@@ -2,24 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | Gridea</title>
+<title>十六进制转八进制 | Gridea</title>
 <link rel="shortcut icon" href="https://oneseek.github.io/favicon.ico?v=1582995495298">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Hello Gridea | Gridea - Atom Feed" href="https://oneseek.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="十六进制转八进制 | Gridea - Atom Feed" href="https://oneseek.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="👏  欢迎使用 Gridea ！
-✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...
-
-Github
-Gridea 主页
-示例网站
-特性👇
-📝  你可以使用最酷的 Markdo..." />
-    <meta name="keywords" content="Gridea" />
+    <meta name="description" content="数组开的太大 会数据异常
+数组开到400000时 在自己的电脑上无法运行 但是可以通过成功AC
+/*
+试题 基础练习 十六进制转八进制
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　给定n个十六进制正整数，..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -81,63 +82,141 @@ Gridea 主页
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              十六进制转八进制
             </h2>
             <div class="post-info">
               <span>
-                2018-12-12
+                2020-03-01
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
-              
-                <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="post-tag">
-                  # Gridea
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://oneseek.github.io/post-images/hello-gridea.png" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <p>数组开的太大 会数据异常</p>
+<p>数组开到400000时 在自己的电脑上无法运行 但是可以通过成功AC</p>
+<pre><code>/*
+试题 基础练习 十六进制转八进制
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　给定n个十六进制正整数，输出它们对应的八进制数。
+
+输入格式
+　　输入的第一行为一个正整数n （1&lt;=n&lt;=10）。
+　　接下来n行，每行一个由0~9、大写字母A~F组成的字符串，表示要转换的十六进制正整数，每个十六进制数长度不超过100000。
+
+输出格式
+　　输出n行，每行为输入对应的八进制正整数。
+
+　　【注意】
+　　输入的十六进制数不会有前导0，比如012A。
+　　输出的八进制数也不能有前导0。
+
+样例输入
+　　2
+　　39
+　　123ABC
+
+样例输出
+　　71
+　　4435274
+
+　　【提示】
+　　先将十六进制数转换成某进制数，再由某进制数转换成八进制。
+
+*/
+
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+using namespace std;
+
+void convert16from2to8(char s[100002]){
+    if(strcmp(s,&quot;0&quot;)==0){
+        printf(&quot;%c\n&quot;, '0');
+        return;
+    }
+    int s_len = strlen(s); // 十六进制数的长度
+    int er[400008]={0}; // 先转换二进制数
+    int l = 0;
+    for (int i = 0; i &lt; s_len; i++,l+=4){
+        int temp=0; // 十六进制数每位的十进制表示
+        if(s[i]&gt;='A'){
+            temp = s[i] - 'A' + 10;
+        }else{
+            temp = s[i] - '0';
+        }
+
+        int j = 4;  
+        while(j--){ // 转换成二进制数
+            er[l+j] = temp % 2;
+            temp /= 2;
+        }   
+    }
+
+    int eight[200004] = {0}; // 八进制数
+    int el = 0; // 八位数的长度记录
+    for (int i = l-1; i &gt;=0 ; ){
+        int j = 3;
+        int e = 0;
+        while(j--){
+            // eight[el] += er[i] * pow(2, 2-j);
+            e += er[i] * pow(2, 2-j);
+            i--;
+            if(i&lt;0){
+                break;
+            }
+        }
+        eight[el++] = e;
+    }
+
+
+    while(eight[el]==0){
+        el--;
+    }
+    
+    for (int i = el ; i &gt;= 0; i--){
+        printf(&quot;%d&quot;, eight[i]);
+    }
+    printf(&quot;\n&quot;);
+
+}
+int main(){
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 0; i &lt; n;i++){
+        char s[100002]={0};
+        scanf(&quot;%s&quot;, s); // 输入十六进制数
+
+        convert16from2to8(s);
+    }
+    return 0;
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">
+              <h3 class="post-title">
+                阶乘计算（高精度）
+              </h3>
+            </a>
+          </div>
         
 
         

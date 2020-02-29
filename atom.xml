@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>Gridea</title>
-    <updated>2020-02-29T13:27:48.510Z</updated>
+    <updated>2020-02-29T16:58:21.294Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,126 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[记一次c++错误]]></title>
+        <id>https://oneseek.github.io/post/ji-yi-ci-ccuo-wu/</id>
+        <link href="https://oneseek.github.io/post/ji-yi-ci-ccuo-wu/">
+        </link>
+        <updated>2020-02-29T16:28:44.000Z</updated>
+        <content type="html"><![CDATA[<p>数组开的太大 会数据异常</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[十六进制转八进制]]></title>
+        <id>https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/</id>
+        <link href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
+        </link>
+        <updated>2020-02-29T16:28:44.000Z</updated>
+        <content type="html"><![CDATA[<p>数组开的太大 会数据异常</p>
+<p>数组开到400000时 在自己的电脑上无法运行 但是可以通过成功AC</p>
+<pre><code>/*
+试题 基础练习 十六进制转八进制
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　给定n个十六进制正整数，输出它们对应的八进制数。
+
+输入格式
+　　输入的第一行为一个正整数n （1&lt;=n&lt;=10）。
+　　接下来n行，每行一个由0~9、大写字母A~F组成的字符串，表示要转换的十六进制正整数，每个十六进制数长度不超过100000。
+
+输出格式
+　　输出n行，每行为输入对应的八进制正整数。
+
+　　【注意】
+　　输入的十六进制数不会有前导0，比如012A。
+　　输出的八进制数也不能有前导0。
+
+样例输入
+　　2
+　　39
+　　123ABC
+
+样例输出
+　　71
+　　4435274
+
+　　【提示】
+　　先将十六进制数转换成某进制数，再由某进制数转换成八进制。
+
+*/
+
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+using namespace std;
+
+void convert16from2to8(char s[100002]){
+    if(strcmp(s,&quot;0&quot;)==0){
+        printf(&quot;%c\n&quot;, '0');
+        return;
+    }
+    int s_len = strlen(s); // 十六进制数的长度
+    int er[400008]={0}; // 先转换二进制数
+    int l = 0;
+    for (int i = 0; i &lt; s_len; i++,l+=4){
+        int temp=0; // 十六进制数每位的十进制表示
+        if(s[i]&gt;='A'){
+            temp = s[i] - 'A' + 10;
+        }else{
+            temp = s[i] - '0';
+        }
+
+        int j = 4;  
+        while(j--){ // 转换成二进制数
+            er[l+j] = temp % 2;
+            temp /= 2;
+        }   
+    }
+
+    int eight[200004] = {0}; // 八进制数
+    int el = 0; // 八位数的长度记录
+    for (int i = l-1; i &gt;=0 ; ){
+        int j = 3;
+        int e = 0;
+        while(j--){
+            // eight[el] += er[i] * pow(2, 2-j);
+            e += er[i] * pow(2, 2-j);
+            i--;
+            if(i&lt;0){
+                break;
+            }
+        }
+        eight[el++] = e;
+    }
+
+
+    while(eight[el]==0){
+        el--;
+    }
+    
+    for (int i = el ; i &gt;= 0; i--){
+        printf(&quot;%d&quot;, eight[i]);
+    }
+    printf(&quot;\n&quot;);
+
+}
+int main(){
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 0; i &lt; n;i++){
+        char s[100002]={0};
+        scanf(&quot;%s&quot;, s); // 输入十六进制数
+
+        convert16from2to8(s);
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[阶乘计算（高精度）]]></title>
         <id>https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/</id>
