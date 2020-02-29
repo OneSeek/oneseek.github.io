@@ -2,24 +2,26 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>阶乘计算（高精度） | Gridea</title>
 <link rel="shortcut icon" href="https://oneseek.github.io/favicon.ico?v=1582982854535">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://oneseek.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="阶乘计算（高精度） | Gridea - Atom Feed" href="https://oneseek.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
-
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
-    <meta name="keywords" content="" />
+    <meta name="description" content="/*
+试题 基础练习 阶乘计算
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　输入一个正整数n，输出n!的值。
+　　其中n!=1*2*3*…*n。
+算法描述
+　　n!可能很大，而计算机能表示的整数范围有限，..." />
+    <meta name="keywords" content="蓝桥杯" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -81,46 +83,93 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              阶乘计算（高精度）
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-02-29
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
+              
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="post-tag">
+                  # 蓝桥杯
+                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <pre><code>/*
+试题 基础练习 阶乘计算
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　输入一个正整数n，输出n!的值。
+　　其中n!=1*2*3*…*n。
+算法描述
+　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
+　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
+　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
+输入格式
+　　输入包含一个正整数n，n&lt;=1000。
+输出格式
+　　输出n!的准确值。
+样例输入
+10
+样例输出
+3628800
+*/
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#define N 3000
+int main(){
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+
+    int a[N];
+    a[1] = 1;
+    int i, j;
+    int q=1 , carry;
+    int temp;
+    for (i = 2; i &lt;= n; i++){
+        carry = 0;
+        for (j = 1; j &lt;= q; j++){
+            temp = a[j] * i + carry;
+            a[j] = temp % 10;
+            carry = temp / 10;
+        }
+        while(carry){
+            a[++q] = carry % 10;
+            carry = carry / 10;
+        }
+    }
+    for (i = q; i &gt; 0;i--){
+        printf(&quot;%d&quot;, a[i]);
+    }
+    return 0;
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://oneseek.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
         
 
         

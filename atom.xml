@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>Gridea</title>
-    <updated>2020-02-29T13:23:40.024Z</updated>
+    <updated>2020-02-29T13:27:48.510Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,65 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[阶乘计算（高精度）]]></title>
+        <id>https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/</id>
+        <link href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">
+        </link>
+        <updated>2020-02-29T13:24:39.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 基础练习 阶乘计算
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　输入一个正整数n，输出n!的值。
+　　其中n!=1*2*3*…*n。
+算法描述
+　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
+　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
+　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
+输入格式
+　　输入包含一个正整数n，n&lt;=1000。
+输出格式
+　　输出n!的准确值。
+样例输入
+10
+样例输出
+3628800
+*/
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#define N 3000
+int main(){
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+
+    int a[N];
+    a[1] = 1;
+    int i, j;
+    int q=1 , carry;
+    int temp;
+    for (i = 2; i &lt;= n; i++){
+        carry = 0;
+        for (j = 1; j &lt;= q; j++){
+            temp = a[j] * i + carry;
+            a[j] = temp % 10;
+            carry = temp / 10;
+        }
+        while(carry){
+            a[++q] = carry % 10;
+            carry = carry / 10;
+        }
+    }
+    for (i = q; i &gt; 0;i--){
+        printf(&quot;%d&quot;, a[i]);
+    }
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://oneseek.github.io/post/hello-gridea/</id>
