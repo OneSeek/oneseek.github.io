@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>Gridea</title>
-    <updated>2020-02-29T16:58:21.294Z</updated>
+    <updated>2020-02-29T17:11:31.095Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -11,15 +11,6 @@
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[记一次c++错误]]></title>
-        <id>https://oneseek.github.io/post/ji-yi-ci-ccuo-wu/</id>
-        <link href="https://oneseek.github.io/post/ji-yi-ci-ccuo-wu/">
-        </link>
-        <updated>2020-02-29T16:28:44.000Z</updated>
-        <content type="html"><![CDATA[<p>数组开的太大 会数据异常</p>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[十六进制转八进制]]></title>
         <id>https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/</id>
         <link href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
@@ -27,6 +18,8 @@
         <updated>2020-02-29T16:28:44.000Z</updated>
         <content type="html"><![CDATA[<p>数组开的太大 会数据异常</p>
 <p>数组开到400000时 在自己的电脑上无法运行 但是可以通过成功AC</p>
+<p>原因：<br>
+感觉应该是和内存有关系，试了试在腾讯云的服务器上运行可以正常运行，可能是电脑的内存限制或编译设置之类的</p>
 <pre><code>/*
 试题 基础练习 十六进制转八进制
   
