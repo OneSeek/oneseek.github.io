@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
-    <title>Gridea</title>
-    <updated>2020-03-02T06:32:39.738Z</updated>
+    <title>OneSeek</title>
+    <updated>2020-03-02T06:57:32.063Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>Be a coder who can change the world</subtitle>
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2020, OneSeek</rights>
     <entry>
         <title type="html"><![CDATA[十六进制转八进制]]></title>
         <id>https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/</id>
