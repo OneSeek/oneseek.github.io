@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-02T08:37:20.088Z</updated>
+    <updated>2020-03-02T08:45:55.238Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[配置gitalk]]></title>
+        <id>https://oneseek.github.io/post/pei-zhi-gitalk/</id>
+        <link href="https://oneseek.github.io/post/pei-zhi-gitalk/">
+        </link>
+        <updated>2020-03-02T08:43:01.000Z</updated>
+        <content type="html"><![CDATA[<p>开始遇到一点小麻烦http和https设置的有点混乱 出现加载问题 都设置成https就ok了 开始一直不行原来是因为没清缓存😤</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[十六进制转八进制]]></title>
         <id>https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/</id>

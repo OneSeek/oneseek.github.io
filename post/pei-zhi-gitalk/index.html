@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>蓝桥杯 | OneSeek</title>
+<title>配置gitalk | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,64 +86,48 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: 蓝桥杯</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">十六进制转八进制</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-01
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>配置gitalk</h1>
+            <p class="article-meta">
+              2020-03-02
+              
+                <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+                  Gridea
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>开始遇到一点小麻烦http和https设置的有点混乱 出现加载问题 都设置成https就ok了 开始一直不行原来是因为没清缓存😤</p>
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">阶乘计算（高精度）</a>
-    </h2>
-    <p class="article-meta">
-      2020-02-29
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
+                <h3 class="post-title">
+                  十六进制转八进制
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1583138712884" class="no-responsive avatar">
@@ -216,6 +207,7 @@
   </div>
 </div>
 
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -227,6 +219,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
