@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>配置gitalk | OneSeek</title>
+<title>水题-大小写转换 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,18 +87,47 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>配置gitalk</h1>
+            <h1>水题-大小写转换</h1>
             <p class="article-meta">
               2020-03-02
               
-                <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge warning">
-                  Gridea
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
+                  蓝桥杯
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>开始遇到一点小麻烦http和https设置的有点混乱 出现加载问题 都设置成https就ok了 开始一直不行原来是因为没清缓存😤</p>
+              <pre><code>/*
+试题 算法训练 大小写转换
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　编写一个程序，输入一个字符串（长度不超过20），然后把这个字符串内的每一个字符进行大小写变换，即将大写字母变成小写，小写字母变成大写，然后把这个新的字符串输出。
+　　输入格式：输入一个字符串，而且这个字符串当中只包含英文字母，不包含其他类型的字符，也没有空格。
+　　输出格式：输出经过转换后的字符串。
+输入输出样例
+样例输入
+AeDb
+样例输出
+aEdB
+*/
+#include&lt;cstdio&gt;
+int main(){
+    char s[20];
+    scanf(&quot;%s&quot;, &amp;s);
+    int l = 'a' - 'A';
+    for (int i = 0; s[i]!=NULL; i++){
+        if(s[i]&gt;='a'){
+            s[i] -= l;
+        }else{
+            s[i] += l;
+        }
+        printf(&quot;%c&quot;, s[i]);
+    }
+}
+</code></pre>
 
             </div>
           </article>
@@ -109,9 +138,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
+              <a href="https://oneseek.github.io/post/pei-zhi-gitalk/">
                 <h3 class="post-title">
-                  十六进制转八进制
+                  配置gitalk
                 </h3>
               </a>
             </div>
@@ -202,7 +231,7 @@
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
           Gridea
         </a>
       

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-02T08:51:56.842Z</updated>
+    <updated>2020-03-02T12:30:27.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[水题-大小写转换]]></title>
+        <id>https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/</id>
+        <link href="https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/">
+        </link>
+        <updated>2020-03-02T12:29:41.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 大小写转换
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+问题描述
+　　编写一个程序，输入一个字符串（长度不超过20），然后把这个字符串内的每一个字符进行大小写变换，即将大写字母变成小写，小写字母变成大写，然后把这个新的字符串输出。
+　　输入格式：输入一个字符串，而且这个字符串当中只包含英文字母，不包含其他类型的字符，也没有空格。
+　　输出格式：输出经过转换后的字符串。
+输入输出样例
+样例输入
+AeDb
+样例输出
+aEdB
+*/
+#include&lt;cstdio&gt;
+int main(){
+    char s[20];
+    scanf(&quot;%s&quot;, &amp;s);
+    int l = 'a' - 'A';
+    for (int i = 0; s[i]!=NULL; i++){
+        if(s[i]&gt;='a'){
+            s[i] -= l;
+        }else{
+            s[i] += l;
+        }
+        printf(&quot;%c&quot;, s[i]);
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[配置gitalk]]></title>
         <id>https://oneseek.github.io/post/pei-zhi-gitalk/</id>
