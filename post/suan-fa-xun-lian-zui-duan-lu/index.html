@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <meta charset="utf-8" >
 
-<title>OneSeek</title>
+<title>算法训练-最短路 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -24,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -77,167 +83,133 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>算法训练-最短路</h1>
+            <p class="article-meta">
+              2020-03-06
+              
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
+                  蓝桥杯
+                </a>
+              
+            </p>
+            
+              <img src="https://oneseek.github.io/post-images/suan-fa-xun-lian-zui-duan-lu.jpg" alt="算法训练-最短路">
+            
+            <div class="post-content">
+              <pre><code>/*
+试题 算法训练 最短路
+  
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+给定一个n个顶点，m条边的有向图（其中某些边权可能为负，但保证没有负环）。
+请你计算从1号点到其他点的最短路（顶点从1到n编号）。
+
+输入格式
+第一行两个整数n, m。
+
+接下来的m行，每行有三个整数u, v, l，表示u到v有一条长度为l的边。
+
+输出格式
+共n-1行，第i行表示1号点到i+1号点的最短路。
+样例输入
+3 3
+1 2 -1
+2 3 -1
+3 1 2
+样例输出
+-1
+-2
+数据规模与约定
+对于10%的数据，n = 2，m = 2。
+
+对于30%的数据，n &lt;= 5，m &lt;= 10。
+
+对于100%的数据，1 &lt;= n &lt;= 20000，1 &lt;= m &lt;= 200000，
+-10000 &lt;= l &lt;= 10000，保证从任意顶点都能到达其他所有顶点。
+*/
+#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+using namespace std;
+struct Node{
+    int v;
+    int dis;
+    Node(int _v,int _dis){
+        v = _v;
+        dis = _dis;
+    }
+};
+vector&lt;Node&gt; Adj[20001];
+#define maxL (1 &lt;&lt; 30)
+int main(){
+    int n, m;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+   
+    for (int i = 1; i &lt;= m; i++){
+        int u, v, l;
+        scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;l);
+        Node node = Node(v, l);
+        Adj[u].push_back(node);
+    }
+    int d[20001];
+    fill(d, d + 20001, maxL);
+    d[1] = 0;
+    bool update;
+    while (true){
+        update = false;
+        for (int i = 1; i &lt;= n; i++){
+            for (int j = 0; j &lt; Adj[i].size(); j++){
+                int v = Adj[i][j].v;
+                int dis = Adj[i][j].dis;
+                if (d[i] + dis &lt; d[v]){
+                    d[v] = d[i] + dis;
+                    update = true;
+                }
+            }
+        }
+        if(!update){
+            break;
+        }
+    }
+
+    for (int i = 2; i &lt;= n; i++){
+        printf(&quot;%d\n&quot;, d[i]);
+    }
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">算法训练-最短路</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-06
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/">水题-大小写转换</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-02
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/pei-zhi-gitalk/">配置gitalk</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-02
-      
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/pei-zhi-gitalk/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">十六进制转八进制</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-01
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">阶乘计算（高精度）</a>
-    </h2>
-    <p class="article-meta">
-      2020-02-29
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/">
+                <h3 class="post-title">
+                  水题-大小写转换
+                </h3>
+              </a>
+            </div>
+          
         </div>
         
-        <div class="row flex-edges">
-  
-  
-</div>
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1583482707651" class="no-responsive avatar">
@@ -314,7 +286,7 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
           蓝桥杯
         </a>
       
@@ -329,7 +301,9 @@
   </div>
 </div>
 
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">
@@ -339,6 +313,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-02T12:30:27.542Z</updated>
+    <updated>2020-03-06T08:18:33.289Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,95 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[算法训练-最短路]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
+        </link>
+        <updated>2020-03-06T08:17:33.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 最短路
+  
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+给定一个n个顶点，m条边的有向图（其中某些边权可能为负，但保证没有负环）。
+请你计算从1号点到其他点的最短路（顶点从1到n编号）。
+
+输入格式
+第一行两个整数n, m。
+
+接下来的m行，每行有三个整数u, v, l，表示u到v有一条长度为l的边。
+
+输出格式
+共n-1行，第i行表示1号点到i+1号点的最短路。
+样例输入
+3 3
+1 2 -1
+2 3 -1
+3 1 2
+样例输出
+-1
+-2
+数据规模与约定
+对于10%的数据，n = 2，m = 2。
+
+对于30%的数据，n &lt;= 5，m &lt;= 10。
+
+对于100%的数据，1 &lt;= n &lt;= 20000，1 &lt;= m &lt;= 200000，
+-10000 &lt;= l &lt;= 10000，保证从任意顶点都能到达其他所有顶点。
+*/
+#include&lt;cstdio&gt;
+#include&lt;vector&gt;
+using namespace std;
+struct Node{
+    int v;
+    int dis;
+    Node(int _v,int _dis){
+        v = _v;
+        dis = _dis;
+    }
+};
+vector&lt;Node&gt; Adj[20001];
+#define maxL (1 &lt;&lt; 30)
+int main(){
+    int n, m;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+   
+    for (int i = 1; i &lt;= m; i++){
+        int u, v, l;
+        scanf(&quot;%d%d%d&quot;, &amp;u, &amp;v, &amp;l);
+        Node node = Node(v, l);
+        Adj[u].push_back(node);
+    }
+    int d[20001];
+    fill(d, d + 20001, maxL);
+    d[1] = 0;
+    bool update;
+    while (true){
+        update = false;
+        for (int i = 1; i &lt;= n; i++){
+            for (int j = 0; j &lt; Adj[i].size(); j++){
+                int v = Adj[i][j].v;
+                int dis = Adj[i][j].dis;
+                if (d[i] + dis &lt; d[v]){
+                    d[v] = d[i] + dis;
+                    update = true;
+                }
+            }
+        }
+        if(!update){
+            break;
+        }
+    }
+
+    for (int i = 2; i &lt;= n; i++){
+        printf(&quot;%d\n&quot;, d[i]);
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[水题-大小写转换]]></title>
         <id>https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/</id>
