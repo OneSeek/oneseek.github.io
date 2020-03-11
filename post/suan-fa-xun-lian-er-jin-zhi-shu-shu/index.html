@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>阶乘计算（高精度） | OneSeek</title>
+<title>算法训练-二进制数数 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,11 +87,11 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>阶乘计算（高精度）</h1>
+            <h1>算法训练-二进制数数</h1>
             <p class="article-meta">
-              2020-02-29
+              2020-03-11
               
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
                   蓝桥杯
                 </a>
               
@@ -99,53 +99,45 @@
             
             <div class="post-content">
               <pre><code>/*
-试题 基础练习 阶乘计算
+试题 算法训练 二进制数数
   
 资源限制
-时间限制：1.0s   内存限制：512.0MB
+时间限制：1.0s   内存限制：256.0MB
 问题描述
-　　输入一个正整数n，输出n!的值。
-　　其中n!=1*2*3*…*n。
-算法描述
-　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
-　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
-　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
+　　给定L,R。统计[L,R]区间内的所有数在二进制下包含的“1”的个数之和。
+　　如5的二进制为101，包含2个“1”。
 输入格式
-　　输入包含一个正整数n，n&lt;=1000。
+　　第一行包含2个数L,R
 输出格式
-　　输出n!的准确值。
+　　一个数S，表示[L,R]区间内的所有数在二进制下包含的“1”的个数之和。
 样例输入
-10
+2 3
 样例输出
-3628800
+3
+数据规模和约定
+　　L&lt;=R&lt;=100000;
 */
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#define N 3000
-int main(){
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-
-    int a[N];
-    a[1] = 1;
-    int i, j;
-    int q=1 , carry;
-    int temp;
-    for (i = 2; i &lt;= n; i++){
-        carry = 0;
-        for (j = 1; j &lt;= q; j++){
-            temp = a[j] * i + carry;
-            a[j] = temp % 10;
-            carry = temp / 10;
-        }
-        while(carry){
-            a[++q] = carry % 10;
-            carry = carry / 10;
-        }
-    }
-    for (i = q; i &gt; 0;i--){
-        printf(&quot;%d&quot;, a[i]);
-    }
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+int cal(int a){
+	int sum=0;
+	while(a){
+		if(a%2){
+			sum++;
+		}
+		a/=2;
+	}
+	return sum;
+} 
+int main() {
+    int L,R;
+    scanf(&quot;%d%d&quot;,&amp;L,&amp;R);
+	int sum=0;
+	for(int i=L;i&lt;=R;i++){
+		sum+=cal(i);
+	}
+	printf(&quot;%d&quot;,sum);
     return 0;
 }
 </code></pre>
@@ -159,9 +151,9 @@ int main(){
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/hello-gridea/">
+              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/">
                 <h3 class="post-title">
-                  Hello Gridea
+                  算法训练-交换(水~)
                 </h3>
               </a>
             </div>
@@ -272,11 +264,11 @@ int main(){
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge warning">
           Gridea
         </a>
       
