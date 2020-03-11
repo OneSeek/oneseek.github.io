@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | OneSeek</title>
+<title>算法训练-动态数组 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,20 +86,91 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="row tags-container">
+          <article class="article">
+            <h1>算法训练-动态数组</h1>
+            <p class="article-meta">
+              2020-03-11
+              
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+                  蓝桥杯
+                </a>
+              
+            </p>
             
-              <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-                蓝桥杯
-              </a>
-            
-              <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
-                Gridea
-              </a>
-            
-          </div>
+            <div class="post-content">
+              <pre><code>/*
+试题 算法训练 动态数组使用
+  
+资源限制
+时间限制：1.0s   内存限制：512.0MB
+从键盘读入n个整数，使用动态数组存储所读入的整数，并计算它们的和与平均值分别输出。要求尽可能使用函数实现程序代码。平均值为小数的只保留其整数部分。
+样例输入: 
+5 
+3 4 0 0 2
+样例输出:
+9  1
+样例输入: 
+7
+3 2 7 5 2 9 1
+样例输出:
+29  4
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+using namespace std;
+int getSum(vector&lt;int&gt; arr){
+	int sum=0;
+	for(int i=0;i&lt;arr.size();i++){
+		sum+=arr[i];
+	}
+	return sum;
+} 
+int main() {
+    int n;
+    vector&lt;int&gt; arr;
+    scanf(&quot;%d&quot;,&amp;n);
+    for(int i=0;i&lt;n;i++){
+		int x;
+		scanf(&quot;%d&quot;,&amp;x);
+		arr.push_back(x);
+	}
+	
+	int sum = getSum(arr);
+	int avg = sum/arr.size();
+	printf(&quot;%d %d&quot;,sum,avg);
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
         </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-1-de-ge-shu/">
+                <h3 class="post-title">
+                  算法训练-1的个数
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1583934153186" class="no-responsive avatar">
@@ -191,11 +269,11 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
           Gridea
         </a>
       
@@ -205,7 +283,8 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
-  
+
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -217,6 +296,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
