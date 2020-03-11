@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-06T08:18:33.289Z</updated>
+    <updated>2020-03-11T13:05:31.966Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -11,7 +11,77 @@
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
     <entry>
-        <title type="html"><![CDATA[算法训练-最短路]]></title>
+        <title type="html"><![CDATA[算法训练-K好数]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-k-hao-shu/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-k-hao-shu/">
+        </link>
+        <updated>2020-03-11T13:04:24.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 K好数
+
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+如果一个自然数N的K进制表示中任意的相邻的两位都不是相邻的数字，那么我们就说这个数是K好数。
+求L位K进制数中K好数的数目。例如K = 4，L =
+2的时候，所有K好数为11、13、20、22、30、31、33 共7个。
+由于这个数目很大，请你输出它对1000000007取模后的值。
+
+输入格式
+输入包含两个正整数，K和L。
+
+输出格式
+输出一个整数，表示答案对1000000007取模后的值。
+样例输入
+4 2
+样例输出
+7
+数据规模与约定
+对于30%的数据，KL &lt;= 106；
+
+对于50%的数据，K &lt;= 16， L &lt;= 10；
+
+对于100%的数据，1 &lt;= K,L &lt;= 100。
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+int main() {
+    int k, l;
+    scanf(&quot;%d%d&quot;, &amp;k, &amp;l);
+    // l位k进制中k好数的数目
+    // 最大数是k-1 l个数
+    long long arr[l + 1][k + 1];
+    memset(arr, 0, sizeof(arr));
+    for (int i = 0; i &lt;= k - 1; i++) {
+        arr[1][i] = 1;  // i开头
+    }
+
+    for (int i = 2; i &lt;= l; i++) {
+        for (int j = 0; j &lt;= k - 1; j++) {
+            for (int m = 0; m &lt;= k - 1; m++) {
+                if (abs(j - m) &gt; 1 || j == m) {
+                    // i开头的j进制数的个数 arr[i][j] = a[i-1][1...k-1](除了j-1,j+1)
+                    arr[i][j] += arr[i - 1][m] % 1000000007;
+                }
+            }
+        }
+    }
+
+    long long res = 0;
+    for (int i = 1; i &lt;= k - 1; i++) { // 把最后一行加起来 
+        res += arr[l][i];
+        res %= 1000000007;
+    }
+    printf(&quot;%lld&quot;, res);
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[算法训练-最短路(BF)]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/</id>
         <link href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
         </link>

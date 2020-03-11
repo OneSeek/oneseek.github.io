@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Hello Gridea | OneSeek</title>
+<title>算法训练-K好数 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,45 +87,95 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Hello Gridea</h1>
+            <h1>算法训练-K好数</h1>
             <p class="article-meta">
-              2018-12-12
+              2020-03-11
               
-                <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
-                  Gridea
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
+                  蓝桥杯
                 </a>
               
             </p>
             
-              <img src="https://oneseek.github.io/post-images/hello-gridea.png" alt="Hello Gridea">
-            
             <div class="post-content">
-              <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+              <pre><code>/*
+试题 算法训练 K好数
+
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+如果一个自然数N的K进制表示中任意的相邻的两位都不是相邻的数字，那么我们就说这个数是K好数。
+求L位K进制数中K好数的数目。例如K = 4，L =
+2的时候，所有K好数为11、13、20、22、30、31、33 共7个。
+由于这个数目很大，请你输出它对1000000007取模后的值。
+
+输入格式
+输入包含两个正整数，K和L。
+
+输出格式
+输出一个整数，表示答案对1000000007取模后的值。
+样例输入
+4 2
+样例输出
+7
+数据规模与约定
+对于30%的数据，KL &lt;= 106；
+
+对于50%的数据，K &lt;= 16， L &lt;= 10；
+
+对于100%的数据，1 &lt;= K,L &lt;= 100。
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+int main() {
+    int k, l;
+    scanf(&quot;%d%d&quot;, &amp;k, &amp;l);
+    // l位k进制中k好数的数目
+    // 最大数是k-1 l个数
+    long long arr[l + 1][k + 1];
+    memset(arr, 0, sizeof(arr));
+    for (int i = 0; i &lt;= k - 1; i++) {
+        arr[1][i] = 1;  // i开头
+    }
+
+    for (int i = 2; i &lt;= l; i++) {
+        for (int j = 0; j &lt;= k - 1; j++) {
+            for (int m = 0; m &lt;= k - 1; m++) {
+                if (abs(j - m) &gt; 1 || j == m) {
+                    // i开头的j进制数的个数 arr[i][j] = a[i-1][1...k-1](除了j-1,j+1)
+                    arr[i][j] += arr[i - 1][m] % 1000000007;
+                }
+            }
+        }
+    }
+
+    long long res = 0;
+    for (int i = 1; i &lt;= k - 1; i++) { // 把最后一行加起来 
+        res += arr[l][i];
+        res %= 1000000007;
+    }
+    printf(&quot;%lld&quot;, res);
+
+    return 0;
+}
+</code></pre>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
+                <h3 class="post-title">
+                  算法训练-最短路(BF)
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -221,11 +271,11 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge warning">
           Gridea
         </a>
       
