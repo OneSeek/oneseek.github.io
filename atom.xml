@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-11T13:20:14.700Z</updated>
+    <updated>2020-03-11T13:27:55.649Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,57 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[算法训练-1的个数]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-1-de-ge-shu/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-1-de-ge-shu/">
+        </link>
+        <updated>2020-03-11T13:26:27.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 1的个数
+  
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+　　输入正整数n，判断从1到n之中，数字1一共要出现几次。例如1123这个数，则出现了两次1。例如15，那么从1到15之中，一共出现了8个1。
+输入格式
+　　一个正整数n
+输出格式
+　　一个整数，表示1出现的资料
+样例输入
+15
+样例输出
+8
+数据规模和约定
+　　n不超过30000
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+int cal(int n){
+	int sum=0;
+	while(n){
+		if(n%10==1){
+			sum++;
+		}
+		n/=10;
+	}
+	return sum;
+} 
+int main() {
+    int n;
+    scanf(&quot;%d&quot;,&amp;n);
+	int sum=0;
+	for(int i=1;i&lt;=n;i++){
+		sum+=cal(i);
+	}
+	printf(&quot;%d&quot;,sum);
+    return 0;
+}
+</code></pre>
+<h3 id="水题刷着好开心啊o-̄-̄ブ">水题刷着好开心啊o(<em>￣▽￣</em>)ブ</h3>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法训练-二进制数数]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-er-jin-zhi-shu-shu/</id>
