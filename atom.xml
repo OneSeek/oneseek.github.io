@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-11T13:05:31.966Z</updated>
+    <updated>2020-03-11T13:10:43.974Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[算法训练-交换(水~)]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/">
+        </link>
+        <updated>2020-03-11T13:09:52.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 数据交换
+  
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+　　编写一个程序，输入两个整数，分别存放在变量x和y当中，然后使用自己定义的函数swap来交换这两个变量的值。
+　　输入格式：输入只有一行，包括两个整数。
+　　输出格式：输出只有一行，也是两个整数，即交换以后的结果。
+　　要求：主函数负责数据的输入与输出，但不能直接交换这两个变量的值，必须通过调用单独定义的函数swap来完成，而swap函数只负责交换变量的值，不能输出交换后的结果。
+输入输出样例
+样例输入
+4 7
+样例输出
+7 4
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+void swap(int* a,int* b){
+	int x;
+	x = *a;
+	*a = *b;
+	*b = x;
+} 
+int main() {
+    int a,b;
+    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+    swap(&amp;a,&amp;b);
+    printf(&quot;%d %d&quot;,a,b);
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法训练-K好数]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-k-hao-shu/</id>

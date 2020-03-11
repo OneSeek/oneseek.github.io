@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | OneSeek</title>
+<title>算法训练-交换(水~) | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,20 +86,81 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="row tags-container">
+          <article class="article">
+            <h1>算法训练-交换(水~)</h1>
+            <p class="article-meta">
+              2020-03-11
+              
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
+                  蓝桥杯
+                </a>
+              
+            </p>
             
-              <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-                蓝桥杯
-              </a>
-            
-              <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
-                Gridea
-              </a>
-            
-          </div>
+            <div class="post-content">
+              <pre><code>/*
+试题 算法训练 数据交换
+  
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+　　编写一个程序，输入两个整数，分别存放在变量x和y当中，然后使用自己定义的函数swap来交换这两个变量的值。
+　　输入格式：输入只有一行，包括两个整数。
+　　输出格式：输出只有一行，也是两个整数，即交换以后的结果。
+　　要求：主函数负责数据的输入与输出，但不能直接交换这两个变量的值，必须通过调用单独定义的函数swap来完成，而swap函数只负责交换变量的值，不能输出交换后的结果。
+输入输出样例
+样例输入
+4 7
+样例输出
+7 4
+*/
+#include &lt;algorithm&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+void swap(int* a,int* b){
+	int x;
+	x = *a;
+	*a = *b;
+	*b = x;
+} 
+int main() {
+    int a,b;
+    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+    swap(&amp;a,&amp;b);
+    printf(&quot;%d %d&quot;,a,b);
+
+    return 0;
+}
+</code></pre>
+
+            </div>
+          </article>
         </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-k-hao-shu/">
+                <h3 class="post-title">
+                  算法训练-K好数
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1583932235774" class="no-responsive avatar">
@@ -181,7 +249,7 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
           蓝桥杯
         </a>
       
@@ -195,7 +263,8 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
-  
+
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -207,6 +276,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
