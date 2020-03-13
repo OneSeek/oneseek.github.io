@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>配置gitalk | OneSeek</title>
+<title>CentOS7安装桌面环境（腾讯云) | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,18 +87,61 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>配置gitalk</h1>
+            <h1>CentOS7安装桌面环境（腾讯云)</h1>
             <p class="article-meta">
-              2020-03-02
+              2020-03-12
               
-                <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
-                  Gridea
+                <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge ">
+                  Linux
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>开始遇到一点小麻烦http和https设置的有点混乱 出现加载问题 都设置成https就ok了 开始一直不行原来是因为没清缓存😤</p>
+              <p>腾讯云快到期了 作一把(●'◡'●)</p>
+<p>参考文章 https://cloud.tencent.com/developer/article/1350824<br>
+https://www.jianshu.com/p/63dce85dc958</p>
+<p>安装X(X Window System)，命令如下：<br>
+yum groupinstall &quot;X Window System&quot;<br>
+安装图形界面软件，GNOME(GNOME Desktop)，命令如下：<br>
+yum groupinstall &quot;GNOME Desktop&quot;</p>
+<h2 id="安装配置xrdp">安装配置XRDP</h2>
+<p>下面的很多操作需要root用户权限，所以，我们先切换为root用户：</p>
+<p>sudo su - root<br>
+安装epel库<br>
+查询是否已经安装epel库:</p>
+<p>rpm -qa|grep epel<br>
+如果 epel库 没有安装，则安装它：</p>
+<p>yum install epel-release<br>
+安装xrdp<br>
+安装xrdp服务：</p>
+<p>yum install xrdp<br>
+因为Xrdp最终会自动启用VNC，所以必须安装tigervnc-server，否则xrdp无法使用。安装vnc：</p>
+<p>yum install tigervnc-server<br>
+为root用户设置VNC密码：</p>
+<p>vncpasswd root<br>
+修改 xrdp最大连接数（使用默认值，不修改也是可以的） ：vim /etc/xrdp/xrdp.ini （默认是32）：</p>
+<p>max_bpp=32<br>
+xrdp最大连接数设置<br>
+关闭防火墙<br>
+这里，我们要确保两台机器可以ping通，能够相互访问。我这里是在局域网内测试，所以我直接关闭防火墙：</p>
+<p>systemctl stop firewalld.service<br>
+设置开机不启动防火墙：</p>
+<p>systemctl disable firewalld.servie<br>
+关闭SElinux<br>
+SElinux应该关闭它。查看SElinux状态：</p>
+<p>sestatus<br>
+如果是临时关闭SElinux：</p>
+<p>setenforce 0<br>
+不过，我们要永久关闭SElinux：vim /etc/selinux/config</p>
+<p>SELINUX=disabled<br>
+永久关闭SELINUX<br>
+启动XRDP<br>
+启动xrdp服务：</p>
+<p>systemctl start xrdp<br>
+设置xrdp服务 开机自启动 ：</p>
+<p>systemctl enable xrdp<br>
+<img src="https://oneseek.github.io/post-images/1584066517857.png" alt="" loading="lazy"></p>
 
             </div>
           </article>
@@ -109,9 +152,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
+              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/">
                 <h3 class="post-title">
-                  十六进制转八进制
+                  算法训练-动态数组
                 </h3>
               </a>
             </div>
@@ -228,7 +271,7 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge success">
+        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge secondary">
           Linux
         </a>
       

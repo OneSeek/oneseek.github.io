@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-11T13:42:38.596Z</updated>
+    <updated>2020-03-13T02:28:53.674Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,58 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[CentOS7安装桌面环境（腾讯云)]]></title>
+        <id>https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/</id>
+        <link href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/">
+        </link>
+        <updated>2020-03-12T01:38:35.000Z</updated>
+        <content type="html"><![CDATA[<p>腾讯云快到期了 作一把(●'◡'●)</p>
+<p>参考文章 https://cloud.tencent.com/developer/article/1350824<br>
+https://www.jianshu.com/p/63dce85dc958</p>
+<p>安装X(X Window System)，命令如下：<br>
+yum groupinstall &quot;X Window System&quot;<br>
+安装图形界面软件，GNOME(GNOME Desktop)，命令如下：<br>
+yum groupinstall &quot;GNOME Desktop&quot;</p>
+<h2 id="安装配置xrdp">安装配置XRDP</h2>
+<p>下面的很多操作需要root用户权限，所以，我们先切换为root用户：</p>
+<p>sudo su - root<br>
+安装epel库<br>
+查询是否已经安装epel库:</p>
+<p>rpm -qa|grep epel<br>
+如果 epel库 没有安装，则安装它：</p>
+<p>yum install epel-release<br>
+安装xrdp<br>
+安装xrdp服务：</p>
+<p>yum install xrdp<br>
+因为Xrdp最终会自动启用VNC，所以必须安装tigervnc-server，否则xrdp无法使用。安装vnc：</p>
+<p>yum install tigervnc-server<br>
+为root用户设置VNC密码：</p>
+<p>vncpasswd root<br>
+修改 xrdp最大连接数（使用默认值，不修改也是可以的） ：vim /etc/xrdp/xrdp.ini （默认是32）：</p>
+<p>max_bpp=32<br>
+xrdp最大连接数设置<br>
+关闭防火墙<br>
+这里，我们要确保两台机器可以ping通，能够相互访问。我这里是在局域网内测试，所以我直接关闭防火墙：</p>
+<p>systemctl stop firewalld.service<br>
+设置开机不启动防火墙：</p>
+<p>systemctl disable firewalld.servie<br>
+关闭SElinux<br>
+SElinux应该关闭它。查看SElinux状态：</p>
+<p>sestatus<br>
+如果是临时关闭SElinux：</p>
+<p>setenforce 0<br>
+不过，我们要永久关闭SElinux：vim /etc/selinux/config</p>
+<p>SELINUX=disabled<br>
+永久关闭SELINUX<br>
+启动XRDP<br>
+启动xrdp服务：</p>
+<p>systemctl start xrdp<br>
+设置xrdp服务 开机自启动 ：</p>
+<p>systemctl enable xrdp<br>
+<img src="https://oneseek.github.io/post-images/1584066517857.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法训练-动态数组]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/</id>
@@ -519,65 +571,6 @@ int main(){
         scanf(&quot;%s&quot;, s); // 输入十六进制数
 
         convert16from2to8(s);
-    }
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[阶乘计算（高精度）]]></title>
-        <id>https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/</id>
-        <link href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">
-        </link>
-        <updated>2020-02-29T13:24:39.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>/*
-试题 基础练习 阶乘计算
-  
-资源限制
-时间限制：1.0s   内存限制：512.0MB
-问题描述
-　　输入一个正整数n，输出n!的值。
-　　其中n!=1*2*3*…*n。
-算法描述
-　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
-　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
-　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
-输入格式
-　　输入包含一个正整数n，n&lt;=1000。
-输出格式
-　　输出n!的准确值。
-样例输入
-10
-样例输出
-3628800
-*/
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#define N 3000
-int main(){
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-
-    int a[N];
-    a[1] = 1;
-    int i, j;
-    int q=1 , carry;
-    int temp;
-    for (i = 2; i &lt;= n; i++){
-        carry = 0;
-        for (j = 1; j &lt;= q; j++){
-            temp = a[j] * i + carry;
-            a[j] = temp % 10;
-            carry = temp / 10;
-        }
-        while(carry){
-            a[++q] = carry % 10;
-            carry = carry / 10;
-        }
-    }
-    for (i = q; i &gt; 0;i--){
-        printf(&quot;%d&quot;, a[i]);
     }
     return 0;
 }
