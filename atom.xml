@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-13T02:28:53.674Z</updated>
+    <updated>2020-03-14T13:39:45.272Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,92 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[真题-数列求值]]></title>
+        <id>https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/</id>
+        <link href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/">
+        </link>
+        <updated>2020-03-14T13:38:11.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+标题：数列求值 （本题总分：10 分）###
+给定数列 1, 1, 1, 3, 5, 9, 17, …，从第 4 项开始，每项都是前 3 项的和。求
+第 20190324 项的最后 4 位数字。
+【答案提交】
+这是一道结果填空的题，你只需要算出结果后提交即可。本题的结果为一
+个 4 位整数（提示：答案的千位不为 0） ，在提交答案时只填写这个整数，填写
+多余的内容将无法得分。*/
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[4];
+    a[1] = 1;
+    a[2] = 1;
+    a[3] = 1;
+    int m;
+    for (int i = 4; i &lt;= 20190324; i++) {
+        m = a[1] + a[2] + a[3];
+        m %= 10000;
+        a[1] = a[2];
+        a[2] = a[3];
+        a[3] = m;
+        
+    }
+    cout &lt;&lt; a[3];
+    return 0;
+}
+</code></pre>
+<p>这两道题都是简单题但是也有一些细节需要注意，还得多练这种题做起来都没有很顺利。。。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[真题-数的分解]]></title>
+        <id>https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/</id>
+        <link href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/">
+        </link>
+        <updated>2020-03-14T13:37:21.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+标题： 数的分解（本题总分：10 分）
+【问题描述】
+把 2019 分解成 3 个各不相同的正整数之和，并且要求每个正整数都不包
+含数字 2 和 4，一共有多少种不同的分解方法？
+注意交换 3 个整数的顺序被视为同一种方法，例如 1000+1001+18 和
+1001+1000+18 被视为同一种。
+【答案提交】
+这是一道结果填空的题，你只需要算出结果后提交即可。本题的结果为一
+个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分*/
+#include &lt;iostream&gt;
+using namespace std;
+bool judge(int i) {
+    while (i) {
+        if (i % 10 == 2 || i % 10 == 4)
+            return false;
+        i /= 10;
+    }
+    return true;
+}
+int main() {
+    int ans = 0;
+    for (int i = 1; i &lt;= 672; i++) {
+        if (judge(i))
+            for (int j = i + 1; j &lt;= 1008; j++) {
+                if (judge(j))
+                    for (int k = j + 1; k &lt;= 1999; k++) {
+                        if (judge(k))
+                            if (i + j + k == 2019) {
+                                // cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; j &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; endl;
+                                ans++;
+                            }
+                    }
+            }
+    }
+
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CentOS7安装桌面环境（腾讯云)]]></title>
         <id>https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/</id>
@@ -451,128 +537,6 @@ int main(){
         }
         printf(&quot;%c&quot;, s[i]);
     }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[配置gitalk]]></title>
-        <id>https://oneseek.github.io/post/pei-zhi-gitalk/</id>
-        <link href="https://oneseek.github.io/post/pei-zhi-gitalk/">
-        </link>
-        <updated>2020-03-02T08:43:01.000Z</updated>
-        <content type="html"><![CDATA[<p>开始遇到一点小麻烦http和https设置的有点混乱 出现加载问题 都设置成https就ok了 开始一直不行原来是因为没清缓存😤</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[十六进制转八进制]]></title>
-        <id>https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/</id>
-        <link href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
-        </link>
-        <updated>2020-02-29T16:28:44.000Z</updated>
-        <content type="html"><![CDATA[<p>数组开的太大 会数据异常</p>
-<p>数组开到400000时 在自己的电脑上无法运行 但是可以通过成功AC</p>
-<p>原因：<br>
-感觉应该是和内存有关系，试了试在腾讯云的服务器上运行可以正常运行，可能是电脑的内存限制或编译设置之类的</p>
-<pre><code>/*
-试题 基础练习 十六进制转八进制
-  
-资源限制
-时间限制：1.0s   内存限制：512.0MB
-问题描述
-　　给定n个十六进制正整数，输出它们对应的八进制数。
-
-输入格式
-　　输入的第一行为一个正整数n （1&lt;=n&lt;=10）。
-　　接下来n行，每行一个由0~9、大写字母A~F组成的字符串，表示要转换的十六进制正整数，每个十六进制数长度不超过100000。
-
-输出格式
-　　输出n行，每行为输入对应的八进制正整数。
-
-　　【注意】
-　　输入的十六进制数不会有前导0，比如012A。
-　　输出的八进制数也不能有前导0。
-
-样例输入
-　　2
-　　39
-　　123ABC
-
-样例输出
-　　71
-　　4435274
-
-　　【提示】
-　　先将十六进制数转换成某进制数，再由某进制数转换成八进制。
-
-*/
-
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#include&lt;cmath&gt;
-using namespace std;
-
-void convert16from2to8(char s[100002]){
-    if(strcmp(s,&quot;0&quot;)==0){
-        printf(&quot;%c\n&quot;, '0');
-        return;
-    }
-    int s_len = strlen(s); // 十六进制数的长度
-    int er[400008]={0}; // 先转换二进制数
-    int l = 0;
-    for (int i = 0; i &lt; s_len; i++,l+=4){
-        int temp=0; // 十六进制数每位的十进制表示
-        if(s[i]&gt;='A'){
-            temp = s[i] - 'A' + 10;
-        }else{
-            temp = s[i] - '0';
-        }
-
-        int j = 4;  
-        while(j--){ // 转换成二进制数
-            er[l+j] = temp % 2;
-            temp /= 2;
-        }   
-    }
-
-    int eight[200004] = {0}; // 八进制数
-    int el = 0; // 八位数的长度记录
-    for (int i = l-1; i &gt;=0 ; ){
-        int j = 3;
-        int e = 0;
-        while(j--){
-            // eight[el] += er[i] * pow(2, 2-j);
-            e += er[i] * pow(2, 2-j);
-            i--;
-            if(i&lt;0){
-                break;
-            }
-        }
-        eight[el++] = e;
-    }
-
-
-    while(eight[el]==0){
-        el--;
-    }
-    
-    for (int i = el ; i &gt;= 0; i--){
-        printf(&quot;%d&quot;, eight[i]);
-    }
-    printf(&quot;\n&quot;);
-
-}
-int main(){
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-
-    for (int i = 0; i &lt; n;i++){
-        char s[100002]={0};
-        scanf(&quot;%s&quot;, s); // 输入十六进制数
-
-        convert16from2to8(s);
-    }
-    return 0;
 }
 </code></pre>
 ]]></content>

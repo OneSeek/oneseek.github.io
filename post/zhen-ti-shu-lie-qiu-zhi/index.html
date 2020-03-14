@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练-K好数 | OneSeek</title>
+<title>真题-数列求值 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,11 +87,11 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练-K好数</h1>
+            <h1>真题-数列求值</h1>
             <p class="article-meta">
-              2020-03-11
+              2020-03-14
               
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
                   蓝桥杯
                 </a>
               
@@ -99,67 +99,35 @@
             
             <div class="post-content">
               <pre><code>/*
-试题 算法训练 K好数
+标题：数列求值 （本题总分：10 分）###
+给定数列 1, 1, 1, 3, 5, 9, 17, …，从第 4 项开始，每项都是前 3 项的和。求
+第 20190324 项的最后 4 位数字。
+【答案提交】
+这是一道结果填空的题，你只需要算出结果后提交即可。本题的结果为一
+个 4 位整数（提示：答案的千位不为 0） ，在提交答案时只填写这个整数，填写
+多余的内容将无法得分。*/
+#include &lt;iostream&gt;
+using namespace std;
 
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-问题描述
-如果一个自然数N的K进制表示中任意的相邻的两位都不是相邻的数字，那么我们就说这个数是K好数。
-求L位K进制数中K好数的数目。例如K = 4，L =
-2的时候，所有K好数为11、13、20、22、30、31、33 共7个。
-由于这个数目很大，请你输出它对1000000007取模后的值。
-
-输入格式
-输入包含两个正整数，K和L。
-
-输出格式
-输出一个整数，表示答案对1000000007取模后的值。
-样例输入
-4 2
-样例输出
-7
-数据规模与约定
-对于30%的数据，KL &lt;= 106；
-
-对于50%的数据，K &lt;= 16， L &lt;= 10；
-
-对于100%的数据，1 &lt;= K,L &lt;= 100。
-*/
-#include &lt;algorithm&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
 int main() {
-    int k, l;
-    scanf(&quot;%d%d&quot;, &amp;k, &amp;l);
-    // l位k进制中k好数的数目
-    // 最大数是k-1 l个数
-    long long arr[l + 1][k + 1];
-    memset(arr, 0, sizeof(arr));
-    for (int i = 0; i &lt;= k - 1; i++) {
-        arr[1][i] = 1;  // i开头
+    int a[4];
+    a[1] = 1;
+    a[2] = 1;
+    a[3] = 1;
+    int m;
+    for (int i = 4; i &lt;= 20190324; i++) {
+        m = a[1] + a[2] + a[3];
+        m %= 10000;
+        a[1] = a[2];
+        a[2] = a[3];
+        a[3] = m;
+        
     }
-
-    for (int i = 2; i &lt;= l; i++) {
-        for (int j = 0; j &lt;= k - 1; j++) {
-            for (int m = 0; m &lt;= k - 1; m++) {
-                if (abs(j - m) &gt; 1 || j == m) {
-                    // i开头的j进制数的个数 arr[i][j] = a[i-1][1...k-1](除了j-1,j+1)
-                    arr[i][j] += arr[i - 1][m] % 1000000007;
-                }
-            }
-        }
-    }
-
-    long long res = 0;
-    for (int i = 1; i &lt;= k - 1; i++) { // 把最后一行加起来 
-        res += arr[l][i];
-        res %= 1000000007;
-    }
-    printf(&quot;%lld&quot;, res);
-
+    cout &lt;&lt; a[3];
     return 0;
 }
 </code></pre>
+<p>这两道题都是简单题但是也有一些细节需要注意，还得多练这种题做起来都没有很顺利。。。</p>
 
             </div>
           </article>
@@ -170,9 +138,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
+              <a href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/">
                 <h3 class="post-title">
-                  算法训练-最短路(BF)
+                  真题-数的分解
                 </h3>
               </a>
             </div>
@@ -301,7 +269,7 @@ int main() {
           Linux
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
           Gridea
         </a>
       

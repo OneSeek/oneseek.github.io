@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练-K好数 | OneSeek</title>
+<title>真题-数的分解 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,11 +87,11 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练-K好数</h1>
+            <h1>真题-数的分解</h1>
             <p class="article-meta">
-              2020-03-11
+              2020-03-14
               
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
                   蓝桥杯
                 </a>
               
@@ -99,64 +99,42 @@
             
             <div class="post-content">
               <pre><code>/*
-试题 算法训练 K好数
-
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-问题描述
-如果一个自然数N的K进制表示中任意的相邻的两位都不是相邻的数字，那么我们就说这个数是K好数。
-求L位K进制数中K好数的数目。例如K = 4，L =
-2的时候，所有K好数为11、13、20、22、30、31、33 共7个。
-由于这个数目很大，请你输出它对1000000007取模后的值。
-
-输入格式
-输入包含两个正整数，K和L。
-
-输出格式
-输出一个整数，表示答案对1000000007取模后的值。
-样例输入
-4 2
-样例输出
-7
-数据规模与约定
-对于30%的数据，KL &lt;= 106；
-
-对于50%的数据，K &lt;= 16， L &lt;= 10；
-
-对于100%的数据，1 &lt;= K,L &lt;= 100。
-*/
-#include &lt;algorithm&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
+标题： 数的分解（本题总分：10 分）
+【问题描述】
+把 2019 分解成 3 个各不相同的正整数之和，并且要求每个正整数都不包
+含数字 2 和 4，一共有多少种不同的分解方法？
+注意交换 3 个整数的顺序被视为同一种方法，例如 1000+1001+18 和
+1001+1000+18 被视为同一种。
+【答案提交】
+这是一道结果填空的题，你只需要算出结果后提交即可。本题的结果为一
+个整数，在提交答案时只填写这个整数，填写多余的内容将无法得分*/
+#include &lt;iostream&gt;
+using namespace std;
+bool judge(int i) {
+    while (i) {
+        if (i % 10 == 2 || i % 10 == 4)
+            return false;
+        i /= 10;
+    }
+    return true;
+}
 int main() {
-    int k, l;
-    scanf(&quot;%d%d&quot;, &amp;k, &amp;l);
-    // l位k进制中k好数的数目
-    // 最大数是k-1 l个数
-    long long arr[l + 1][k + 1];
-    memset(arr, 0, sizeof(arr));
-    for (int i = 0; i &lt;= k - 1; i++) {
-        arr[1][i] = 1;  // i开头
-    }
-
-    for (int i = 2; i &lt;= l; i++) {
-        for (int j = 0; j &lt;= k - 1; j++) {
-            for (int m = 0; m &lt;= k - 1; m++) {
-                if (abs(j - m) &gt; 1 || j == m) {
-                    // i开头的j进制数的个数 arr[i][j] = a[i-1][1...k-1](除了j-1,j+1)
-                    arr[i][j] += arr[i - 1][m] % 1000000007;
-                }
+    int ans = 0;
+    for (int i = 1; i &lt;= 672; i++) {
+        if (judge(i))
+            for (int j = i + 1; j &lt;= 1008; j++) {
+                if (judge(j))
+                    for (int k = j + 1; k &lt;= 1999; k++) {
+                        if (judge(k))
+                            if (i + j + k == 2019) {
+                                // cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; j &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; endl;
+                                ans++;
+                            }
+                    }
             }
-        }
     }
 
-    long long res = 0;
-    for (int i = 1; i &lt;= k - 1; i++) { // 把最后一行加起来 
-        res += arr[l][i];
-        res %= 1000000007;
-    }
-    printf(&quot;%lld&quot;, res);
-
+    cout &lt;&lt; ans;
     return 0;
 }
 </code></pre>
@@ -170,9 +148,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
+              <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/">
                 <h3 class="post-title">
-                  算法训练-最短路(BF)
+                  CentOS7安装桌面环境（腾讯云)
                 </h3>
               </a>
             </div>
@@ -293,7 +271,7 @@ int main() {
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
           蓝桥杯
         </a>
       
@@ -301,7 +279,7 @@ int main() {
           Linux
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
           Gridea
         </a>
       
