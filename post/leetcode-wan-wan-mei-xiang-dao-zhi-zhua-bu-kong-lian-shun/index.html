@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Linux | OneSeek</title>
+<title>leetcode-万万没想到之抓捕孔连顺 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,40 +86,128 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Linux</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/">CentOS7安装桌面环境（腾讯云)</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-12
-      
-        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge success">
-          Linux
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>leetcode-万万没想到之抓捕孔连顺</h1>
+            <p class="article-meta">
+              2020-03-15
+              
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge ">
+                  leetcode
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>排列组合公式<br>
+<img src="https://oneseek.github.io/post-images/1584271775556.png" alt="" loading="lazy"></p>
+<pre><code>/*
+[编程题]万万没想到之抓捕孔连顺
+时间限制：C/C++ 1秒，其他语言2秒
+
+空间限制：C/C++ 128M，其他语言256M
+
+我叫王大锤，是一名特工。我刚刚接到任务：在字节跳动大街进行埋伏，抓捕恐怖分子孔连顺。和我一起行动的还有另外两名特工，我提议
+
+1. 我们在字节跳动大街的N个建筑中选定3个埋伏地点。
+2. 为了相互照应，我们决定相距最远的两名特工间的距离不超过D。
+
+我特喵是个天才!
+经过精密的计算，我们从X种可行的埋伏方案中选择了一种。这个方案万无一失，颤抖吧，孔连顺！
+……
+万万没想到，计划还是失败了，孔连顺化妆成小龙女，混在cosplay的队伍中逃出了字节跳动大街。只怪他的伪装太成功了，就是杨过本人来了也发现不了的！
+
+请听题：给定N（可选作为埋伏点的建筑物数）、D（相距最远的两名特工间的距离的最大值）以及可选建筑的坐标，计算在这次行动中，大锤的小队有多少种埋伏选择。
+注意：
+1. 两个特工不能埋伏在同一地点
+2. 三个特工是等价的：即同样的位置组合(A, B, C)
+只算一种埋伏方法，不能因“特工之间互换位置”而重复使用
 
 
+输入描述:
+第一行包含空格分隔的两个数字 N和D(1?≤?N?≤?1000000; 1?≤?D?≤?1000000)
+
+第二行包含N个建筑物的的位置，每个位置用一个整数（取值区间为[0,
+1000000]）表示，从小到大排列（将字节跳动大街看做一条数轴）
+
+输出描述:
+一个数字，表示不同埋伏方案的数量。结果可能溢出，请对 99997867 取模
+
+输入例子1:
+4 3
+1 2 3 4
+
+输出例子1:
+4
+
+例子说明1:
+可选方案 (1, 2, 3), (1, 2, 4), (1, 3, 4), (2, 3, 4)
+
+输入例子2:
+5 19
+1 10 20 30 50
+
+输出例子2:
+1
+
+例子说明2:
+可选方案 (1, 10, 20)
+*/
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    long long N, D, count = 0;
+    cin &gt;&gt; N &gt;&gt; D;
+    long long v[N];
+    
+    int j = 0;
+    for (int i = 0; i &lt; N; i++) {
+        cin &gt;&gt; v[i];
+
+        while (v[i] - v[j] &gt; D&amp;&amp;i&gt;2) {
+            j++;
+        }
+        long long c = i - j;
+        count += (c - 1) * c / 2;
+
+    }
+
+    
+    cout &lt;&lt; count % 99997867;
+
+    return 0;
+}
+
+</code></pre>
+
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-cong-ming-de-bian-ji/">
+                <h3 class="post-title">
+                  leetcode-万万没想到之聪明的编辑
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1584273125637" class="no-responsive avatar">
@@ -225,15 +320,15 @@
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge secondary">
           leetcode
         </a>
       
-        <a href="https://oneseek.github.io/tag/8PavsPD1i/" class="badge ">
+        <a href="https://oneseek.github.io/tag/8PavsPD1i/" class="badge secondary">
           SpringBoot
         </a>
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
           蓝桥杯
         </a>
       
@@ -241,7 +336,7 @@
           Linux
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
           Gridea
         </a>
       
@@ -251,6 +346,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
@@ -263,6 +359,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

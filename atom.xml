@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-15T11:03:44.777Z</updated>
+    <updated>2020-03-15T11:52:10.930Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,95 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[leetcode-万万没想到之抓捕孔连顺]]></title>
+        <id>https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-zhua-bu-kong-lian-shun/</id>
+        <link href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-zhua-bu-kong-lian-shun/">
+        </link>
+        <updated>2020-03-15T11:28:34.000Z</updated>
+        <content type="html"><![CDATA[<p>排列组合公式<br>
+<img src="https://oneseek.github.io/post-images/1584271775556.png" alt="" loading="lazy"></p>
+<pre><code>/*
+[编程题]万万没想到之抓捕孔连顺
+时间限制：C/C++ 1秒，其他语言2秒
+
+空间限制：C/C++ 128M，其他语言256M
+
+我叫王大锤，是一名特工。我刚刚接到任务：在字节跳动大街进行埋伏，抓捕恐怖分子孔连顺。和我一起行动的还有另外两名特工，我提议
+
+1. 我们在字节跳动大街的N个建筑中选定3个埋伏地点。
+2. 为了相互照应，我们决定相距最远的两名特工间的距离不超过D。
+
+我特喵是个天才!
+经过精密的计算，我们从X种可行的埋伏方案中选择了一种。这个方案万无一失，颤抖吧，孔连顺！
+……
+万万没想到，计划还是失败了，孔连顺化妆成小龙女，混在cosplay的队伍中逃出了字节跳动大街。只怪他的伪装太成功了，就是杨过本人来了也发现不了的！
+
+请听题：给定N（可选作为埋伏点的建筑物数）、D（相距最远的两名特工间的距离的最大值）以及可选建筑的坐标，计算在这次行动中，大锤的小队有多少种埋伏选择。
+注意：
+1. 两个特工不能埋伏在同一地点
+2. 三个特工是等价的：即同样的位置组合(A, B, C)
+只算一种埋伏方法，不能因“特工之间互换位置”而重复使用
+
+
+输入描述:
+第一行包含空格分隔的两个数字 N和D(1?≤?N?≤?1000000; 1?≤?D?≤?1000000)
+
+第二行包含N个建筑物的的位置，每个位置用一个整数（取值区间为[0,
+1000000]）表示，从小到大排列（将字节跳动大街看做一条数轴）
+
+输出描述:
+一个数字，表示不同埋伏方案的数量。结果可能溢出，请对 99997867 取模
+
+输入例子1:
+4 3
+1 2 3 4
+
+输出例子1:
+4
+
+例子说明1:
+可选方案 (1, 2, 3), (1, 2, 4), (1, 3, 4), (2, 3, 4)
+
+输入例子2:
+5 19
+1 10 20 30 50
+
+输出例子2:
+1
+
+例子说明2:
+可选方案 (1, 10, 20)
+*/
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    long long N, D, count = 0;
+    cin &gt;&gt; N &gt;&gt; D;
+    long long v[N];
+    
+    int j = 0;
+    for (int i = 0; i &lt; N; i++) {
+        cin &gt;&gt; v[i];
+
+        while (v[i] - v[j] &gt; D&amp;&amp;i&gt;2) {
+            j++;
+        }
+        long long c = i - j;
+        count += (c - 1) * c / 2;
+
+    }
+
+    
+    cout &lt;&lt; count % 99997867;
+
+    return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[leetcode-万万没想到之聪明的编辑]]></title>
         <id>https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-cong-ming-de-bian-ji/</id>
@@ -532,48 +621,6 @@ int main() {
 		sum+=cal(i);
 	}
 	printf(&quot;%d&quot;,sum);
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[算法训练-交换(水~)]]></title>
-        <id>https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/</id>
-        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/">
-        </link>
-        <updated>2020-03-11T13:09:52.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>/*
-试题 算法训练 数据交换
-  
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-问题描述
-　　编写一个程序，输入两个整数，分别存放在变量x和y当中，然后使用自己定义的函数swap来交换这两个变量的值。
-　　输入格式：输入只有一行，包括两个整数。
-　　输出格式：输出只有一行，也是两个整数，即交换以后的结果。
-　　要求：主函数负责数据的输入与输出，但不能直接交换这两个变量的值，必须通过调用单独定义的函数swap来完成，而swap函数只负责交换变量的值，不能输出交换后的结果。
-输入输出样例
-样例输入
-4 7
-样例输出
-7 4
-*/
-#include &lt;algorithm&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-void swap(int* a,int* b){
-	int x;
-	x = *a;
-	*a = *b;
-	*b = x;
-} 
-int main() {
-    int a,b;
-    scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
-    swap(&amp;a,&amp;b);
-    printf(&quot;%d %d&quot;,a,b);
-
     return 0;
 }
 </code></pre>
