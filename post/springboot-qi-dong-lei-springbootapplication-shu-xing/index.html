@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>真题-特别数的和 | OneSeek</title>
+<title>SpringBoot 启动类 @SpringBootApplication 属性 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,60 +87,97 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>真题-特别数的和</h1>
+            <h1>SpringBoot 启动类 @SpringBootApplication 属性</h1>
             <p class="article-meta">
-              2020-03-14
-              
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-                  蓝桥杯
-                </a>
+              2020-03-15
               
             </p>
             
             <div class="post-content">
-              <pre><code>/*
-第六题
-标题：特别数的和（时间限制: 1.0s 内存限制: 256.0MB 本题总分：15 分）###
-【问题描述】
-小明对数位中含有 2、0、1、9 的数字很感兴趣（不包括前导 0） ，在 1 到
-40 中这样的数包括 1、2、9、10 至 32、39 和 40，共 28 个，他们的和是 574。
-请问，在 1 到 n 中，所有这样的数的和是多少？
-【输入格式】
-输入一行包含两个整数 n。
-【输出格式】
-输出一行，包含一个整数，表示满足条件的数的和。
-【样例输入】
-40
-【样例输出】
-574
-【评测用例规模与约定】
-对于 20% 的评测用例，1 ≤ n ≤ 10。
-对于 50% 的评测用例，1 ≤ n ≤ 100。
-对于 80% 的评测用例，1 ≤ n ≤ 1000。
-对于所有评测用例，1 ≤ n ≤ 10000。*/
-#include &lt;iostream&gt;
-using namespace std;
-bool judge(int i) {
-    while (i) {
-        if (i % 10 == 2 || i % 10 == 0 || i % 10 == 1 || i % 10 == 9) {
-            return true;
-        }
-        i /= 10;
-    }
-    return false;
+              <h3 id="给学院做的一个项目访问404发现是一个学弟在springbootapplication这多加了一个属性-scanbasepackages在解决问题的过程中发现自己也有很多东西都不了解记录一下">给学院做的一个项目访问404，发现是一个学弟在@SpringBootApplication这多加了一个属性 scanBasePackages，在解决问题的过程中发现自己也有很多东西都不了解，记录一下</h3>
+<p>SpringBoot官方文档中对@SpringBootApplication 的解释<br>
+@SpringBootApplication 注解相当于使用 @Configuration、@EnableAutoConfiguration 和 @ComponentScan</p>
+<p>@SpringBootApplication 还提供了别名来自定义 @EnableAutoConfiguration 和 @ComponentScan 的属性。</p>
+<p>@EnableAutoConfiguration：启用Spring Boot的自动配置机制，类似在java代码中自动import，属于自动导入。</p>
+<p>@Configuration：有自动导入就有属于自动导出，需要配合该类中方法的@bean，这就相当于一个xml配置:</p>
+<p>@ComponentScan：扫描所有使用@Component 的类，不管自动导入还是导出，首先需要告诉spring boot到哪里去找导入导出的原料。</p>
+<p>scanBasePackages是 ComponentScan的一个属性</p>
+<p>ComponentScan注解里有两种方式用来指定扫描的范围:<br>
+一、scanBasePackages (常用)<br>
+可以指定多个包名进行扫描<br>
+二、scanBasePackageClasses<br>
+可以指定多个类或接口的class,扫描时会 在这些指定的类和接口所属的包进行扫面。</p>
+<p>@SpringBootApplication 源码</p>
+<pre><code>//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package org.springframework.boot.autoconfigure;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.context.TypeExcludeFilter;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.core.annotation.AliasFor;
+
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(
+    excludeFilters = {@Filter(
+    type = FilterType.CUSTOM,
+    classes = {TypeExcludeFilter.class}
+), @Filter(
+    type = FilterType.CUSTOM,
+    classes = {AutoConfigurationExcludeFilter.class}
+)}
+)
+public @interface SpringBootApplication {
+    @AliasFor(
+        annotation = EnableAutoConfiguration.class
+    )
+    Class&lt;?&gt;[] exclude() default {};
+
+    @AliasFor(
+        annotation = EnableAutoConfiguration.class
+    )
+    String[] excludeName() default {};
+
+    @AliasFor(
+        annotation = ComponentScan.class,
+        attribute = &quot;basePackages&quot;
+    )
+    String[] scanBasePackages() default {};
+
+    @AliasFor(
+        annotation = ComponentScan.class,
+        attribute = &quot;basePackageClasses&quot;
+    )
+    Class&lt;?&gt;[] scanBasePackageClasses() default {};
+
+    @AliasFor(
+        annotation = Configuration.class
+    )
+    boolean proxyBeanMethods() default true;
 }
-int main() {
-    int n;
-    cin &gt;&gt; n;
-    int ans = 0;
-    for (int i = 1; i &lt;= n; i++) {
-        if (judge(i)) {
-            ans += i;
-        }
-    }
-    cout &lt;&lt; ans;
-    return 0;
-}
+
+</code></pre>
+<p>这里面的类关系往往是一个里面有其他更多的配置 所以等以后有时间做个思维导图把他们的关系表示出来</p>
+<pre><code>参考文档 SpringBoot官方文档
+知乎 https://zhuanlan.zhihu.com/p/60421014
+csdn https://blog.csdn.net/qq_28163175/article/details/89194108
 </code></pre>
 
             </div>
@@ -152,9 +189,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/">
+              <a href="https://oneseek.github.io/post/zhen-ti-te-bie-shu-de-he/">
                 <h3 class="post-title">
-                  真题-数列求值
+                  真题-特别数的和
                 </h3>
               </a>
             </div>
@@ -279,15 +316,15 @@ int main() {
     </div>
     <div class="row">
       
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
+        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge warning">
+        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge secondary">
           Linux
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge ">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
           Gridea
         </a>
       
