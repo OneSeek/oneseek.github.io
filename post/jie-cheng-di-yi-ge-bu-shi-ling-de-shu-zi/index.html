@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>leetcode-万万没想到之聪明的编辑 | OneSeek</title>
+<title>阶乘 第一个不是零的数字 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -87,94 +87,72 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>leetcode-万万没想到之聪明的编辑</h1>
+            <h1>阶乘 第一个不是零的数字</h1>
             <p class="article-meta">
-              2020-03-15
+              2020-03-16
               
-                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge secondary">
-                  leetcode
+                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge warning">
+                  蓝桥杯
                 </a>
               
             </p>
             
             <div class="post-content">
-              <pre><code>/*
-[编程题]万万没想到之聪明的编辑
+              <pre><code>/*试题 算法训练 P0505
 
-时间限制：C/C++ 1秒，其他语言2秒
-
-空间限制：C/C++ 32M，其他语言64M
-
-我叫王大锤，是一家出版社的编辑。我负责校对投稿来的英文稿件，这份工作非常烦人，因为每天都要去修正无数的拼写错误。但是，优秀的人总能在平凡的工作中发现真理。我发现一个发现拼写错误的捷径：
-
-1. 三个同样的字母连在一起，一定是拼写错误，去掉一个的就好啦：比如 helllo -&gt; hello
-2. 两对一样的字母（AABB型）连在一起，一定是拼写错误，去掉第二对的一个字母就好啦：比如 helloo -&gt; hello
-3. 上面的规则优先“从左到右”匹配，即如果是AABBCC，虽然AABB和BBCC都是错误拼写，应该优先考虑修复AABB，结果为AABCC
-
-我特喵是个天才！我在蓝翔学过挖掘机和程序设计，按照这个原理写了一个自动校对器，工作效率从此起飞。用不了多久，我就会出任CEO，当上董事长，迎娶白富美，走上人生巅峰，想想都有点小激动呢！
-……
-万万没想到，我被开除了，临走时老板对我说： “做人做事要兢兢业业、勤勤恳恳、本本分分，人要是行，干一行行一行。一行行行行行；要是不行，干一行不行一行，一行不行行行不行。” 我现在整个人红红火火恍恍惚惚的……
-
-请听题：请实现大锤的自动校对程序
-
-输入描述:
-第一行包括一个数字N，表示本次用例包括多少个待校验的字符串。
-
-后面跟随N行，每行为一个待校验的字符串。
-
-输出描述:
-N行，每行包括一个被修复后的字符串。
-
-输入例子1:
-2
-helloo
-wooooooow
-
-输出例子1:
-hello
-woow
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+　　一个整数n的阶乘可以写成n!，它表示从1到n这n个整数的乘积。阶乘的增长速度非常快，例如，13！就已经比较大了，已经无法存放在一个整型变量中；而35！就更大了，它已经无法存放在一个浮点型变量中。因此，当n比较大时，去计算n!是非常困难的。幸运的是，在本题中，我们的任务不是去计算n!，而是去计算n!最右边的那个非0的数字是多少。例如，5！=1*2*3*4*5=120，因此5!最右边的那个非0的数字是2。再如，7！=5040，因此7！最右边的那个非0的数字是4。再如，15！=
+1307674368000，因此15！最右边的那个非0的数字是8。请编写一个程序，输入一个整数n(0&lt;n&lt;=100)，然后输出n!最右边的那个非0的数字是多少。
+输入：
+　　7
+输出：
+　　4
 */
 #include &lt;iostream&gt;
-#include &lt;string&gt;
 using namespace std;
-//hello
-string strhandle(string m) {
-    string n = &quot;&quot;;
-    for (int i = 0; i &lt; m.length(); i++) {
-        if (m[i] == m[i + 1] &amp;&amp; m[i + 2] == m[i + 3]&amp;&amp; i+3&lt;m.length()) {
-            n += m[i];
-            n += m[i + 1];
-            n += m[i + 2];
-            i += 3;
-        }else{
-            n += m[i];
-        }
-    }
-    return n;
+int delZero(int i) {
+    while (i % 10 == 0) {
+        i /= 10;
+    };
+    return i;
 }
-string strhandle2(string x) {
-    // wooooow
-    string m = &quot;&quot;;
-    for (int i = 0; i &lt; x.length(); i++) {
-        if (x[i] == x[i + 1] &amp;&amp; x[i + 1] == x[i + 2]) {
-            
-        }else{
-            m += x[i];
-        }
-    }
-    // aabb
-    return strhandle(m);
-}
-
 int main() {
-    int N;
-    cin &gt;&gt; N;
-
-    for (int i = 0; i &lt; N; i++) {
-        string x;
-        cin &gt;&gt; x;
-
-        cout &lt;&lt; strhandle2(x) &lt;&lt; endl;
+    int n;
+    cin &gt;&gt; n;
+    int ans = 1;;
+    for (int i = 1; i &lt;= n; i++) {
+        ans *= i;
+        ans = delZero(ans);
+        ans = ans % 1000;
+    }
+    cout &lt;&lt;ans%10;
+    return 0;
+}
+</code></pre>
+<h2 id="因为这道题n的范围是-n100-所以对1000求余是可以得出正确答案的如果更大可以用数组模拟乘法来做">因为这道题n的范围是 n&lt;100 所以对1000求余是可以得出正确答案的，如果更大可以用数组模拟乘法来做</h2>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+using namespace std;
+int a[10005];
+int main() {
+    long n;
+    memset(a, 0, sizeof(a));
+    cin &gt;&gt; n;
+    a[0] = 1;
+    int s, c = 0;  // c 进位
+    for (int i = 2; i &lt;= n; i++) {
+        for (int j = 0; j &lt; 10000; j++) {
+            s = a[j] * i + c;
+            a[j] = s % 10;
+            c = s / 10;
+        }
+    }
+    for (int i = 0;; i++) {
+        if (a[i] != 0) {
+            cout &lt;&lt; a[i];
+            break;
+        }
     }
     return 0;
 }
@@ -189,9 +167,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/springboot-qi-dong-lei-springbootapplication-shu-xing/">
+              <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-zhua-bu-kong-lian-shun/">
                 <h3 class="post-title">
-                  SpringBoot 启动类 @SpringBootApplication 属性
+                  leetcode-万万没想到之抓捕孔连顺
                 </h3>
               </a>
             </div>
@@ -326,11 +304,11 @@ int main() {
           蓝桥杯
         </a>
       
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge secondary">
           leetcode
         </a>
       
-        <a href="https://oneseek.github.io/tag/8PavsPD1i/" class="badge ">
+        <a href="https://oneseek.github.io/tag/8PavsPD1i/" class="badge success">
           SpringBoot
         </a>
       
@@ -338,7 +316,7 @@ int main() {
           Linux
         </a>
       
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge warning">
           Gridea
         </a>
       
