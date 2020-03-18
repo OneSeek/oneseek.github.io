@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <meta charset="utf-8" >
 
-<title>OneSeek</title>
+<title>nginx 资源重定向错误 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -24,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -77,75 +83,59 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>nginx 资源重定向错误</h1>
+            <p class="article-meta">
+              2020-03-18
+              
+                <a href="https://oneseek.github.io/tag/7p4YZGo8w/" class="badge secondary">
+                  nginx
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>原因 leanote 页面使用的是绝对 路径 导致 二级目录访问 会跳转到 根目录<br>
+例如 localhost/leanote/index 变成 localhost/index</p>
+<p>解决方法：<br>
+用sub_filter 将请求的资源变成 相对路径<br>
+可能会造成从第三方网址的资源不可用 但是暂时只能这样解决了</p>
+<pre><code>sub_filter 'src=&quot;/' 'src=&quot;./'; 
+sub_filter 'href=&quot;/' 'href=&quot;./'; 
+ sub_filter_once off;
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">阶乘计算（高精度）</a>
-    </h2>
-    <p class="article-meta">
-      2020-02-29
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/nginx-sub_filter/">
+                <h3 class="post-title">
+                  nginx 反向代理
+                </h3>
+              </a>
+            </div>
+          
         </div>
         
-        <div class="row flex-edges">
-  
-    <a href="https://oneseek.github.io/page/4/" class="paper-btn">
-      上一页
-    </a>
-  
-  
-</div>
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1584537651563" class="no-responsive avatar">
@@ -171,7 +161,7 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge success">
+        class="badge ">
         nginx
       </a>
       
@@ -181,7 +171,7 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge success">
+        class="badge warning">
         蓝桥杯
       </a>
       
@@ -191,12 +181,12 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge success">
+        class="badge warning">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge secondary">
+        class="badge warning">
         Gridea
       </a>
       
@@ -302,7 +292,9 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">
@@ -312,6 +304,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
