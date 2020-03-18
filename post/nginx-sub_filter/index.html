@@ -7,7 +7,7 @@
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://oneseek.github.io/favicon.ico?v=1584511728495">
+<link rel="shortcut icon" href="https://oneseek.github.io/favicon.ico?v=1584533469539">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -91,7 +91,7 @@
             <p class="article-meta">
               2020-03-18
               
-                <a href="https://oneseek.github.io/tag/7p4YZGo8w/" class="badge success">
+                <a href="https://oneseek.github.io/tag/7p4YZGo8w/" class="badge warning">
                   nginx
                 </a>
               
@@ -109,40 +109,17 @@
             sub_filter / /leanote;
         }
 </code></pre>
-<p>解决： 使用代理 把资源匹配到正确路径<br>
-rewrite (.<em>)/wapindex(.</em>) /leanote$1/wapindex$2;<br>
-rewrite (.<em>)/image(.</em>) /leanote$1/image$2;<br>
-rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
+<p>解决： 使用代理 把资源匹配到正确路径</p>
 <pre><code>location / {
-         #index index.html index.htm;
-         #root html/;
-         #proxy_next_upstream http_502 http_504 error timeout invalid_header;
-         proxy_set_header Host  $host;
-         proxy_set_header X-Real-IP $remote_addr;
-         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
          proxy_pass http://localhost:9000/;
-         expires      -1;
-         proxy_connect_timeout 300;
-        proxy_send_timeout 300;
-        proxy_read_timeout 300;
-
-         rewrite (.*)/wapindex(.*) /leanote$1/wapindex$2;
-        rewrite (.*)/image(.*) /leanote$1/image$2;
-        rewrite (.*)/js(.*) /leanote$1/js$2;
         }
         location /leanote/ {
             proxy_pass http://localhost:9000/;
         }
-
-       
-
-    }
-    ```
-
-
-
-
-参考文章 ： https://blog.csdn.net/djfjkj52/article/details/96426979</code></pre>
+}
+</code></pre>
+<p>但是这样</p>
+<p>参考文章 ： https://blog.csdn.net/djfjkj52/article/details/96426979</p>
 
             </div>
           </article>
@@ -174,7 +151,7 @@ rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://oneseek.github.io/images/avatar.png?v=1584511728495" class="no-responsive avatar">
+    <img src="https://oneseek.github.io/images/avatar.png?v=1584533469539" class="no-responsive avatar">
     <div class="text-muted">Be a coder who can change the world</div>
     <div class="social-container">
       
@@ -202,7 +179,7 @@ rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge warning">
+        class="badge secondary">
         Linux
       </a>
       
@@ -217,12 +194,12 @@ rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge warning">
+        class="badge secondary">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge secondary">
+        class="badge warning">
         Gridea
       </a>
       
