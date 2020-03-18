@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-18T04:36:04.888Z</updated>
+    <updated>2020-03-18T04:44:10.295Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -38,6 +38,10 @@
     }
 </code></pre>
 <p>访问 learn.oneseek.cn/learn 进入9000端口的网站</p>
+<p>启动mongo命令<br>
+mongod --dbpath /home/user1/data<br>
+启动leanote<br>
+bash run.sh</p>
 ]]></content>
     </entry>
     <entry>
