@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Gridea | OneSeek</title>
+<title>nginx sub_filter | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="https://oneseek.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
@@ -23,6 +29,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,66 +86,92 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Gridea</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/pei-zhi-gitalk/">配置gitalk</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-02
-      
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/pei-zhi-gitalk/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>nginx sub_filter</h1>
+            <p class="article-meta">
+              2020-03-18
+              
+                <a href="https://oneseek.github.io/tag/7p4YZGo8w/" class="badge ">
+                  nginx
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>配置leanote时，希望把二级目录 匹配到端口 发现只能进首页其他的url都不对</p>
+<p>原因：连接没有重定向到 二级目录下</p>
+<p>增加 sub_filter 属性能让首页的资源加载到 但是点击连接别的页面 却被从定向到根目录</p>
+<pre><code>listen 80;
+        server_name localhost;
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge success">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        location /leanote/ {
+            proxy_pass http://localhost:9000/;
+            sub_filter / /leanote;
+        }
+</code></pre>
+<p>解决： 使用代理 把资源匹配到正确路径<br>
+rewrite (.<em>)/wapindex(.</em>) /leanote$1/wapindex$2;<br>
+rewrite (.<em>)/image(.</em>) /leanote$1/image$2;<br>
+rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
+<pre><code>location / {
+         #index index.html index.htm;
+         #root html/;
+         #proxy_next_upstream http_502 http_504 error timeout invalid_header;
+         proxy_set_header Host  $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_pass http://localhost:9000/;
+         expires      -1;
+         proxy_connect_timeout 300;
+        proxy_send_timeout 300;
+        proxy_read_timeout 300;
 
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+         rewrite (.*)/wapindex(.*) /leanote$1/wapindex$2;
+        rewrite (.*)/image(.*) /leanote$1/image$2;
+        rewrite (.*)/js(.*) /leanote$1/js$2;
+        }
+        location /leanote/ {
+            proxy_pass http://localhost:9000/;
+        }
+
+       
+
+    }
+    ```
 
 
+
+
+参考文章 ： https://blog.csdn.net/djfjkj52/article/details/96426979</code></pre>
+
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/centos7-da-jian-leanote/">
+                <h3 class="post-title">
+                  CentOS7 搭建leanote
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
 
+          
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1584511668810" class="no-responsive avatar">
@@ -164,32 +197,32 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge secondary">
+        class="badge ">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge ">
+        class="badge warning">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge success">
+        class="badge ">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge warning">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge warning">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge warning">
+        class="badge success">
         Gridea
       </a>
       
@@ -293,6 +326,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -304,6 +338,29 @@ AOS.init();
 hljs.initHighlightingOnLoad()
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '346408680e2c90eae057',
+        clientSecret: 'd9aa44a162d187ec35fa85d627739fcc79419de1',
+        repo: 'bloggitalk',
+        owner: 'OneSeek',
+        admin: ['OneSeek'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-18T04:44:10.295Z</updated>
+    <updated>2020-03-18T06:07:52.059Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,59 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[nginx sub_filter]]></title>
+        <id>https://oneseek.github.io/post/nginx-sub_filter/</id>
+        <link href="https://oneseek.github.io/post/nginx-sub_filter/">
+        </link>
+        <updated>2020-03-18T05:30:18.000Z</updated>
+        <content type="html"><![CDATA[<p>配置leanote时，希望把二级目录 匹配到端口 发现只能进首页其他的url都不对</p>
+<p>原因：连接没有重定向到 二级目录下</p>
+<p>增加 sub_filter 属性能让首页的资源加载到 但是点击连接别的页面 却被从定向到根目录</p>
+<pre><code>listen 80;
+        server_name localhost;
+
+        location /leanote/ {
+            proxy_pass http://localhost:9000/;
+            sub_filter / /leanote;
+        }
+</code></pre>
+<p>解决： 使用代理 把资源匹配到正确路径<br>
+rewrite (.<em>)/wapindex(.</em>) /leanote$1/wapindex$2;<br>
+rewrite (.<em>)/image(.</em>) /leanote$1/image$2;<br>
+rewrite (.<em>)/js(.</em>) /leanote$1/js$2;</p>
+<pre><code>location / {
+         #index index.html index.htm;
+         #root html/;
+         #proxy_next_upstream http_502 http_504 error timeout invalid_header;
+         proxy_set_header Host  $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_pass http://localhost:9000/;
+         expires      -1;
+         proxy_connect_timeout 300;
+        proxy_send_timeout 300;
+        proxy_read_timeout 300;
+
+         rewrite (.*)/wapindex(.*) /leanote$1/wapindex$2;
+        rewrite (.*)/image(.*) /leanote$1/image$2;
+        rewrite (.*)/js(.*) /leanote$1/js$2;
+        }
+        location /leanote/ {
+            proxy_pass http://localhost:9000/;
+        }
+
+       
+
+    }
+    ```
+
+
+
+
+参考文章 ： https://blog.csdn.net/djfjkj52/article/details/96426979</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CentOS7 搭建leanote]]></title>
         <id>https://oneseek.github.io/post/centos7-da-jian-leanote/</id>
@@ -286,100 +339,6 @@ int main() {
     }
     return 0;
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[SpringBoot 启动类 @SpringBootApplication 属性]]></title>
-        <id>https://oneseek.github.io/post/springboot-qi-dong-lei-springbootapplication-shu-xing/</id>
-        <link href="https://oneseek.github.io/post/springboot-qi-dong-lei-springbootapplication-shu-xing/">
-        </link>
-        <updated>2020-03-15T08:05:16.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="给学院做的一个项目访问404发现是一个学弟在springbootapplication这多加了一个属性-scanbasepackages在解决问题的过程中发现自己也有很多东西都不了解记录一下">给学院做的一个项目访问404，发现是一个学弟在@SpringBootApplication这多加了一个属性 scanBasePackages，在解决问题的过程中发现自己也有很多东西都不了解，记录一下</h3>
-<p>SpringBoot官方文档中对@SpringBootApplication 的解释<br>
-@SpringBootApplication 注解相当于使用 @Configuration、@EnableAutoConfiguration 和 @ComponentScan</p>
-<p>@SpringBootApplication 还提供了别名来自定义 @EnableAutoConfiguration 和 @ComponentScan 的属性。</p>
-<p>@EnableAutoConfiguration：启用Spring Boot的自动配置机制，类似在java代码中自动import，属于自动导入。</p>
-<p>@Configuration：有自动导入就有属于自动导出，需要配合该类中方法的@bean，这就相当于一个xml配置:</p>
-<p>@ComponentScan：扫描所有使用@Component 的类，不管自动导入还是导出，首先需要告诉spring boot到哪里去找导入导出的原料。</p>
-<p>scanBasePackages是 ComponentScan的一个属性</p>
-<p>ComponentScan注解里有两种方式用来指定扫描的范围:<br>
-一、scanBasePackages (常用)<br>
-可以指定多个包名进行扫描<br>
-二、scanBasePackageClasses<br>
-可以指定多个类或接口的class,扫描时会 在这些指定的类和接口所属的包进行扫面。</p>
-<p>@SpringBootApplication 源码</p>
-<pre><code>//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
-package org.springframework.boot.autoconfigure;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.context.TypeExcludeFilter;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.core.annotation.AliasFor;
-
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@SpringBootConfiguration
-@EnableAutoConfiguration
-@ComponentScan(
-    excludeFilters = {@Filter(
-    type = FilterType.CUSTOM,
-    classes = {TypeExcludeFilter.class}
-), @Filter(
-    type = FilterType.CUSTOM,
-    classes = {AutoConfigurationExcludeFilter.class}
-)}
-)
-public @interface SpringBootApplication {
-    @AliasFor(
-        annotation = EnableAutoConfiguration.class
-    )
-    Class&lt;?&gt;[] exclude() default {};
-
-    @AliasFor(
-        annotation = EnableAutoConfiguration.class
-    )
-    String[] excludeName() default {};
-
-    @AliasFor(
-        annotation = ComponentScan.class,
-        attribute = &quot;basePackages&quot;
-    )
-    String[] scanBasePackages() default {};
-
-    @AliasFor(
-        annotation = ComponentScan.class,
-        attribute = &quot;basePackageClasses&quot;
-    )
-    Class&lt;?&gt;[] scanBasePackageClasses() default {};
-
-    @AliasFor(
-        annotation = Configuration.class
-    )
-    boolean proxyBeanMethods() default true;
-}
-
-</code></pre>
-<p>这里面的类关系往往是一个里面有其他更多的配置 所以等以后有时间做个思维导图把他们的关系表示出来</p>
-<pre><code>参考文档 SpringBoot官方文档
-知乎 https://zhuanlan.zhihu.com/p/60421014
-csdn https://blog.csdn.net/qq_28163175/article/details/89194108
-Spring零配置之@Configuration注解详解。 https://mp.weixin.qq.com/s/i8qHLkdtf4XzRyIRJ8R_7A
 </code></pre>
 ]]></content>
     </entry>
