@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-19T13:17:16.107Z</updated>
+    <updated>2020-03-19T13:57:40.475Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[算法训练 大等于n的最小完全平方数]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-da-deng-yu-n-de-zui-xiao-wan-quan-ping-fang-shu/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-da-deng-yu-n-de-zui-xiao-wan-quan-ping-fang-shu/">
+        </link>
+        <updated>2020-03-19T13:56:06.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>/*
+试题 算法训练 大等于n的最小完全平方数
+
+资源限制
+时间限制：1.0s   内存限制：256.0MB
+问题描述
+　　输出大等于n的最小的完全平方数。
+　　若一个数能表示成某个自然数的平方的形式，则称这个数为完全平方数
+　　Tips：注意数据范围
+输入格式
+　　一个整数n
+输出格式
+　　大等于n的最小的完全平方数
+样例输入
+71711
+样例输出
+71824
+数据规模和约定
+　　n是32位有符号整数
+*/
+#include &lt;cmath&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+int main() {
+    long long n;
+    scanf(&quot;%lld&quot;, &amp;n);
+    long long i = sqrt(n);
+    printf(&quot;%lld\n&quot;, (i + 1) * (i + 1));
+    printf(&quot;%f\n&quot;, pow(3, 2));
+    printf(&quot;%.lf\n&quot;, pow(3, 2));
+    return 0;
+}
+</code></pre>
+<p>pow() 函数 头文件 cmath printf输出 要用 %lf 或 %f</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[域名可以ping通 但是网页显示无法访问]]></title>
         <id>https://oneseek.github.io/post/yu-ming-ke-yi-ping-tong-dan-shi-wang-ye-xian-shi-wu-fa-fang-wen/</id>
@@ -98,73 +140,6 @@ sub_filter 'href=&quot;/' 'href=&quot;./';
 mongod --dbpath /home/user1/data<br>
 启动leanote<br>
 bash run.sh</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[阶乘 第一个不是零的数字]]></title>
-        <id>https://oneseek.github.io/post/jie-cheng-di-yi-ge-bu-shi-ling-de-shu-zi/</id>
-        <link href="https://oneseek.github.io/post/jie-cheng-di-yi-ge-bu-shi-ling-de-shu-zi/">
-        </link>
-        <updated>2020-03-16T13:56:25.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>/*试题 算法训练 P0505
-
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-　　一个整数n的阶乘可以写成n!，它表示从1到n这n个整数的乘积。阶乘的增长速度非常快，例如，13！就已经比较大了，已经无法存放在一个整型变量中；而35！就更大了，它已经无法存放在一个浮点型变量中。因此，当n比较大时，去计算n!是非常困难的。幸运的是，在本题中，我们的任务不是去计算n!，而是去计算n!最右边的那个非0的数字是多少。例如，5！=1*2*3*4*5=120，因此5!最右边的那个非0的数字是2。再如，7！=5040，因此7！最右边的那个非0的数字是4。再如，15！=
-1307674368000，因此15！最右边的那个非0的数字是8。请编写一个程序，输入一个整数n(0&lt;n&lt;=100)，然后输出n!最右边的那个非0的数字是多少。
-输入：
-　　7
-输出：
-　　4
-*/
-#include &lt;iostream&gt;
-using namespace std;
-int delZero(int i) {
-    while (i % 10 == 0) {
-        i /= 10;
-    };
-    return i;
-}
-int main() {
-    int n;
-    cin &gt;&gt; n;
-    int ans = 1;;
-    for (int i = 1; i &lt;= n; i++) {
-        ans *= i;
-        ans = delZero(ans);
-        ans = ans % 1000;
-    }
-    cout &lt;&lt;ans%10;
-    return 0;
-}
-</code></pre>
-<h2 id="因为这道题n的范围是-n100-所以对1000求余是可以得出正确答案的如果更大可以用数组模拟乘法来做">因为这道题n的范围是 n&lt;100 所以对1000求余是可以得出正确答案的，如果更大可以用数组模拟乘法来做</h2>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;string.h&gt;
-using namespace std;
-int a[10005];
-int main() {
-    long n;
-    memset(a, 0, sizeof(a));
-    cin &gt;&gt; n;
-    a[0] = 1;
-    int s, c = 0;  // c 进位
-    for (int i = 2; i &lt;= n; i++) {
-        for (int j = 0; j &lt; 10000; j++) {
-            s = a[j] * i + c;
-            a[j] = s % 10;
-            c = s / 10;
-        }
-    }
-    for (int i = 0;; i++) {
-        if (a[i] != 0) {
-            cout &lt;&lt; a[i];
-            break;
-        }
-    }
-    return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
