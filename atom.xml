@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-19T13:57:40.475Z</updated>
+    <updated>2020-03-19T14:29:15.205Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -42,14 +42,19 @@ using namespace std;
 int main() {
     long long n;
     scanf(&quot;%lld&quot;, &amp;n);
-    long long i = sqrt(n);
-    printf(&quot;%lld\n&quot;, (i + 1) * (i + 1));
-    printf(&quot;%f\n&quot;, pow(3, 2));
-    printf(&quot;%.lf\n&quot;, pow(3, 2));
+    if (n &lt; 0) {
+        printf(&quot;%d&quot;, 0);
+    }
+    else {
+        long long i = sqrt(n);
+        while (i*i &lt; n) {
+			i++;				
+		}
+        printf(&quot;%lld&quot;, i * i);
+    }
     return 0;
 }
 </code></pre>
-<p>pow() 函数 头文件 cmath printf输出 要用 %lf 或 %f</p>
 ]]></content>
     </entry>
     <entry>
