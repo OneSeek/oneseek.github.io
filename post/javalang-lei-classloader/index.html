@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>CentOS7 搭建leanote | OneSeek</title>
+<title>java.lang 类 ClassLoader | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,43 +81,29 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>CentOS7 搭建leanote</h1>
+            <h1>java.lang 类 ClassLoader</h1>
             <p class="article-meta">
-              2020-03-17
+              2020-03-23
               
-                <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge success">
-                  Linux
+                <a href="https://oneseek.github.io/tag/xAZHCSswP/" class="badge ">
+                  java
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>1、leanote官网下载二进制文件<br>
-2、mongodb下载<br>
-3、mongodb配置<br>
-4、leanote配置<br>
-5、nginx反代</p>
-<p>下载leanote linux 二进制文件 https://sourceforge.net/projects/leanote-bin/files/2.6.1/leanote-linux-amd64-v2.6.1.bin.tar.gz/download</p>
-<p>https://github.com/leanote/leanote/wiki/Leanote-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%89%88%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B----Mac-and-Linux</p>
-<p>照着做就完了。。。。</p>
-<p>二级目录反向代理</p>
-<pre><code>server
-    {
-
-        listen 80;   
-        server_name learn.oneseek.cn;
-
-        location /leanote/ {
-            proxy_pass http://localhost:9000/;
-        }
-
-    }
-</code></pre>
-<p>访问 learn.oneseek.cn/learn 进入9000端口的网站</p>
-<p>启动mongo命令<br>
-mongod --dbpath /home/user1/data<br>
-启动leanote<br>
-bash run.sh</p>
+              <p>文档 ： https://tool.oschina.net/apidocs/apidoc?api=jdk-zh</p>
+<p><strong>getResource</strong><br>
+public URL getResource(String name)<br>
+查找具有给定名称的资源。资源是可以通过类代码以与代码基无关的方式访问的一些数据（图像、声音、文本等）。<br>
+资源名称是以 '/' 分隔的标识资源的路径名称。</p>
+<p>此方法首先搜索资源的父类加载器；如果父类加载器为 null，则搜索的路径就是虚拟机的内置类加载器的路径。如果搜索失败，则此方法将调用 findResource(String) 来查找资源。</p>
+<p><strong>参数：</strong><br>
+name - 资源名称<br>
+<strong>返回：</strong><br>
+读取资源的 URL 对象；如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null。<br>
+<strong>从以下版本开始：</strong><br>
+1.1</p>
 
             </div>
           </article>
@@ -128,9 +114,9 @@ bash run.sh</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/jie-cheng-di-yi-ge-bu-shi-ling-de-shu-zi/">
+              <a href="https://oneseek.github.io/post/106jerry-de-kao-yan/">
                 <h3 class="post-title">
-                  阶乘 第一个不是零的数字
+                  106.Jerry的考验
                 </h3>
               </a>
             </div>
@@ -179,22 +165,22 @@ bash run.sh</p>
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge success">
+        class="badge secondary">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge success">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge success">
+        class="badge warning">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge secondary">
+        class="badge success">
         Gridea
       </a>
       

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-23T02:22:15.273Z</updated>
+    <updated>2020-03-23T14:32:37.378Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,26 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[java.lang 类 ClassLoader]]></title>
+        <id>https://oneseek.github.io/post/javalang-lei-classloader/</id>
+        <link href="https://oneseek.github.io/post/javalang-lei-classloader/">
+        </link>
+        <updated>2020-03-23T14:22:42.000Z</updated>
+        <content type="html"><![CDATA[<p>文档 ： https://tool.oschina.net/apidocs/apidoc?api=jdk-zh</p>
+<p><strong>getResource</strong><br>
+public URL getResource(String name)<br>
+查找具有给定名称的资源。资源是可以通过类代码以与代码基无关的方式访问的一些数据（图像、声音、文本等）。<br>
+资源名称是以 '/' 分隔的标识资源的路径名称。</p>
+<p>此方法首先搜索资源的父类加载器；如果父类加载器为 null，则搜索的路径就是虚拟机的内置类加载器的路径。如果搜索失败，则此方法将调用 findResource(String) 来查找资源。</p>
+<p><strong>参数：</strong><br>
+name - 资源名称<br>
+<strong>返回：</strong><br>
+读取资源的 URL 对象；如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null。<br>
+<strong>从以下版本开始：</strong><br>
+1.1</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[106.Jerry的考验]]></title>
         <id>https://oneseek.github.io/post/106jerry-de-kao-yan/</id>
@@ -388,15 +408,6 @@ int main() {
     return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[域名可以ping通 但是网页显示无法访问]]></title>
-        <id>https://oneseek.github.io/post/yu-ming-ke-yi-ping-tong-dan-shi-wang-ye-xian-shi-wu-fa-fang-wen/</id>
-        <link href="https://oneseek.github.io/post/yu-ming-ke-yi-ping-tong-dan-shi-wang-ye-xian-shi-wu-fa-fang-wen/">
-        </link>
-        <updated>2020-03-19T13:10:41.000Z</updated>
-        <content type="html"><![CDATA[<p>原因可能是 之前的网页缓存和ip缓存没清理，之前也试过清理但是还是不行，早上出的问题，隔了一个下午，就可以用了，也有可能是服务器配置出了问题，中间也重启了几次服务器。</p>
 ]]></content>
     </entry>
 </feed>
