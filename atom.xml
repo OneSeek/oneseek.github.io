@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-20T15:08:39.389Z</updated>
+    <updated>2020-03-23T02:22:15.273Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,198 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[106.Jerry的考验]]></title>
+        <id>https://oneseek.github.io/post/106jerry-de-kao-yan/</id>
+        <link href="https://oneseek.github.io/post/106jerry-de-kao-yan/">
+        </link>
+        <updated>2020-03-23T02:13:24.000Z</updated>
+        <content type="html"><![CDATA[<p>概述：<br>
+有一天Jerry给Tom出了一道题来考验他。Jerry给了Tom一个长度为2<em>n的只包含小写字母的字符串，让Tom将这个字符串任意挑选字符，将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，然后a要和reverse(b)相同(a和反转后的b相同)，问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。<br>
+输入一个正整数n，和一个长度为2</em>n的字符串<br>
+输出方案数</p>
+<p>示例1<br>
+输入：<br>
+2<br>
+&quot;abba&quot;<br>
+输出：<br>
+4</p>
+<h3 id="最开始写的c版-直接暴力">最开始写的C++版 直接暴力</h3>
+<pre><code>/*有一天Jerry给Tom出了一道题来考验他。
+Jerry给了Tom一个长度为2*n的只包含小写字母的字符串，
+让Tom将这个字符串任意挑选字符，
+将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，
+然后a要和reverse(b)相同(a和反转后的b相同)，
+问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。
+输入一个正整数n，和一个长度为2*n的字符串
+输出方案数
+*/
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+int main() {
+    int n = 4;
+    string a = &quot;abba&quot;;
+    int ans = 0;
+    for (int i = 0; i &lt; (1 &lt;&lt; n); i++)  //二进制枚举//枚举每一个状态
+    {
+        string sa = &quot;&quot;;
+        string sb = &quot;&quot;;
+        for (int j = 0; j &lt; n; j++)  //枚举该状态下二进制的每一位数值
+        {
+            cout &lt;&lt; i &lt;&lt;&quot;&amp;&quot;&lt;&lt;&quot;(1&lt;&lt;&quot;&lt;&lt;j&lt;&lt; &quot;) &quot; &lt;&lt; (i &amp; (1 &lt;&lt; j)) &lt;&lt; &quot;\t&quot;;
+            if (i &amp; (1 &lt;&lt; j))  //当前状态的第i位 ?是否为1(存在
+            {
+                sa += a[j];
+            }
+            else {
+                sb += a[j];
+            }
+        }
+        cout &lt;&lt; endl;
+        reverse(sb.begin(), sb.end());
+        if (sa == sb) {
+            ans++;
+        }
+    }
+
+    cout &lt;&lt; ans;
+
+    return 0;
+}
+</code></pre>
+<h3 id="优化一点的折半法-但是还是超时">优化一点的折半法 但是还是超时</h3>
+<pre><code>public static long solution(int n, String s) {
+        String S_0 = s.substring(0, n);
+        String S_1 = s.substring(n, n * 2);
+        int ans = 0;
+
+        ArrayList&lt;ArrayList&lt;String&gt;&gt; SSa = fun(n, S_0); // 返回a的所有可能
+
+        ArrayList&lt;String&gt; Sa1 = SSa.get(1); // 得到a选中的字符串的集合
+        ArrayList&lt;String&gt; Sa0 = SSa.get(0); // a没有选中的字符串的集合
+
+        SSa = fun(n, S_1); // 返回b的所有可能
+        ArrayList&lt;String&gt; Sb0 = SSa.get(1); // 得到b选中的字符串的集合
+        ArrayList&lt;String&gt; Sb1 = SSa.get(0); // b没有选中的字符串的集合
+
+        int len = Sb1.size(); // b可能性数目
+
+        // System.out.println(&quot;len=&quot;+len);
+
+        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb1 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
+        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb0 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
+
+        for (int i = 0; i &lt; len; i++) { //
+            String sb1 = Sb1.get(i);
+            String sb0 = Sb0.get(i);
+
+            // System.out.println(sb1);
+
+            int sb1_len = sb1.length();
+            int sb0_len = sb0.length();
+
+            ArrayList&lt;String&gt; sb1List = mapb1.get(sb1_len);
+            ArrayList&lt;String&gt; sb0List = mapb0.get(sb0_len);
+
+            if (sb1List == null) {
+                sb1List = new ArrayList&lt;String&gt;();
+            }
+            if (sb0List == null) {
+                sb0List = new ArrayList&lt;String&gt;();
+            }
+
+            sb1List.add(sb1);
+            sb0List.add(sb0);
+
+            mapb1.put(sb1_len, sb1List);
+            mapb0.put(sb0_len, sb0List);
+        }
+
+        // System.out.println(mapb1.size());
+        // for( Map.Entry&lt;Integer, ArrayList&lt;String&gt;&gt; map:mapb1.entrySet()){
+        // System.out.println(map);
+        // }
+        // System.out.println(len + &quot; &quot; + Math.pow(2, n) + &quot; &quot; + mapb1.size());
+
+        len = Sa1.size();
+
+        int t = 0;
+        Map&lt;String,Integer&gt; table = new HashMap&lt;&gt;();
+        for (String sa1 : Sa1) {
+            String sa0 = Sa0.get(t);
+            t++;
+            if(table.get(sa1+sa0)!=null){
+                ans+=table.get(sa1+sa0);
+                continue;
+            }
+            int sa1_len = sa1.length();
+            // System.out.println(t+&quot;:&quot;+sa1+&quot; &quot;+ sa1_count);
+            ArrayList&lt;String&gt; sb1List = new ArrayList&lt;String&gt;();
+            ArrayList&lt;String&gt; sb0List = new ArrayList&lt;String&gt;();
+
+            sb1List = mapb1.get(n - sa1_len);
+            sb0List = mapb0.get(sa1_len);
+
+            if (sb1List == null) {
+                sb1List = new ArrayList&lt;String&gt;();
+            }
+            if (sb0List == null) {
+                sb0List = new ArrayList&lt;String&gt;();
+            }
+
+            int ans_a=0;
+            for (int j = 0; j &lt; sb1List.size(); j++) {
+                String fa = sa1 + sb1List.get(j);
+                String fb = new StringBuilder(sa0 + sb0List.get(j)).reverse().toString();
+
+                if (fa.equals(fb)) {
+                    ans++;
+                    ans_a++;
+                }
+            }
+            table.put(sa1+sa0, ans_a);
+        }
+
+        return ans;
+    }
+
+    public static ArrayList&lt;ArrayList&lt;String&gt;&gt; fun(int n, String s) {
+        ArrayList&lt;ArrayList&lt;String&gt;&gt; aList = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();
+        ArrayList&lt;String&gt; S1 = new ArrayList&lt;&gt;();
+        ArrayList&lt;String&gt; S0 = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; Math.pow(2, n); i++) { // 二进制枚举//枚举每一个状态
+            String sa = &quot;&quot;;
+            String sb = &quot;&quot;;
+            for (int j = 0; j &lt; n; j++) { // 枚举该状态下二进制的每一位数值
+                if ((i &amp; (int) Math.pow(2, j)) != 0) { // 当前状态的第i位 ?是否为1(存在
+                    sa += s.charAt(j);
+                } else {
+                    sb += s.charAt(j);
+                }
+            }
+            S1.add(sa);
+            S0.add(sb);
+        }
+        aList.add(S0);
+        aList.add(S1);
+        return aList;
+    }
+    ```</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[centos7安装 wordpress]]></title>
+        <id>https://oneseek.github.io/post/centos7-an-zhuang-wordpress/</id>
+        <link href="https://oneseek.github.io/post/centos7-an-zhuang-wordpress/">
+        </link>
+        <updated>2020-03-21T05:34:10.000Z</updated>
+        <content type="html"><![CDATA[<p>照着教程做 中间遇到一点小问题</p>
+<p>在安装 MySQL时 systemctl start mysql.service出现fail</p>
+<p>解决方法：需要安装mariadb-server</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法训练-审美课]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-shen-mei-ke/</id>
@@ -205,53 +397,6 @@ int main() {
         </link>
         <updated>2020-03-19T13:10:41.000Z</updated>
         <content type="html"><![CDATA[<p>原因可能是 之前的网页缓存和ip缓存没清理，之前也试过清理但是还是不行，早上出的问题，隔了一个下午，就可以用了，也有可能是服务器配置出了问题，中间也重启了几次服务器。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[nginx 资源重定向错误]]></title>
-        <id>https://oneseek.github.io/post/nginx-zi-yuan-chong-ding-xiang-cuo-wu/</id>
-        <link href="https://oneseek.github.io/post/nginx-zi-yuan-chong-ding-xiang-cuo-wu/">
-        </link>
-        <updated>2020-03-18T13:12:34.000Z</updated>
-        <content type="html"><![CDATA[<p>原因 leanote 页面使用的是绝对 路径 导致 二级目录访问 会跳转到 根目录<br>
-例如 localhost/leanote/index 变成 localhost/index</p>
-<p>解决方法：<br>
-用sub_filter 将请求的资源变成 相对路径<br>
-可能会造成从第三方网址的资源不可用 但是暂时只能这样解决了</p>
-<pre><code>sub_filter 'src=&quot;/' 'src=&quot;./'; 
-sub_filter 'href=&quot;/' 'href=&quot;./'; 
- sub_filter_once off;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[nginx 反向代理]]></title>
-        <id>https://oneseek.github.io/post/nginx-sub_filter/</id>
-        <link href="https://oneseek.github.io/post/nginx-sub_filter/">
-        </link>
-        <updated>2020-03-18T05:30:18.000Z</updated>
-        <content type="html"><![CDATA[<p>配置leanote时，希望把二级目录 匹配到端口 发现只能进首页其他的url都不对</p>
-<p>原因：连接没有重定向到 二级目录下</p>
-<p>增加 sub_filter 属性能让首页的资源加载到 但是点击连接别的页面 却被从定向到根目录</p>
-<pre><code>listen 80;
-        server_name localhost;
-
-        location /leanote/ {
-            proxy_pass http://localhost:9000/;
-            sub_filter / /leanote;
-        }
-</code></pre>
-<p>解决： 使用代理 把资源匹配到正确路径</p>
-<pre><code>location / {
-         proxy_pass http://localhost:9000/;
-        }
-        location /leanote/ {
-            proxy_pass http://localhost:9000/;
-        }
-}
-</code></pre>
-<p>但是这样</p>
-<p>参考文章 ： https://blog.csdn.net/djfjkj52/article/details/96426979</p>
 ]]></content>
     </entry>
 </feed>

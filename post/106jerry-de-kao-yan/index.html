@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练-审美课 | OneSeek</title>
+<title>106.Jerry的考验 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,150 +81,186 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练-审美课</h1>
+            <h1>106.Jerry的考验</h1>
             <p class="article-meta">
-              2020-03-20
-              
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
-                  蓝桥杯
-                </a>
+              2020-03-23
               
             </p>
             
             <div class="post-content">
-              <p>/*<br>
-试题 算法训练 审美课</p>
-<p>资源限制<br>
-时间限制：1.0s   内存限制：256.0MB<br>
-问题描述<br>
-　　《审美的历程》课上有n位学生，帅老师展示了m幅画，<br>
-其中有些是梵高的作品，另外的都出自五岁小朋友之手。<br>
-老师请同学们分辨哪些画的作者是梵高，但是老师自己<br>
-并没有答案，因为这些画看上去都像是小朋友画的……<br>
-老师只想知道，有多少对同学给出的答案完全相反，<br>
-这样他就可以用这个数据去揭穿披着皇帝新衣的抽象艺术了<br>
-（支持帅老师<sup>_</sup>）。<br>
-　　答案完全相反是指对每一幅画的判断都相反。<br>
-输入格式<br>
-　　第一行两个数n和m，表示学生数和图画数；<br>
-　　接下来是一个n<em>m的01矩阵A：<br>
-　　如果aij=0，表示学生i觉得第j幅画是小朋友画的；<br>
-　　如果aij=1，表示学生i觉得第j幅画是梵高画的。<br>
-输出格式<br>
-　　输出一个数ans：表示有多少对同学的答案完全相反。<br>
-样例输入<br>
-3 2<br>
-1 0<br>
-0 1<br>
-1 0<br>
-样例输出<br>
+              <p>概述：<br>
+有一天Jerry给Tom出了一道题来考验他。Jerry给了Tom一个长度为2<em>n的只包含小写字母的字符串，让Tom将这个字符串任意挑选字符，将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，然后a要和reverse(b)相同(a和反转后的b相同)，问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。<br>
+输入一个正整数n，和一个长度为2</em>n的字符串<br>
+输出方案数</p>
+<p>示例1<br>
+输入：<br>
 2<br>
-样例说明<br>
-　　同学1和同学2的答案完全相反；<br>
-　　同学2和同学3的答案完全相反；<br>
-　　所以答案是2。<br>
-数据规模和约定<br>
-　　对于50%的数据：n&lt;=1000；<br>
-　　对于80%的数据：n&lt;=10000；<br>
-　　对于100%的数据：n&lt;=50000，m&lt;=20。</em>/</p>
-<pre><code>//直接暴力-超时
+&quot;abba&quot;<br>
+输出：<br>
+4</p>
+<h3 id="最开始写的c版-直接暴力">最开始写的C++版 直接暴力</h3>
+<pre><code>/*有一天Jerry给Tom出了一道题来考验他。
+Jerry给了Tom一个长度为2*n的只包含小写字母的字符串，
+让Tom将这个字符串任意挑选字符，
+将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，
+然后a要和reverse(b)相同(a和反转后的b相同)，
+问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。
+输入一个正整数n，和一个长度为2*n的字符串
+输出方案数
+*/
+#include &lt;algorithm&gt;
 #include &lt;iostream&gt;
+#include &lt;string&gt;
 using namespace std;
 int main() {
-    int n, m;
-    cin &gt;&gt; n &gt;&gt; m;
-    int a[n][m];
-    for (int i = 0; i &lt; n; i++) {
-        for (int j = 0; j &lt; m; j++) {
-            cin &gt;&gt; a[i][j];
-        }
-    }
+    int n = 4;
+    string a = &quot;abba&quot;;
     int ans = 0;
-    for (int i = 0; i &lt; n; i++) {
-        for (int k = i + 1; k &lt; n; k++) {
-            for (int j = 0; j &lt; m; j++) {
-                if (a[i][j] == a[k][j]) {
-                    break;
-                }
-                if (j == m - 1){
-                    ans++;
-                }        
+    for (int i = 0; i &lt; (1 &lt;&lt; n); i++)  //二进制枚举//枚举每一个状态
+    {
+        string sa = &quot;&quot;;
+        string sb = &quot;&quot;;
+        for (int j = 0; j &lt; n; j++)  //枚举该状态下二进制的每一位数值
+        {
+            cout &lt;&lt; i &lt;&lt;&quot;&amp;&quot;&lt;&lt;&quot;(1&lt;&lt;&quot;&lt;&lt;j&lt;&lt; &quot;) &quot; &lt;&lt; (i &amp; (1 &lt;&lt; j)) &lt;&lt; &quot;\t&quot;;
+            if (i &amp; (1 &lt;&lt; j))  //当前状态的第i位 ?是否为1(存在
+            {
+                sa += a[j];
+            }
+            else {
+                sb += a[j];
             }
         }
+        cout &lt;&lt; endl;
+        reverse(sb.begin(), sb.end());
+        if (sa == sb) {
+            ans++;
+        }
     }
+
     cout &lt;&lt; ans;
+
     return 0;
 }
 </code></pre>
-<pre><code>#include &lt;iostream&gt;
-using namespace std;
-int main() {
-    int n, m;
-    cin &gt;&gt; n &gt;&gt; m;
-    int a[n];
-    for (int i = 0; i &lt; n; i++) {
-        a[i] = 0;
-        for (int j = 0; j &lt; m; j++) {
-            int k;
-            cin &gt;&gt; k;
-            a[i] = a[i] * 10 + k;
-        }
-    }
-    int ans = 0;
-    int l = 0;
-    for (int j = 0; j &lt; m; j++) {
-        l = l * 10 + 1;
-    }
-    // cout &lt;&lt; l &lt;&lt; endl;
-    for (int i = 0; i &lt; n; i++) {
-        for (int k = i + 1; k &lt; n; k++) {
-            int x = a[i] + a[k];
-            if (x == l) {
-                ans++;
+<h3 id="优化一点的折半法-但是还是超时">优化一点的折半法 但是还是超时</h3>
+<pre><code>public static long solution(int n, String s) {
+        String S_0 = s.substring(0, n);
+        String S_1 = s.substring(n, n * 2);
+        int ans = 0;
+
+        ArrayList&lt;ArrayList&lt;String&gt;&gt; SSa = fun(n, S_0); // 返回a的所有可能
+
+        ArrayList&lt;String&gt; Sa1 = SSa.get(1); // 得到a选中的字符串的集合
+        ArrayList&lt;String&gt; Sa0 = SSa.get(0); // a没有选中的字符串的集合
+
+        SSa = fun(n, S_1); // 返回b的所有可能
+        ArrayList&lt;String&gt; Sb0 = SSa.get(1); // 得到b选中的字符串的集合
+        ArrayList&lt;String&gt; Sb1 = SSa.get(0); // b没有选中的字符串的集合
+
+        int len = Sb1.size(); // b可能性数目
+
+        // System.out.println(&quot;len=&quot;+len);
+
+        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb1 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
+        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb0 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
+
+        for (int i = 0; i &lt; len; i++) { //
+            String sb1 = Sb1.get(i);
+            String sb0 = Sb0.get(i);
+
+            // System.out.println(sb1);
+
+            int sb1_len = sb1.length();
+            int sb0_len = sb0.length();
+
+            ArrayList&lt;String&gt; sb1List = mapb1.get(sb1_len);
+            ArrayList&lt;String&gt; sb0List = mapb0.get(sb0_len);
+
+            if (sb1List == null) {
+                sb1List = new ArrayList&lt;String&gt;();
             }
+            if (sb0List == null) {
+                sb0List = new ArrayList&lt;String&gt;();
+            }
+
+            sb1List.add(sb1);
+            sb0List.add(sb0);
+
+            mapb1.put(sb1_len, sb1List);
+            mapb0.put(sb0_len, sb0List);
         }
-        
-    }
-    cout &lt;&lt; ans;
-    return 0;
-}
-</code></pre>
-<p>1101+0010=1111 全部相反 两数相加等于全一 这样时间复杂度会下降 但是依旧超时</p>
-<p>看网上的解析别人有用散列 改了下果然过了 这也是之前忽略的一个地方 明天再好好看看相关的知识点</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;map&gt;
-using namespace std;
-int main() {
-    int n, m;
-    cin &gt;&gt; n &gt;&gt; m;
-    map&lt;int, int&gt; num;
-    for (int i = 0; i &lt; n; i++) {
+
+        // System.out.println(mapb1.size());
+        // for( Map.Entry&lt;Integer, ArrayList&lt;String&gt;&gt; map:mapb1.entrySet()){
+        // System.out.println(map);
+        // }
+        // System.out.println(len + &quot; &quot; + Math.pow(2, n) + &quot; &quot; + mapb1.size());
+
+        len = Sa1.size();
+
         int t = 0;
-        for (int j = 0; j &lt; m; j++) {
-            int k;
-            cin &gt;&gt; k;
-            t = t * 10 + k;
-        }
-        num[t]++;
-    }
-    
-    int ans = 0;
-    int l = 0;
-    for (int j = 0; j &lt; m; j++) {
-        l = l * 10 + 1;
-    }
-    for (map&lt;int, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
-        for (map&lt;int, int&gt;::iterator it2 = num.begin(); it2 != num.end(); ++it2){
-            if(it-&gt;first+it2-&gt;first==l){
-                ans += it-&gt;second * it2-&gt;second;
+        Map&lt;String,Integer&gt; table = new HashMap&lt;&gt;();
+        for (String sa1 : Sa1) {
+            String sa0 = Sa0.get(t);
+            t++;
+            if(table.get(sa1+sa0)!=null){
+                ans+=table.get(sa1+sa0);
+                continue;
             }
+            int sa1_len = sa1.length();
+            // System.out.println(t+&quot;:&quot;+sa1+&quot; &quot;+ sa1_count);
+            ArrayList&lt;String&gt; sb1List = new ArrayList&lt;String&gt;();
+            ArrayList&lt;String&gt; sb0List = new ArrayList&lt;String&gt;();
+
+            sb1List = mapb1.get(n - sa1_len);
+            sb0List = mapb0.get(sa1_len);
+
+            if (sb1List == null) {
+                sb1List = new ArrayList&lt;String&gt;();
+            }
+            if (sb0List == null) {
+                sb0List = new ArrayList&lt;String&gt;();
+            }
+
+            int ans_a=0;
+            for (int j = 0; j &lt; sb1List.size(); j++) {
+                String fa = sa1 + sb1List.get(j);
+                String fb = new StringBuilder(sa0 + sb0List.get(j)).reverse().toString();
+
+                if (fa.equals(fb)) {
+                    ans++;
+                    ans_a++;
+                }
+            }
+            table.put(sa1+sa0, ans_a);
         }
+
+        return ans;
     }
-    
-    cout &lt;&lt; ans;
-    return 0;
-}
-</code></pre>
+
+    public static ArrayList&lt;ArrayList&lt;String&gt;&gt; fun(int n, String s) {
+        ArrayList&lt;ArrayList&lt;String&gt;&gt; aList = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();
+        ArrayList&lt;String&gt; S1 = new ArrayList&lt;&gt;();
+        ArrayList&lt;String&gt; S0 = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; Math.pow(2, n); i++) { // 二进制枚举//枚举每一个状态
+            String sa = &quot;&quot;;
+            String sb = &quot;&quot;;
+            for (int j = 0; j &lt; n; j++) { // 枚举该状态下二进制的每一位数值
+                if ((i &amp; (int) Math.pow(2, j)) != 0) { // 当前状态的第i位 ?是否为1(存在
+                    sa += s.charAt(j);
+                } else {
+                    sb += s.charAt(j);
+                }
+            }
+            S1.add(sa);
+            S0.add(sb);
+        }
+        aList.add(S0);
+        aList.add(S1);
+        return aList;
+    }
+    ```</code></pre>
 
             </div>
           </article>
@@ -235,9 +271,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-da-deng-yu-n-de-zui-xiao-wan-quan-ping-fang-shu/">
+              <a href="https://oneseek.github.io/post/centos7-an-zhuang-wordpress/">
                 <h3 class="post-title">
-                  算法训练 大等于n的最小完全平方数
+                  centos7安装 wordpress
                 </h3>
               </a>
             </div>
@@ -271,17 +307,17 @@ int main() {
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge success">
+        class="badge warning">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge secondary">
+        class="badge warning">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge ">
+        class="badge secondary">
         Linux
       </a>
       
@@ -291,12 +327,12 @@ int main() {
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge secondary">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge warning">
+        class="badge success">
         Gridea
       </a>
       
