@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-25T14:30:37.236Z</updated>
+    <updated>2020-03-25T14:31:36.357Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -14,51 +14,6 @@
         <title type="html"><![CDATA[shell编写显示ps相关脚本]]></title>
         <id>https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan-jiao-ben/</id>
         <link href="https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan-jiao-ben/">
-        </link>
-        <updated>2020-03-25T14:26:55.000Z</updated>
-        <content type="html"><![CDATA[<p>编写脚本checkCpu.sh，在脚本中三个函数：getPid、getCpu、checkCpu<br>
-getPid：参数1为当前用户名，参数2为进程名称（返回值为进程Pid）<br>
-getCpu:参数1为进程的pid（返回值为进程pid的cpu利用率）<br>
-checkCpu：参数1为当前用户名，参数2为进程名称    参数3. . . .(进程名称)，无返回值（在函数中打印各个进程cpu占用率）<br>
-执行脚本checkCpu.sh时 ，参数1为进程1名称     参数2. . . .(进程名称列表)</p>
-<pre><code>#!/bin/bash
-getPid(){
-username=$1
-processname=$2
-ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
-}
-getCpu(){
-pid=$1
-ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-}
-checkCpu(){
-for processname in $*
-do
-   echo &quot;var = $processname&quot;
-   pid=`getPid $USER $processname`
-   echo &quot;pid = $pid&quot;
-   ret=`getCpu $USER $pid`
-   echo &quot;cat = $ret&quot;
-done
-}
-checkCpu $*
-</code></pre>
-<p>相关命令</p>
-<pre><code>ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
-</code></pre>
-<p>查询对应进程cpu利用率<br>
-第一种</p>
-<pre><code>ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-</code></pre>
-<p>第二种</p>
-<pre><code>ps -p 6672 -o pcpu
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[shell编写显示ps相关]]></title>
-        <id>https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan/</id>
-        <link href="https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan/">
         </link>
         <updated>2020-03-25T14:26:55.000Z</updated>
         <content type="html"><![CDATA[<p>编写脚本checkCpu.sh，在脚本中三个函数：getPid、getCpu、checkCpu<br>
@@ -310,6 +265,147 @@ int main() {
         <content type="html"><![CDATA[<p>照着教程做 中间遇到一点小问题</p>
 <p>在安装 MySQL时 systemctl start mysql.service出现fail</p>
 <p>解决方法：需要安装mariadb-server</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[算法训练-审美课]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-shen-mei-ke/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-shen-mei-ke/">
+        </link>
+        <updated>2020-03-20T13:57:14.000Z</updated>
+        <content type="html"><![CDATA[<p>/*<br>
+试题 算法训练 审美课</p>
+<p>资源限制<br>
+时间限制：1.0s   内存限制：256.0MB<br>
+问题描述<br>
+　　《审美的历程》课上有n位学生，帅老师展示了m幅画，<br>
+其中有些是梵高的作品，另外的都出自五岁小朋友之手。<br>
+老师请同学们分辨哪些画的作者是梵高，但是老师自己<br>
+并没有答案，因为这些画看上去都像是小朋友画的……<br>
+老师只想知道，有多少对同学给出的答案完全相反，<br>
+这样他就可以用这个数据去揭穿披着皇帝新衣的抽象艺术了<br>
+（支持帅老师<sup>_</sup>）。<br>
+　　答案完全相反是指对每一幅画的判断都相反。<br>
+输入格式<br>
+　　第一行两个数n和m，表示学生数和图画数；<br>
+　　接下来是一个n<em>m的01矩阵A：<br>
+　　如果aij=0，表示学生i觉得第j幅画是小朋友画的；<br>
+　　如果aij=1，表示学生i觉得第j幅画是梵高画的。<br>
+输出格式<br>
+　　输出一个数ans：表示有多少对同学的答案完全相反。<br>
+样例输入<br>
+3 2<br>
+1 0<br>
+0 1<br>
+1 0<br>
+样例输出<br>
+2<br>
+样例说明<br>
+　　同学1和同学2的答案完全相反；<br>
+　　同学2和同学3的答案完全相反；<br>
+　　所以答案是2。<br>
+数据规模和约定<br>
+　　对于50%的数据：n&lt;=1000；<br>
+　　对于80%的数据：n&lt;=10000；<br>
+　　对于100%的数据：n&lt;=50000，m&lt;=20。</em>/</p>
+<pre><code>//直接暴力-超时
+#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    int a[n][m];
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; m; j++) {
+            cin &gt;&gt; a[i][j];
+        }
+    }
+    int ans = 0;
+    for (int i = 0; i &lt; n; i++) {
+        for (int k = i + 1; k &lt; n; k++) {
+            for (int j = 0; j &lt; m; j++) {
+                if (a[i][j] == a[k][j]) {
+                    break;
+                }
+                if (j == m - 1){
+                    ans++;
+                }        
+            }
+        }
+    }
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    int a[n];
+    for (int i = 0; i &lt; n; i++) {
+        a[i] = 0;
+        for (int j = 0; j &lt; m; j++) {
+            int k;
+            cin &gt;&gt; k;
+            a[i] = a[i] * 10 + k;
+        }
+    }
+    int ans = 0;
+    int l = 0;
+    for (int j = 0; j &lt; m; j++) {
+        l = l * 10 + 1;
+    }
+    // cout &lt;&lt; l &lt;&lt; endl;
+    for (int i = 0; i &lt; n; i++) {
+        for (int k = i + 1; k &lt; n; k++) {
+            int x = a[i] + a[k];
+            if (x == l) {
+                ans++;
+            }
+        }
+        
+    }
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
+<p>1101+0010=1111 全部相反 两数相加等于全一 这样时间复杂度会下降 但是依旧超时</p>
+<p>看网上的解析别人有用散列 改了下果然过了 这也是之前忽略的一个地方 明天再好好看看相关的知识点</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    map&lt;int, int&gt; num;
+    for (int i = 0; i &lt; n; i++) {
+        int t = 0;
+        for (int j = 0; j &lt; m; j++) {
+            int k;
+            cin &gt;&gt; k;
+            t = t * 10 + k;
+        }
+        num[t]++;
+    }
+    
+    int ans = 0;
+    int l = 0;
+    for (int j = 0; j &lt; m; j++) {
+        l = l * 10 + 1;
+    }
+    for (map&lt;int, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
+        for (map&lt;int, int&gt;::iterator it2 = num.begin(); it2 != num.end(); ++it2){
+            if(it-&gt;first+it2-&gt;first==l){
+                ans += it-&gt;second * it2-&gt;second;
+            }
+        }
+    }
+    
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
 </feed>
