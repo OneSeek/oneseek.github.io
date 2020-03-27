@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-27T01:58:48.450Z</updated>
+    <updated>2020-03-27T14:28:29.819Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,67 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[算法训练 素因子去重]]></title>
+        <id>https://oneseek.github.io/post/suan-fa-xun-lian-su-yin-zi-qu-chong/</id>
+        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-su-yin-zi-qu-chong/">
+        </link>
+        <updated>2020-03-27T13:39:58.000Z</updated>
+        <content type="html"><![CDATA[<p>试题 算法训练 素因子去重</p>
+<p>资源限制<br>
+时间限制：1.0s   内存限制：256.0MB<br>
+问题描述<br>
+　　给定一个正整数n，求一个正整数p，满足p仅包含n的所有素因子，且每个素因子的次数不大于1<br>
+输入格式<br>
+　　一个整数，表示n<br>
+输出格式<br>
+　　输出一行，包含一个整数p。<br>
+样例输入<br>
+1000<br>
+样例输出<br>
+10<br>
+数据规模和约定<br>
+　　n&lt;=10^12<br>
+　　样例解释：n=1000=2^3<em>5</em>3，p=2*5=10</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;cmath&gt;
+typedef long long ll;
+
+using namespace std;
+int main() {
+    ll n;
+    cin &gt;&gt; n;
+    
+    map&lt;ll, int&gt; num;
+    while (n % 2 == 0) {
+        num[2]=1;
+        n /= 2;
+    }
+    for (ll i = 3; i &lt;= sqrt(n * 1.0); i += 2) {
+        while (n % i == 0) {
+            num[i]=1;
+            n /= i;
+        }
+    }
+    if (n &gt; 2) {
+        num[n]=1;
+    }
+
+    ll ans=1;
+    for (map&lt;ll, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
+        
+		ans *= it-&gt;first;
+         
+    }
+
+    cout&lt;&lt;ans;
+    
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java关键字]]></title>
         <id>https://oneseek.github.io/post/java-guan-jian-zi/</id>
@@ -313,17 +374,6 @@ int main() {
         return aList;
     }
     ```</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[centos7安装 wordpress]]></title>
-        <id>https://oneseek.github.io/post/centos7-an-zhuang-wordpress/</id>
-        <link href="https://oneseek.github.io/post/centos7-an-zhuang-wordpress/">
-        </link>
-        <updated>2020-03-21T05:34:10.000Z</updated>
-        <content type="html"><![CDATA[<p>照着教程做 中间遇到一点小问题</p>
-<p>在安装 MySQL时 systemctl start mysql.service出现fail</p>
-<p>解决方法：需要安装mariadb-server</p>
 ]]></content>
     </entry>
 </feed>

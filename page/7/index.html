@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
     <meta charset="utf-8" >
 
-<title>阶乘计算（高精度） | OneSeek</title>
+<title>OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,7 +24,6 @@
 
   </head>
   <body>
-  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -77,93 +77,51 @@
   </div>
 </nav>
 
+
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <article class="article">
-            <h1>阶乘计算（高精度）</h1>
-            <p class="article-meta">
-              2020-02-29
-              
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-                  蓝桥杯
-                </a>
-              
-            </p>
-            
-            <div class="post-content">
-              <pre><code>/*
-试题 基础练习 阶乘计算
-  
-资源限制
-时间限制：1.0s   内存限制：512.0MB
-问题描述
-　　输入一个正整数n，输出n!的值。
-　　其中n!=1*2*3*…*n。
-算法描述
-　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
-　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
-　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
-输入格式
-　　输入包含一个正整数n，n&lt;=1000。
-输出格式
-　　输出n!的准确值。
-样例输入
-10
-样例输出
-3628800
-*/
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#define N 3000
-int main(){
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-
-    int a[N];
-    a[1] = 1;
-    int i, j;
-    int q=1 , carry;
-    int temp;
-    for (i = 2; i &lt;= n; i++){
-        carry = 0;
-        for (j = 1; j &lt;= q; j++){
-            temp = a[j] * i + carry;
-            a[j] = temp % 10;
-            carry = temp / 10;
-        }
-        while(carry){
-            a[++q] = carry % 10;
-            carry = carry / 10;
-        }
-    }
-    for (i = q; i &gt; 0;i--){
-        printf(&quot;%d&quot;, a[i]);
-    }
-    return 0;
-}
-</code></pre>
-
-            </div>
-          </article>
-        </div>
-        <div class="paper" data-aos="fade-in">
           
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://oneseek.github.io/post/hello-gridea/">
-                <h3 class="post-title">
-                  Hello Gridea
-                </h3>
-              </a>
-            </div>
-          
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://oneseek.github.io/post/hello-gridea/">Hello Gridea</a>
+    </h2>
+    <p class="article-meta">
+      2018-12-12
+      
+        <a href="https://oneseek.github.io/tag/O0F7cPAMr/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+
+    </p>
+    <div class="row">
+      <a href="https://oneseek.github.io/post/hello-gridea/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+
         </div>
         
-      </div>
+        <div class="row flex-edges">
+  
+    <a href="https://oneseek.github.io/page/6/" class="paper-btn">
+      上一页
+    </a>
+  
+  
+</div>
 
+      </div>
+      
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1585319304573" class="no-responsive avatar">
@@ -198,12 +156,12 @@ int main(){
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge success">
+        class="badge warning">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge secondary">
+        class="badge ">
         java
       </a>
       
@@ -213,7 +171,7 @@ int main(){
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge secondary">
+        class="badge ">
         nginx
       </a>
       
@@ -228,7 +186,7 @@ int main(){
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge secondary">
+        class="badge ">
         Gridea
       </a>
       
@@ -352,9 +310,7 @@ int main(){
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
-
     </div>
-
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">

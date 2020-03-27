@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>阶乘计算（高精度） | OneSeek</title>
+<title>算法训练 素因子去重 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,65 +81,63 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>阶乘计算（高精度）</h1>
+            <h1>算法训练 素因子去重</h1>
             <p class="article-meta">
-              2020-02-29
-              
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-                  蓝桥杯
-                </a>
+              2020-03-27
               
             </p>
             
             <div class="post-content">
-              <pre><code>/*
-试题 基础练习 阶乘计算
-  
-资源限制
-时间限制：1.0s   内存限制：512.0MB
-问题描述
-　　输入一个正整数n，输出n!的值。
-　　其中n!=1*2*3*…*n。
-算法描述
-　　n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
-　　将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
-　　首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
-输入格式
-　　输入包含一个正整数n，n&lt;=1000。
-输出格式
-　　输出n!的准确值。
-样例输入
-10
-样例输出
-3628800
-*/
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
-#define N 3000
-int main(){
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
+              <p>试题 算法训练 素因子去重</p>
+<p>资源限制<br>
+时间限制：1.0s   内存限制：256.0MB<br>
+问题描述<br>
+　　给定一个正整数n，求一个正整数p，满足p仅包含n的所有素因子，且每个素因子的次数不大于1<br>
+输入格式<br>
+　　一个整数，表示n<br>
+输出格式<br>
+　　输出一行，包含一个整数p。<br>
+样例输入<br>
+1000<br>
+样例输出<br>
+10<br>
+数据规模和约定<br>
+　　n&lt;=10^12<br>
+　　样例解释：n=1000=2^3<em>5</em>3，p=2*5=10</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;cmath&gt;
+typedef long long ll;
 
-    int a[N];
-    a[1] = 1;
-    int i, j;
-    int q=1 , carry;
-    int temp;
-    for (i = 2; i &lt;= n; i++){
-        carry = 0;
-        for (j = 1; j &lt;= q; j++){
-            temp = a[j] * i + carry;
-            a[j] = temp % 10;
-            carry = temp / 10;
-        }
-        while(carry){
-            a[++q] = carry % 10;
-            carry = carry / 10;
+using namespace std;
+int main() {
+    ll n;
+    cin &gt;&gt; n;
+    
+    map&lt;ll, int&gt; num;
+    while (n % 2 == 0) {
+        num[2]=1;
+        n /= 2;
+    }
+    for (ll i = 3; i &lt;= sqrt(n * 1.0); i += 2) {
+        while (n % i == 0) {
+            num[i]=1;
+            n /= i;
         }
     }
-    for (i = q; i &gt; 0;i--){
-        printf(&quot;%d&quot;, a[i]);
+    if (n &gt; 2) {
+        num[n]=1;
     }
+
+    ll ans=1;
+    for (map&lt;ll, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
+        
+		ans *= it-&gt;first;
+         
+    }
+
+    cout&lt;&lt;ans;
+    
     return 0;
 }
 </code></pre>
@@ -153,9 +151,9 @@ int main(){
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/hello-gridea/">
+              <a href="https://oneseek.github.io/post/java-guan-jian-zi/">
                 <h3 class="post-title">
-                  Hello Gridea
+                  Java关键字
                 </h3>
               </a>
             </div>
@@ -198,7 +196,7 @@ int main(){
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge success">
+        class="badge secondary">
         Linux
       </a>
       
@@ -208,7 +206,7 @@ int main(){
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge success">
+        class="badge secondary">
         蓝桥杯
       </a>
       
@@ -218,12 +216,12 @@ int main(){
       </a>
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge secondary">
+        class="badge ">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge secondary">
+        class="badge success">
         SpringBoot
       </a>
       
