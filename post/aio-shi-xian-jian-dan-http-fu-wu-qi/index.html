@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <meta charset="utf-8" >
 
-<title>OneSeek</title>
+<title>AIO实现简单http服务器 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -24,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -77,149 +77,188 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>AIO实现简单http服务器</h1>
+            <p class="article-meta">
+              2020-03-30
+              
+            </p>
+            
+            <div class="post-content">
+              <pre><code>import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousChannelGroup;
+import java.nio.channels.AsynchronousServerSocketChannel;
+import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.CompletionHandler;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+/**
+ * 一个简单的web 服务器&lt;br/&gt;
+ * 通过浏览器输入localhost:8080/访问
+ * 
+ * @author Joeson
+ * @since 2014/05
+ * 
+ */
+public class AioServer implements Runnable
+{
+ 
+	private AsynchronousChannelGroup asyncChannelGroup;
+	private AsynchronousServerSocketChannel server;
+ 
+	public AioServer(int port) throws Exception
+	{
+		// 创建线程池
+		ExecutorService executor = Executors.newFixedThreadPool(20);
+		// 异步通道管理器
+		asyncChannelGroup = AsynchronousChannelGroup.withThreadPool(executor);
+		// 创建 用在服务端的异步Socket.以下简称服务器socket。
+		// 异步通道管理器，会把服务端所用到的相关参数
+		server = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(
+				new InetSocketAddress(port));
+	}
+ 
+	public void run()
+	{
+		try
+		{
+ 
+			// 为服务端socket指定接收操作对象.accept原型是：
+			// accept(A attachment, CompletionHandler&lt;AsynchronousSocketChannel,
+			// ? super A&gt; handler)
+			// 也就是这里的CompletionHandler的A型参数是实际调用accept方法的第一个参数
+			// 即是listener。另一个参数V，就是原型中的客户端socket
+			server.accept(
+					server,
+					new CompletionHandler&lt;AsynchronousSocketChannel, AsynchronousServerSocketChannel&gt;()
+					{
+						String str = &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;this is a socketserver test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+						String CRLF = &quot;\r\n&quot;;
+						// 响应头的参数
+						String serverLine = &quot;Server:a simple java WebServer&quot;;
+						String statusLine = &quot;HTTP/1.1 200 OK&quot; + CRLF;
+						String contentTypeLine = &quot;Content-type:text/html&quot;
+								+ CRLF;
+						String contentLengthLine = &quot;Content-Length:&quot; + str.length()
+								+ CRLF;
+ 
+ 
+						@Override
+						public void completed(AsynchronousSocketChannel result,
+								AsynchronousServerSocketChannel attachment)
+						{
+							// TODO Auto-generated method stub
+							// writeChannel(result, statusLine);
+							// writeChannel(result, serverLine);
+							// writeChannel(result, contentTypeLine);
+							// writeChannel(result, contentLengthLine);
+							// writeChannel(result, CRLF);
+ 
+							writeChannel(result, statusLine + serverLine
+									+ contentTypeLine + contentLengthLine
+									+ CRLF + str);
+ 
+							// writeChannel(result, str);
+ 
+							try
+							{
+								result.shutdownOutput();
+								result.shutdownInput();
+							} catch (IOException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+ 
+							try
+							{
+								result.close();
+							} catch (IOException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+ 
+							attachment.accept(attachment, this);
+ 
+						}
+ 
+						@Override
+						public void failed(Throwable exc,
+								AsynchronousServerSocketChannel attachment)
+						{
+							// TODO Auto-generated method stub
+ 
+						}
+ 
+						public void writeChannel(
+								AsynchronousSocketChannel channel, String s)
+						{
+							Future&lt;Integer&gt; future = channel.write(ByteBuffer
+									.wrap(s.getBytes()));
+ 
+							try
+							{
+								future.get();
+							} catch (InterruptedException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (ExecutionException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+ 
+					});
+			Thread.sleep(400000);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			System.out.println(&quot;finished server&quot;);
+		}
+	}
+ 
+	public static void main(String... args) throws Exception
+	{
+		AioServer server = new AioServer(8888);
+		new Thread(server).start();
+	}
+ 
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-te-bie-shu-de-he/">真题-特别数的和</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-te-bie-shu-de-he/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/">真题-数列求值</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/">真题-数的分解</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/">CentOS7安装桌面环境（腾讯云)</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-12
-      
-        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge warning">
-          Linux
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/">算法训练-动态数组</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-11
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/">
+                <h3 class="post-title">
+                  Linux jar包 后台运行
+                </h3>
+              </a>
+            </div>
+          
         </div>
         
-        <div class="row flex-edges">
-  
-    <a href="https://oneseek.github.io/page/4/" class="paper-btn">
-      上一页
-    </a>
-  
-  
-    <a href="https://oneseek.github.io/page/6/" class="paper-btn">
-      下一页
-    </a>
-  
-</div>
-
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1585499253156" class="no-responsive avatar">
@@ -254,7 +293,7 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge secondary">
+        class="badge warning">
         Linux
       </a>
       
@@ -269,22 +308,22 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge warning">
+        class="badge ">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge ">
+        class="badge warning">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge warning">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge success">
+        class="badge ">
         Gridea
       </a>
       
@@ -416,7 +455,9 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">

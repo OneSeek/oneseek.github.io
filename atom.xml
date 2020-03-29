@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-29T07:22:11.043Z</updated>
+    <updated>2020-03-29T16:27:38.181Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,317 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[NIO实现简单服务器]]></title>
+        <id>https://oneseek.github.io/post/nio-shi-xian-jian-dan-fu-wu-qi/</id>
+        <link href="https://oneseek.github.io/post/nio-shi-xian-jian-dan-fu-wu-qi/">
+        </link>
+        <updated>2020-03-29T16:27:03.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.util.Iterator;
+/**
+ * @Author: Chuang
+ * @Date: 2020/3/29 22:34
+ */
+
+
+public class NioServer {
+
+    private int port;
+
+    private Selector selector;
+
+    public NioServer(int port) {
+        this.port = port;
+    }
+
+    public void startListen() throws IOException {
+        selector = Selector.open();
+
+        ServerSocketChannel serverChannel = ServerSocketChannel.open();
+        serverChannel.configureBlocking(false);
+        serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+        serverChannel.bind(new InetSocketAddress(port));
+
+        while (true) {
+            //不能使用select方法，该方法会阻塞，如果在阻塞过程中channel状态就绪，会因此处阻塞而无法执行。
+            //所以，如果调用阻塞方法，下面对channel状态的处理得另起一个常驻线程
+            int result = selector.selectNow();
+            if (result == 0) {
+                continue;
+            }
+
+            Iterator&lt;SelectionKey&gt; it = selector.selectedKeys().iterator();
+            while (it.hasNext()) {
+                SelectionKey key = it.next();
+                if (key.isAcceptable()) {
+                    accept(key);
+                } else if (key.isReadable()) {
+                    read(key);
+                } else if (key.isWritable()) {
+                    write(key);
+                } else {
+                    System.out.println(&quot;Unknow selector type&quot;);
+                }
+
+                //一定要调用remove方法将已经处理过的SelectionKey清除掉，否则会造成后面的请求无法接受
+                it.remove();
+            }
+        }
+    }
+
+    private void accept(SelectionKey key) throws IOException {
+        System.out.println(&quot;Receive connection&quot;);
+        ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
+        SocketChannel channel = serverSocketChannel.accept();
+
+        if (channel != null) {
+            channel.configureBlocking(false);
+            channel.register(selector, SelectionKey.OP_READ);
+        }
+        System.out.println(&quot;Connection end&quot;);
+    }
+
+    private void read(SelectionKey key) throws IOException {
+        System.out.println(&quot;Start read&quot;);
+        SocketChannel channel = (SocketChannel) key.channel();
+        ByteBuffer buffer = ByteBuffer.allocate(64);
+        boolean hasContent = false;
+
+        //这里的判断条件不能是不等于-1，因为channel一直都在，只是在数据被读完后里面为空，返回的长度是0.用-1判断会无限循环无法退出
+        while (channel.read(buffer) &gt; 0) {
+            buffer.flip(); //切换为读模式
+            CharBuffer cb = Charset.forName(&quot;UTF-8&quot;).decode(buffer);
+            System.out.print(cb.toString());
+            buffer.clear();
+            hasContent = true;
+        }
+
+        if (hasContent) {
+            //设置interestOps，用于写响应
+            key.interestOps(SelectionKey.OP_WRITE);
+        } else {
+            channel.close();
+        }
+        System.out.println(&quot;Read end&quot;);
+    }
+
+    private void write(SelectionKey key) throws IOException {
+        System.out.println(&quot;Start write&quot;);
+        SocketChannel channel = (SocketChannel) key.channel();
+
+        String resText = getResponseText();
+        ByteBuffer buffer = ByteBuffer.wrap(resText.getBytes());
+
+        //此处不可使用channel.write(buffer) != -1来判断，因为在两端都不关闭的情况下，会一直返回0，导致该循环无法退出
+        while (buffer.hasRemaining()) {
+            channel.write(buffer);
+        }
+        channel.close();
+        System.out.println(&quot;End write&quot;);
+    }
+
+    private String getResponseText() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(&quot;HTTP/1.1 200 OK\n&quot;);
+        sb.append(&quot;Content-Type: text/html; charset=UTF-8\n&quot;);
+        sb.append(&quot;\n&quot;);
+        sb.append(&quot;&lt;html&gt;&quot;);
+        sb.append(&quot;  &lt;head&gt;&quot;);
+        sb.append(&quot;    &lt;title&gt;&quot;);
+        sb.append(&quot;      NIO Http Server&quot;);
+        sb.append(&quot;    &lt;/title&gt;&quot;);
+        sb.append(&quot;  &lt;/head&gt;&quot;);
+        sb.append(&quot;  &lt;body&gt;&quot;);
+        sb.append(&quot;    &lt;h1&gt;Hello World!&lt;/h1&gt;&quot;);
+        sb.append(&quot;  &lt;/body&gt;&quot;);
+        sb.append(&quot;&lt;/html&gt;&quot;);
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        NioServer server = new NioServer(8888);
+
+        try {
+
+            server.startListen();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[AIO实现简单http服务器]]></title>
+        <id>https://oneseek.github.io/post/aio-shi-xian-jian-dan-http-fu-wu-qi/</id>
+        <link href="https://oneseek.github.io/post/aio-shi-xian-jian-dan-http-fu-wu-qi/">
+        </link>
+        <updated>2020-03-29T16:25:03.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousChannelGroup;
+import java.nio.channels.AsynchronousServerSocketChannel;
+import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.CompletionHandler;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+/**
+ * 一个简单的web 服务器&lt;br/&gt;
+ * 通过浏览器输入localhost:8080/访问
+ * 
+ * @author Joeson
+ * @since 2014/05
+ * 
+ */
+public class AioServer implements Runnable
+{
+ 
+	private AsynchronousChannelGroup asyncChannelGroup;
+	private AsynchronousServerSocketChannel server;
+ 
+	public AioServer(int port) throws Exception
+	{
+		// 创建线程池
+		ExecutorService executor = Executors.newFixedThreadPool(20);
+		// 异步通道管理器
+		asyncChannelGroup = AsynchronousChannelGroup.withThreadPool(executor);
+		// 创建 用在服务端的异步Socket.以下简称服务器socket。
+		// 异步通道管理器，会把服务端所用到的相关参数
+		server = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(
+				new InetSocketAddress(port));
+	}
+ 
+	public void run()
+	{
+		try
+		{
+ 
+			// 为服务端socket指定接收操作对象.accept原型是：
+			// accept(A attachment, CompletionHandler&lt;AsynchronousSocketChannel,
+			// ? super A&gt; handler)
+			// 也就是这里的CompletionHandler的A型参数是实际调用accept方法的第一个参数
+			// 即是listener。另一个参数V，就是原型中的客户端socket
+			server.accept(
+					server,
+					new CompletionHandler&lt;AsynchronousSocketChannel, AsynchronousServerSocketChannel&gt;()
+					{
+						String str = &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;this is a socketserver test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+						String CRLF = &quot;\r\n&quot;;
+						// 响应头的参数
+						String serverLine = &quot;Server:a simple java WebServer&quot;;
+						String statusLine = &quot;HTTP/1.1 200 OK&quot; + CRLF;
+						String contentTypeLine = &quot;Content-type:text/html&quot;
+								+ CRLF;
+						String contentLengthLine = &quot;Content-Length:&quot; + str.length()
+								+ CRLF;
+ 
+ 
+						@Override
+						public void completed(AsynchronousSocketChannel result,
+								AsynchronousServerSocketChannel attachment)
+						{
+							// TODO Auto-generated method stub
+							// writeChannel(result, statusLine);
+							// writeChannel(result, serverLine);
+							// writeChannel(result, contentTypeLine);
+							// writeChannel(result, contentLengthLine);
+							// writeChannel(result, CRLF);
+ 
+							writeChannel(result, statusLine + serverLine
+									+ contentTypeLine + contentLengthLine
+									+ CRLF + str);
+ 
+							// writeChannel(result, str);
+ 
+							try
+							{
+								result.shutdownOutput();
+								result.shutdownInput();
+							} catch (IOException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+ 
+							try
+							{
+								result.close();
+							} catch (IOException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+ 
+							attachment.accept(attachment, this);
+ 
+						}
+ 
+						@Override
+						public void failed(Throwable exc,
+								AsynchronousServerSocketChannel attachment)
+						{
+							// TODO Auto-generated method stub
+ 
+						}
+ 
+						public void writeChannel(
+								AsynchronousSocketChannel channel, String s)
+						{
+							Future&lt;Integer&gt; future = channel.write(ByteBuffer
+									.wrap(s.getBytes()));
+ 
+							try
+							{
+								future.get();
+							} catch (InterruptedException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (ExecutionException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+ 
+					});
+			Thread.sleep(400000);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			System.out.println(&quot;finished server&quot;);
+		}
+	}
+ 
+	public static void main(String... args) throws Exception
+	{
+		AioServer server = new AioServer(8888);
+		new Thread(server).start();
+	}
+ 
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Linux jar包 后台运行]]></title>
         <id>https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/</id>
@@ -105,110 +416,6 @@ int main() {
     
     return 0;
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java关键字]]></title>
-        <id>https://oneseek.github.io/post/java-guan-jian-zi/</id>
-        <link href="https://oneseek.github.io/post/java-guan-jian-zi/">
-        </link>
-        <updated>2020-03-26T13:07:23.000Z</updated>
-        <content type="html"><![CDATA[<p>关键字	含义<br>
-abstract	表明类或者成员方法具有抽象属性<br>
-assert	断言，用来进行程序调试<br>
-boolean	基本数据类型之一，布尔类型<br>
-break	提前跳出一个块<br>
-byte	基本数据类型之一，字节类型<br>
-case	用在switch语句之中，表示其中的一个分支<br>
-catch	用在异常处理中，用来捕捉异常<br>
-char	基本数据类型之一，字符类型<br>
-class	声明一个类<br>
-const	保留关键字，没有具体含义<br>
-continue	回到一个块的开始处<br>
-default	默认，例如，用在switch语句中，表明一个默认的分支<br>
-do	用在do-while循环结构中<br>
-double	基本数据类型之一，双精度浮点数类型<br>
-else	用在条件语句中，表明当条件不成立时的分支<br>
-enum	枚举<br>
-extends	表明一个类型是另一个类型的子类型，这里常见的类型有类和接口<br>
-final	用来说明最终属性，表明一个类不能派生出子类，或者成员方法不能被覆盖，或者成员域的值不能被改变，用来定义常量<br>
-finally	用于处理异常情况，用来声明一个基本肯定会被执行到的语句块<br>
-float	基本数据类型之一，单精度浮点数类型<br>
-for	一种循环结构的引导词<br>
-goto	保留关键字，没有具体含义<br>
-if	条件语句的引导词<br>
-implements	表明一个类实现了给定的接口<br>
-import	表明要访问指定的类或包<br>
-instanceof	用来测试一个对象是否是指定类型的实例对象<br>
-int	基本数据类型之一，整数类型<br>
-interface	接口<br>
-long	基本数据类型之一，长整数类型<br>
-native	用来声明一个方法是由与计算机相关的语言（如C/C++/FORTRAN语言）实现的<br>
-new	用来创建新实例对象<br>
-package	包<br>
-private	一种访问控制方式：私用模式<br>
-protected	一种访问控制方式：保护模式<br>
-public	一种访问控制方式：共用模式<br>
-return	从成员方法中返回数据<br>
-short	基本数据类型之一,短整数类型<br>
-static	表明具有静态属性<br>
-strictfp	用来声明FP_strict（单精度或双精度浮点数）表达式遵循IEEE 754算术规范 [1] <br>
-super	表明当前对象的父类型的引用或者父类型的构造方法<br>
-switch	分支语句结构的引导词<br>
-synchronized	表明一段代码需要同步执行<br>
-this	指向当前实例对象的引用<br>
-throw	抛出一个异常<br>
-throws	声明在当前定义的成员方法中所有需要抛出的异常<br>
-transient	声明不用序列化的成员域<br>
-try	尝试一个可能抛出异常的程序块<br>
-void	声明当前成员方法没有返回值<br>
-volatile	表明两个或者多个变量必须同步地发生变化<br>
-while	用在循环结构中</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[shell编写显示ps相关脚本]]></title>
-        <id>https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan-jiao-ben/</id>
-        <link href="https://oneseek.github.io/post/shell-bian-xie-xian-shi-ps-xiang-guan-jiao-ben/">
-        </link>
-        <updated>2020-03-25T14:26:55.000Z</updated>
-        <content type="html"><![CDATA[<p>编写脚本checkCpu.sh，在脚本中三个函数：getPid、getCpu、checkCpu<br>
-getPid：参数1为当前用户名，参数2为进程名称（返回值为进程Pid）<br>
-getCpu:参数1为进程的pid（返回值为进程pid的cpu利用率）<br>
-checkCpu：参数1为当前用户名，参数2为进程名称    参数3. . . .(进程名称)，无返回值（在函数中打印各个进程cpu占用率）<br>
-执行脚本checkCpu.sh时 ，参数1为进程1名称     参数2. . . .(进程名称列表)</p>
-<pre><code>#!/bin/bash
-getPid(){
-username=$1
-processname=$2
-ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
-}
-getCpu(){
-pid=$1
-ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-}
-checkCpu(){
-for processname in $*
-do
-   echo &quot;var = $processname&quot;
-   pid=`getPid $USER $processname`
-   echo &quot;pid = $pid&quot;
-   ret=`getCpu $USER $pid`
-   echo &quot;cat = $ret&quot;
-done
-}
-checkCpu $*
-</code></pre>
-<p>相关命令</p>
-<pre><code>ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
-</code></pre>
-<p>查询对应进程cpu利用率<br>
-第一种</p>
-<pre><code>ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-</code></pre>
-<p>第二种</p>
-<pre><code>ps -p 6672 -o pcpu
 </code></pre>
 ]]></content>
     </entry>

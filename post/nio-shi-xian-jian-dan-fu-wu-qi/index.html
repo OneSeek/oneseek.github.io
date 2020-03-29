@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <meta charset="utf-8" >
 
-<title>OneSeek</title>
+<title>NIO实现简单服务器 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -24,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -77,149 +77,183 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>NIO实现简单服务器</h1>
+            <p class="article-meta">
+              2020-03-30
+              
+            </p>
+            
+            <div class="post-content">
+              <pre><code>import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.util.Iterator;
+/**
+ * @Author: Chuang
+ * @Date: 2020/3/29 22:34
+ */
+
+
+public class NioServer {
+
+    private int port;
+
+    private Selector selector;
+
+    public NioServer(int port) {
+        this.port = port;
+    }
+
+    public void startListen() throws IOException {
+        selector = Selector.open();
+
+        ServerSocketChannel serverChannel = ServerSocketChannel.open();
+        serverChannel.configureBlocking(false);
+        serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+        serverChannel.bind(new InetSocketAddress(port));
+
+        while (true) {
+            //不能使用select方法，该方法会阻塞，如果在阻塞过程中channel状态就绪，会因此处阻塞而无法执行。
+            //所以，如果调用阻塞方法，下面对channel状态的处理得另起一个常驻线程
+            int result = selector.selectNow();
+            if (result == 0) {
+                continue;
+            }
+
+            Iterator&lt;SelectionKey&gt; it = selector.selectedKeys().iterator();
+            while (it.hasNext()) {
+                SelectionKey key = it.next();
+                if (key.isAcceptable()) {
+                    accept(key);
+                } else if (key.isReadable()) {
+                    read(key);
+                } else if (key.isWritable()) {
+                    write(key);
+                } else {
+                    System.out.println(&quot;Unknow selector type&quot;);
+                }
+
+                //一定要调用remove方法将已经处理过的SelectionKey清除掉，否则会造成后面的请求无法接受
+                it.remove();
+            }
+        }
+    }
+
+    private void accept(SelectionKey key) throws IOException {
+        System.out.println(&quot;Receive connection&quot;);
+        ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
+        SocketChannel channel = serverSocketChannel.accept();
+
+        if (channel != null) {
+            channel.configureBlocking(false);
+            channel.register(selector, SelectionKey.OP_READ);
+        }
+        System.out.println(&quot;Connection end&quot;);
+    }
+
+    private void read(SelectionKey key) throws IOException {
+        System.out.println(&quot;Start read&quot;);
+        SocketChannel channel = (SocketChannel) key.channel();
+        ByteBuffer buffer = ByteBuffer.allocate(64);
+        boolean hasContent = false;
+
+        //这里的判断条件不能是不等于-1，因为channel一直都在，只是在数据被读完后里面为空，返回的长度是0.用-1判断会无限循环无法退出
+        while (channel.read(buffer) &gt; 0) {
+            buffer.flip(); //切换为读模式
+            CharBuffer cb = Charset.forName(&quot;UTF-8&quot;).decode(buffer);
+            System.out.print(cb.toString());
+            buffer.clear();
+            hasContent = true;
+        }
+
+        if (hasContent) {
+            //设置interestOps，用于写响应
+            key.interestOps(SelectionKey.OP_WRITE);
+        } else {
+            channel.close();
+        }
+        System.out.println(&quot;Read end&quot;);
+    }
+
+    private void write(SelectionKey key) throws IOException {
+        System.out.println(&quot;Start write&quot;);
+        SocketChannel channel = (SocketChannel) key.channel();
+
+        String resText = getResponseText();
+        ByteBuffer buffer = ByteBuffer.wrap(resText.getBytes());
+
+        //此处不可使用channel.write(buffer) != -1来判断，因为在两端都不关闭的情况下，会一直返回0，导致该循环无法退出
+        while (buffer.hasRemaining()) {
+            channel.write(buffer);
+        }
+        channel.close();
+        System.out.println(&quot;End write&quot;);
+    }
+
+    private String getResponseText() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(&quot;HTTP/1.1 200 OK\n&quot;);
+        sb.append(&quot;Content-Type: text/html; charset=UTF-8\n&quot;);
+        sb.append(&quot;\n&quot;);
+        sb.append(&quot;&lt;html&gt;&quot;);
+        sb.append(&quot;  &lt;head&gt;&quot;);
+        sb.append(&quot;    &lt;title&gt;&quot;);
+        sb.append(&quot;      NIO Http Server&quot;);
+        sb.append(&quot;    &lt;/title&gt;&quot;);
+        sb.append(&quot;  &lt;/head&gt;&quot;);
+        sb.append(&quot;  &lt;body&gt;&quot;);
+        sb.append(&quot;    &lt;h1&gt;Hello World!&lt;/h1&gt;&quot;);
+        sb.append(&quot;  &lt;/body&gt;&quot;);
+        sb.append(&quot;&lt;/html&gt;&quot;);
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        NioServer server = new NioServer(8888);
+
+        try {
+
+            server.startListen();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-te-bie-shu-de-he/">真题-特别数的和</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-te-bie-shu-de-he/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/">真题-数列求值</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-lie-qiu-zhi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/">真题-数的分解</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-14
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge secondary">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/zhen-ti-shu-de-fen-jie/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/">CentOS7安装桌面环境（腾讯云)</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-12
-      
-        <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge warning">
-          Linux
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/centos7-yi-jian-an-zhuang-zhuo-mian-huan-jing-teng-xun-yun/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/">算法训练-动态数组</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-11
-      
-        <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-          蓝桥杯
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/aio-shi-xian-jian-dan-http-fu-wu-qi/">
+                <h3 class="post-title">
+                  AIO实现简单http服务器
+                </h3>
+              </a>
+            </div>
+          
         </div>
         
-        <div class="row flex-edges">
-  
-    <a href="https://oneseek.github.io/page/4/" class="paper-btn">
-      上一页
-    </a>
-  
-  
-    <a href="https://oneseek.github.io/page/6/" class="paper-btn">
-      下一页
-    </a>
-  
-</div>
-
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1585499253156" class="no-responsive avatar">
@@ -264,27 +298,27 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge secondary">
+        class="badge success">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge warning">
+        class="badge success">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge ">
+        class="badge success">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge success">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge success">
+        class="badge ">
         Gridea
       </a>
       
@@ -416,7 +450,9 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">
