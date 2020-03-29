@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-27T14:28:29.819Z</updated>
+    <updated>2020-03-29T07:22:11.043Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[Linux jar包 后台运行]]></title>
+        <id>https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/</id>
+        <link href="https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/">
+        </link>
+        <updated>2020-03-29T07:20:28.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>持续后台运行命令：nohup java-jar xxx项目.jar &gt;xxxx项目.log 2&gt;&amp;1 &amp;
+
+nohup：表示当前用户和系统的会话下的进程忽略响应HUP消息
+
+&amp;是把该命令以后台的job的形式运行
+
+0 表示stdin标准输入；
+
+1 表示stdout标准输出；
+
+2 表示stderr标准错误
+
+&gt; 重定向符号
+
+&gt;xxxx项目.log 2&gt;&amp;1  把标准错误重定向到标准输出 xxx项目.log文件中
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[每日刷题]]></title>
+        <id>https://oneseek.github.io/post/mei-ri-shua-ti/</id>
+        <link href="https://oneseek.github.io/post/mei-ri-shua-ti/">
+        </link>
+        <updated>2020-03-29T03:35:30.000Z</updated>
+        <content type="html"><![CDATA[<p>在按层次遍历二叉树的算法中，需要借助的数据结构是（  ）。队列<br>
+在类方法中调用本类的类方法时可直接调用<br>
+设与某资源相关联的信号量初值为3，当前为1，若M表示该资源的可用个数，N表示等待该资源的进程数，则M，N分别是()      1，0<br>
+虚拟局域网是一种新型局域网。<br>
+CISCO 4500 能提供E1接口的路由器</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法训练 素因子去重]]></title>
         <id>https://oneseek.github.io/post/suan-fa-xun-lian-su-yin-zi-qu-chong/</id>
@@ -173,207 +210,6 @@ checkCpu $*
 <p>第二种</p>
 <pre><code>ps -p 6672 -o pcpu
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[java.lang 类 ClassLoader]]></title>
-        <id>https://oneseek.github.io/post/javalang-lei-classloader/</id>
-        <link href="https://oneseek.github.io/post/javalang-lei-classloader/">
-        </link>
-        <updated>2020-03-23T14:22:42.000Z</updated>
-        <content type="html"><![CDATA[<p>文档 ： https://tool.oschina.net/apidocs/apidoc?api=jdk-zh</p>
-<p><strong>getResource</strong><br>
-public URL getResource(String name)<br>
-查找具有给定名称的资源。资源是可以通过类代码以与代码基无关的方式访问的一些数据（图像、声音、文本等）。<br>
-资源名称是以 '/' 分隔的标识资源的路径名称。</p>
-<p>此方法首先搜索资源的父类加载器；如果父类加载器为 null，则搜索的路径就是虚拟机的内置类加载器的路径。如果搜索失败，则此方法将调用 findResource(String) 来查找资源。</p>
-<p><strong>参数：</strong><br>
-name - 资源名称<br>
-<strong>返回：</strong><br>
-读取资源的 URL 对象；如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null。<br>
-<strong>从以下版本开始：</strong><br>
-1.1</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[106.Jerry的考验]]></title>
-        <id>https://oneseek.github.io/post/106jerry-de-kao-yan/</id>
-        <link href="https://oneseek.github.io/post/106jerry-de-kao-yan/">
-        </link>
-        <updated>2020-03-23T02:13:24.000Z</updated>
-        <content type="html"><![CDATA[<p>概述：<br>
-有一天Jerry给Tom出了一道题来考验他。Jerry给了Tom一个长度为2<em>n的只包含小写字母的字符串，让Tom将这个字符串任意挑选字符，将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，然后a要和reverse(b)相同(a和反转后的b相同)，问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。<br>
-输入一个正整数n，和一个长度为2</em>n的字符串<br>
-输出方案数</p>
-<p>示例1<br>
-输入：<br>
-2<br>
-&quot;abba&quot;<br>
-输出：<br>
-4</p>
-<h3 id="最开始写的c版-直接暴力">最开始写的C++版 直接暴力</h3>
-<pre><code>/*有一天Jerry给Tom出了一道题来考验他。
-Jerry给了Tom一个长度为2*n的只包含小写字母的字符串，
-让Tom将这个字符串任意挑选字符，
-将其分成两个等长的字符串a和b(对于一个si不能同时被选到a和b中)，
-然后a要和reverse(b)相同(a和反转后的b相同)，
-问这样的方案数有多少？Tom有些为难，所以请你来帮帮他吧。
-输入一个正整数n，和一个长度为2*n的字符串
-输出方案数
-*/
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-using namespace std;
-int main() {
-    int n = 4;
-    string a = &quot;abba&quot;;
-    int ans = 0;
-    for (int i = 0; i &lt; (1 &lt;&lt; n); i++)  //二进制枚举//枚举每一个状态
-    {
-        string sa = &quot;&quot;;
-        string sb = &quot;&quot;;
-        for (int j = 0; j &lt; n; j++)  //枚举该状态下二进制的每一位数值
-        {
-            cout &lt;&lt; i &lt;&lt;&quot;&amp;&quot;&lt;&lt;&quot;(1&lt;&lt;&quot;&lt;&lt;j&lt;&lt; &quot;) &quot; &lt;&lt; (i &amp; (1 &lt;&lt; j)) &lt;&lt; &quot;\t&quot;;
-            if (i &amp; (1 &lt;&lt; j))  //当前状态的第i位 ?是否为1(存在
-            {
-                sa += a[j];
-            }
-            else {
-                sb += a[j];
-            }
-        }
-        cout &lt;&lt; endl;
-        reverse(sb.begin(), sb.end());
-        if (sa == sb) {
-            ans++;
-        }
-    }
-
-    cout &lt;&lt; ans;
-
-    return 0;
-}
-</code></pre>
-<h3 id="优化一点的折半法-但是还是超时">优化一点的折半法 但是还是超时</h3>
-<pre><code>public static long solution(int n, String s) {
-        String S_0 = s.substring(0, n);
-        String S_1 = s.substring(n, n * 2);
-        int ans = 0;
-
-        ArrayList&lt;ArrayList&lt;String&gt;&gt; SSa = fun(n, S_0); // 返回a的所有可能
-
-        ArrayList&lt;String&gt; Sa1 = SSa.get(1); // 得到a选中的字符串的集合
-        ArrayList&lt;String&gt; Sa0 = SSa.get(0); // a没有选中的字符串的集合
-
-        SSa = fun(n, S_1); // 返回b的所有可能
-        ArrayList&lt;String&gt; Sb0 = SSa.get(1); // 得到b选中的字符串的集合
-        ArrayList&lt;String&gt; Sb1 = SSa.get(0); // b没有选中的字符串的集合
-
-        int len = Sb1.size(); // b可能性数目
-
-        // System.out.println(&quot;len=&quot;+len);
-
-        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb1 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
-        Map&lt;Integer, ArrayList&lt;String&gt;&gt; mapb0 = new HashMap&lt;Integer, ArrayList&lt;String&gt;&gt;();
-
-        for (int i = 0; i &lt; len; i++) { //
-            String sb1 = Sb1.get(i);
-            String sb0 = Sb0.get(i);
-
-            // System.out.println(sb1);
-
-            int sb1_len = sb1.length();
-            int sb0_len = sb0.length();
-
-            ArrayList&lt;String&gt; sb1List = mapb1.get(sb1_len);
-            ArrayList&lt;String&gt; sb0List = mapb0.get(sb0_len);
-
-            if (sb1List == null) {
-                sb1List = new ArrayList&lt;String&gt;();
-            }
-            if (sb0List == null) {
-                sb0List = new ArrayList&lt;String&gt;();
-            }
-
-            sb1List.add(sb1);
-            sb0List.add(sb0);
-
-            mapb1.put(sb1_len, sb1List);
-            mapb0.put(sb0_len, sb0List);
-        }
-
-        // System.out.println(mapb1.size());
-        // for( Map.Entry&lt;Integer, ArrayList&lt;String&gt;&gt; map:mapb1.entrySet()){
-        // System.out.println(map);
-        // }
-        // System.out.println(len + &quot; &quot; + Math.pow(2, n) + &quot; &quot; + mapb1.size());
-
-        len = Sa1.size();
-
-        int t = 0;
-        Map&lt;String,Integer&gt; table = new HashMap&lt;&gt;();
-        for (String sa1 : Sa1) {
-            String sa0 = Sa0.get(t);
-            t++;
-            if(table.get(sa1+sa0)!=null){
-                ans+=table.get(sa1+sa0);
-                continue;
-            }
-            int sa1_len = sa1.length();
-            // System.out.println(t+&quot;:&quot;+sa1+&quot; &quot;+ sa1_count);
-            ArrayList&lt;String&gt; sb1List = new ArrayList&lt;String&gt;();
-            ArrayList&lt;String&gt; sb0List = new ArrayList&lt;String&gt;();
-
-            sb1List = mapb1.get(n - sa1_len);
-            sb0List = mapb0.get(sa1_len);
-
-            if (sb1List == null) {
-                sb1List = new ArrayList&lt;String&gt;();
-            }
-            if (sb0List == null) {
-                sb0List = new ArrayList&lt;String&gt;();
-            }
-
-            int ans_a=0;
-            for (int j = 0; j &lt; sb1List.size(); j++) {
-                String fa = sa1 + sb1List.get(j);
-                String fb = new StringBuilder(sa0 + sb0List.get(j)).reverse().toString();
-
-                if (fa.equals(fb)) {
-                    ans++;
-                    ans_a++;
-                }
-            }
-            table.put(sa1+sa0, ans_a);
-        }
-
-        return ans;
-    }
-
-    public static ArrayList&lt;ArrayList&lt;String&gt;&gt; fun(int n, String s) {
-        ArrayList&lt;ArrayList&lt;String&gt;&gt; aList = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();
-        ArrayList&lt;String&gt; S1 = new ArrayList&lt;&gt;();
-        ArrayList&lt;String&gt; S0 = new ArrayList&lt;&gt;();
-        for (int i = 0; i &lt; Math.pow(2, n); i++) { // 二进制枚举//枚举每一个状态
-            String sa = &quot;&quot;;
-            String sb = &quot;&quot;;
-            for (int j = 0; j &lt; n; j++) { // 枚举该状态下二进制的每一位数值
-                if ((i &amp; (int) Math.pow(2, j)) != 0) { // 当前状态的第i位 ?是否为1(存在
-                    sa += s.charAt(j);
-                } else {
-                    sb += s.charAt(j);
-                }
-            }
-            S1.add(sa);
-            S0.add(sb);
-        }
-        aList.add(S0);
-        aList.add(S1);
-        return aList;
-    }
-    ```</code></pre>
 ]]></content>
     </entry>
 </feed>
