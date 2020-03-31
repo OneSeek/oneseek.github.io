@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-29T16:27:38.181Z</updated>
+    <updated>2020-03-31T09:09:45.799Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,18 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[spring implement HandlerInterceptor 接口 实现权限管理]]></title>
+        <id>https://oneseek.github.io/post/spring-implement-handlerinterceptor-jie-kou-shi-xian-quan-xian-guan-li/</id>
+        <link href="https://oneseek.github.io/post/spring-implement-handlerinterceptor-jie-kou-shi-xian-quan-xian-guan-li/">
+        </link>
+        <updated>2020-03-31T08:59:17.000Z</updated>
+        <content type="html"><![CDATA[<p>先写一个类实现 HandlerInterceptor<br>
+重写 preHandle函数 保存 request 的 user session对象 然后 sendRedirect重定向到登陆界面</p>
+<h3 id="role判断">role判断</h3>
+<p>定义一个type 从前台传送到后台 判断type后 验证用户密码</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[NIO实现简单服务器]]></title>
         <id>https://oneseek.github.io/post/nio-shi-xian-jian-dan-fu-wu-qi/</id>
@@ -356,67 +368,6 @@ nohup：表示当前用户和系统的会话下的进程忽略响应HUP消息
 设与某资源相关联的信号量初值为3，当前为1，若M表示该资源的可用个数，N表示等待该资源的进程数，则M，N分别是()      1，0<br>
 虚拟局域网是一种新型局域网。<br>
 CISCO 4500 能提供E1接口的路由器</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[算法训练 素因子去重]]></title>
-        <id>https://oneseek.github.io/post/suan-fa-xun-lian-su-yin-zi-qu-chong/</id>
-        <link href="https://oneseek.github.io/post/suan-fa-xun-lian-su-yin-zi-qu-chong/">
-        </link>
-        <updated>2020-03-27T13:39:58.000Z</updated>
-        <content type="html"><![CDATA[<p>试题 算法训练 素因子去重</p>
-<p>资源限制<br>
-时间限制：1.0s   内存限制：256.0MB<br>
-问题描述<br>
-　　给定一个正整数n，求一个正整数p，满足p仅包含n的所有素因子，且每个素因子的次数不大于1<br>
-输入格式<br>
-　　一个整数，表示n<br>
-输出格式<br>
-　　输出一行，包含一个整数p。<br>
-样例输入<br>
-1000<br>
-样例输出<br>
-10<br>
-数据规模和约定<br>
-　　n&lt;=10^12<br>
-　　样例解释：n=1000=2^3<em>5</em>3，p=2*5=10</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;map&gt;
-#include &lt;cmath&gt;
-typedef long long ll;
-
-using namespace std;
-int main() {
-    ll n;
-    cin &gt;&gt; n;
-    
-    map&lt;ll, int&gt; num;
-    while (n % 2 == 0) {
-        num[2]=1;
-        n /= 2;
-    }
-    for (ll i = 3; i &lt;= sqrt(n * 1.0); i += 2) {
-        while (n % i == 0) {
-            num[i]=1;
-            n /= i;
-        }
-    }
-    if (n &gt; 2) {
-        num[n]=1;
-    }
-
-    ll ans=1;
-    for (map&lt;ll, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
-        
-		ans *= it-&gt;first;
-         
-    }
-
-    cout&lt;&lt;ans;
-    
-    return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>

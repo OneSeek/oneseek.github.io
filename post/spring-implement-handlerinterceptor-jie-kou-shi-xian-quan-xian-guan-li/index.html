@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>SpringBoot | OneSeek</title>
+<title>spring implement HandlerInterceptor 接口 实现权限管理 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,40 +80,39 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: SpringBoot</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/springboot-qi-dong-lei-springbootapplication-shu-xing/">SpringBoot 启动类 @SpringBootApplication 属性</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-15
-      
-        <a href="https://oneseek.github.io/tag/8PavsPD1i/" class="badge success">
-          SpringBoot
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/springboot-qi-dong-lei-springbootapplication-shu-xing/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>spring implement HandlerInterceptor 接口 实现权限管理</h1>
+            <p class="article-meta">
+              2020-03-31
+              
+            </p>
+            
+            <div class="post-content">
+              <p>先写一个类实现 HandlerInterceptor<br>
+重写 preHandle函数 保存 request 的 user session对象 然后 sendRedirect重定向到登陆界面</p>
+<h3 id="role判断">role判断</h3>
+<p>定义一个type 从前台传送到后台 判断type后 验证用户密码</p>
 
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/nio-shi-xian-jian-dan-fu-wu-qi/">
+                <h3 class="post-title">
+                  NIO实现简单服务器
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1585645781316" class="no-responsive avatar">
@@ -147,22 +147,22 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge warning">
+        class="badge secondary">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge secondary">
+        class="badge ">
         java
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge ">
+        class="badge success">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge ">
+        class="badge warning">
         nginx
       </a>
       
@@ -177,7 +177,7 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge success">
+        class="badge secondary">
         Gridea
       </a>
       
@@ -311,6 +311,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
