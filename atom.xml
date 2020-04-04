@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-03-31T09:09:45.799Z</updated>
+    <updated>2020-04-04T13:33:04.645Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,26 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[世事变迁，历史沿革]]></title>
+        <id>https://oneseek.github.io/post/shi-shi-bian-qian-li-shi-yan-ge/</id>
+        <link href="https://oneseek.github.io/post/shi-shi-bian-qian-li-shi-yan-ge/">
+        </link>
+        <updated>2020-04-04T13:32:07.000Z</updated>
+        <content type="html"><![CDATA[<p>世事变迁，历史沿革</p>
+<p>等有时间了，一定要重新整个舒服的博客 (╯▔皿▔)╯</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[synchronized]]></title>
+        <id>https://oneseek.github.io/post/synchronized/</id>
+        <link href="https://oneseek.github.io/post/synchronized/">
+        </link>
+        <updated>2020-04-04T07:27:56.000Z</updated>
+        <content type="html"><![CDATA[<p>synchronized<br>
+保证在同一时刻，只有一个线程可以执行某个方法或某个代码块，同时synchronized可以保证一个线程的变化可见（可见性），即可以代替volatile。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[spring implement HandlerInterceptor 接口 实现权限管理]]></title>
         <id>https://oneseek.github.io/post/spring-implement-handlerinterceptor-jie-kou-shi-xian-quan-xian-guan-li/</id>
@@ -331,43 +351,6 @@ public class AioServer implements Runnable
  
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux jar包 后台运行]]></title>
-        <id>https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/</id>
-        <link href="https://oneseek.github.io/post/linux-jar-bao-hou-tai-yun-xing/">
-        </link>
-        <updated>2020-03-29T07:20:28.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>持续后台运行命令：nohup java-jar xxx项目.jar &gt;xxxx项目.log 2&gt;&amp;1 &amp;
-
-nohup：表示当前用户和系统的会话下的进程忽略响应HUP消息
-
-&amp;是把该命令以后台的job的形式运行
-
-0 表示stdin标准输入；
-
-1 表示stdout标准输出；
-
-2 表示stderr标准错误
-
-&gt; 重定向符号
-
-&gt;xxxx项目.log 2&gt;&amp;1  把标准错误重定向到标准输出 xxx项目.log文件中
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每日刷题]]></title>
-        <id>https://oneseek.github.io/post/mei-ri-shua-ti/</id>
-        <link href="https://oneseek.github.io/post/mei-ri-shua-ti/">
-        </link>
-        <updated>2020-03-29T03:35:30.000Z</updated>
-        <content type="html"><![CDATA[<p>在按层次遍历二叉树的算法中，需要借助的数据结构是（  ）。队列<br>
-在类方法中调用本类的类方法时可直接调用<br>
-设与某资源相关联的信号量初值为3，当前为1，若M表示该资源的可用个数，N表示等待该资源的进程数，则M，N分别是()      1，0<br>
-虚拟局域网是一种新型局域网。<br>
-CISCO 4500 能提供E1接口的路由器</p>
 ]]></content>
     </entry>
 </feed>
