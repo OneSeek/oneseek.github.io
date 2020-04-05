@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-04T13:33:04.645Z</updated>
+    <updated>2020-04-05T02:44:30.620Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[leetcode：42. 接雨水]]></title>
+        <id>https://oneseek.github.io/post/leetcode42-jie-yu-shui/</id>
+        <link href="https://oneseek.github.io/post/leetcode42-jie-yu-shui/">
+        </link>
+        <updated>2020-04-04T14:33:07.000Z</updated>
+        <content type="html"><![CDATA[<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。<br>
+<img src="https://oneseek.github.io/post-images/1586010946546.png" alt="" loading="lazy"><br>
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。<br>
+示例:<br>
+输入: [0,1,0,2,1,0,1,3,2,1,2,1]<br>
+输出: 6</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[世事变迁，历史沿革]]></title>
         <id>https://oneseek.github.io/post/shi-shi-bian-qian-li-shi-yan-ge/</id>
@@ -191,164 +205,6 @@ public class NioServer {
         }
     }
 
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[AIO实现简单http服务器]]></title>
-        <id>https://oneseek.github.io/post/aio-shi-xian-jian-dan-http-fu-wu-qi/</id>
-        <link href="https://oneseek.github.io/post/aio-shi-xian-jian-dan-http-fu-wu-qi/">
-        </link>
-        <updated>2020-03-29T16:25:03.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.AsynchronousChannelGroup;
-import java.nio.channels.AsynchronousServerSocketChannel;
-import java.nio.channels.AsynchronousSocketChannel;
-import java.nio.channels.CompletionHandler;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-/**
- * 一个简单的web 服务器&lt;br/&gt;
- * 通过浏览器输入localhost:8080/访问
- * 
- * @author Joeson
- * @since 2014/05
- * 
- */
-public class AioServer implements Runnable
-{
- 
-	private AsynchronousChannelGroup asyncChannelGroup;
-	private AsynchronousServerSocketChannel server;
- 
-	public AioServer(int port) throws Exception
-	{
-		// 创建线程池
-		ExecutorService executor = Executors.newFixedThreadPool(20);
-		// 异步通道管理器
-		asyncChannelGroup = AsynchronousChannelGroup.withThreadPool(executor);
-		// 创建 用在服务端的异步Socket.以下简称服务器socket。
-		// 异步通道管理器，会把服务端所用到的相关参数
-		server = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(
-				new InetSocketAddress(port));
-	}
- 
-	public void run()
-	{
-		try
-		{
- 
-			// 为服务端socket指定接收操作对象.accept原型是：
-			// accept(A attachment, CompletionHandler&lt;AsynchronousSocketChannel,
-			// ? super A&gt; handler)
-			// 也就是这里的CompletionHandler的A型参数是实际调用accept方法的第一个参数
-			// 即是listener。另一个参数V，就是原型中的客户端socket
-			server.accept(
-					server,
-					new CompletionHandler&lt;AsynchronousSocketChannel, AsynchronousServerSocketChannel&gt;()
-					{
-						String str = &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;this is a socketserver test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
-						String CRLF = &quot;\r\n&quot;;
-						// 响应头的参数
-						String serverLine = &quot;Server:a simple java WebServer&quot;;
-						String statusLine = &quot;HTTP/1.1 200 OK&quot; + CRLF;
-						String contentTypeLine = &quot;Content-type:text/html&quot;
-								+ CRLF;
-						String contentLengthLine = &quot;Content-Length:&quot; + str.length()
-								+ CRLF;
- 
- 
-						@Override
-						public void completed(AsynchronousSocketChannel result,
-								AsynchronousServerSocketChannel attachment)
-						{
-							// TODO Auto-generated method stub
-							// writeChannel(result, statusLine);
-							// writeChannel(result, serverLine);
-							// writeChannel(result, contentTypeLine);
-							// writeChannel(result, contentLengthLine);
-							// writeChannel(result, CRLF);
- 
-							writeChannel(result, statusLine + serverLine
-									+ contentTypeLine + contentLengthLine
-									+ CRLF + str);
- 
-							// writeChannel(result, str);
- 
-							try
-							{
-								result.shutdownOutput();
-								result.shutdownInput();
-							} catch (IOException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
- 
-							try
-							{
-								result.close();
-							} catch (IOException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
- 
-							attachment.accept(attachment, this);
- 
-						}
- 
-						@Override
-						public void failed(Throwable exc,
-								AsynchronousServerSocketChannel attachment)
-						{
-							// TODO Auto-generated method stub
- 
-						}
- 
-						public void writeChannel(
-								AsynchronousSocketChannel channel, String s)
-						{
-							Future&lt;Integer&gt; future = channel.write(ByteBuffer
-									.wrap(s.getBytes()));
- 
-							try
-							{
-								future.get();
-							} catch (InterruptedException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (ExecutionException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
- 
-					});
-			Thread.sleep(400000);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			System.out.println(&quot;finished server&quot;);
-		}
-	}
- 
-	public static void main(String... args) throws Exception
-	{
-		AioServer server = new AioServer(8888);
-		new Thread(server).start();
-	}
- 
 }
 </code></pre>
 ]]></content>
