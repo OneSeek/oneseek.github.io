@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>CentOS7安装桌面环境（腾讯云) | OneSeek</title>
+<title>岛屿数量 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,61 +81,80 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>CentOS7安装桌面环境（腾讯云)</h1>
+            <h1>岛屿数量</h1>
             <p class="article-meta">
-              2020-03-12
+              2020-04-05
               
-                <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge secondary">
-                  Linux
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+                  leetcode
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>腾讯云快到期了 作一把(●'◡'●)</p>
-<p>参考文章 https://cloud.tencent.com/developer/article/1350824<br>
-https://www.jianshu.com/p/63dce85dc958</p>
-<p>安装X(X Window System)，命令如下：<br>
-yum groupinstall &quot;X Window System&quot;<br>
-安装图形界面软件，GNOME(GNOME Desktop)，命令如下：<br>
-yum groupinstall &quot;GNOME Desktop&quot;</p>
-<h2 id="安装配置xrdp">安装配置XRDP</h2>
-<p>下面的很多操作需要root用户权限，所以，我们先切换为root用户：</p>
-<p>sudo su - root<br>
-安装epel库<br>
-查询是否已经安装epel库:</p>
-<p>rpm -qa|grep epel<br>
-如果 epel库 没有安装，则安装它：</p>
-<p>yum install epel-release<br>
-安装xrdp<br>
-安装xrdp服务：</p>
-<p>yum install xrdp<br>
-因为Xrdp最终会自动启用VNC，所以必须安装tigervnc-server，否则xrdp无法使用。安装vnc：</p>
-<p>yum install tigervnc-server<br>
-为root用户设置VNC密码：</p>
-<p>vncpasswd root<br>
-修改 xrdp最大连接数（使用默认值，不修改也是可以的） ：vim /etc/xrdp/xrdp.ini （默认是32）：</p>
-<p>max_bpp=32<br>
-xrdp最大连接数设置<br>
-关闭防火墙<br>
-这里，我们要确保两台机器可以ping通，能够相互访问。我这里是在局域网内测试，所以我直接关闭防火墙：</p>
-<p>systemctl stop firewalld.service<br>
-设置开机不启动防火墙：</p>
-<p>systemctl disable firewalld.servie<br>
-关闭SElinux<br>
-SElinux应该关闭它。查看SElinux状态：</p>
-<p>sestatus<br>
-如果是临时关闭SElinux：</p>
-<p>setenforce 0<br>
-不过，我们要永久关闭SElinux：vim /etc/selinux/config</p>
-<p>SELINUX=disabled<br>
-永久关闭SELINUX<br>
-启动XRDP<br>
-启动xrdp服务：</p>
-<p>systemctl start xrdp<br>
-设置xrdp服务 开机自启动 ：</p>
-<p>systemctl enable xrdp<br>
-<img src="https://oneseek.github.io/post-images/1584066517857.png" alt="" loading="lazy"></p>
+              <p>给定一个由 '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。</p>
+<p>示例 1:</p>
+<p>输入:<br>
+11110<br>
+11010<br>
+11000<br>
+00000</p>
+<p>输出: 1<br>
+示例 2:</p>
+<p>输入:<br>
+11000<br>
+11000<br>
+00100<br>
+00011</p>
+<p>输出: 3</p>
+<pre><code>class Solution {
+    public int numIslands(char[][] grid) {
+        int nums = 0;
+        int h = grid.length;
+        int w = grid.length&gt;0?grid[0].length:0;
+        for(int i=0;i&lt;h;i++){
+            for(int j=0;j&lt;w;j++){
+                System.out.print(grid[i][j]+&quot; &quot;);
+                if(grid[i][j]=='1'){
+                    nums++;
+                    dfs(i,j,grid);
+                }
+            }
+            System.out.println();
+        }
+        return nums;
+    }
+    
+    void dfs(int i,int j,char[][] grid){
+        grid[i][j]='0';
+        if(j&lt;grid[0].length-1){
+            if(grid[i][j+1]=='1'){
+                grid[i][j+1]='0';
+                dfs(i,j+1,grid);
+            }  
+        }
+        if(i&lt;grid.length-1){
+            if(grid[i+1][j]=='1'){
+                grid[i+1][j]='0';
+                dfs(i+1,j,grid);
+            }  
+        }
+        if(i&gt;0){
+            if(grid[i-1][j]=='1'){
+                grid[i-1][j]='0';
+                dfs(i-1,j,grid);
+            }  
+        }
+        if(j&gt;0){
+            if(grid[i][j-1]=='1'){
+                grid[i][j-1]='0';
+                dfs(i,j-1,grid);
+            }  
+        }
+        
+    }
+}
+</code></pre>
 
             </div>
           </article>
@@ -146,9 +165,9 @@ SElinux应该关闭它。查看SElinux状态：</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-dong-tai-shu-zu/">
+              <a href="https://oneseek.github.io/post/leetcode42-jie-yu-shui/">
                 <h3 class="post-title">
-                  算法训练-动态数组
+                  leetcode：42. 接雨水
                 </h3>
               </a>
             </div>
@@ -191,17 +210,17 @@ SElinux应该关闭它。查看SElinux状态：</p>
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge warning">
+        class="badge ">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge secondary">
+        class="badge success">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge warning">
+        class="badge secondary">
         java
       </a>
       
@@ -216,7 +235,7 @@ SElinux应该关闭它。查看SElinux状态：</p>
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge success">
         SpringBoot
       </a>
       
