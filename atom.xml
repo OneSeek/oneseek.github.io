@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-05T13:54:54.467Z</updated>
+    <updated>2020-04-06T03:11:37.970Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,52 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[Java实现多线程的三种方法]]></title>
+        <id>https://oneseek.github.io/post/java-shi-xian-duo-xian-cheng-de-san-chong-fang-fa/</id>
+        <link href="https://oneseek.github.io/post/java-shi-xian-duo-xian-cheng-de-san-chong-fang-fa/">
+        </link>
+        <updated>2020-04-06T02:53:38.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="第一种-继承-thread类">第一种 继承 Thread类</h2>
+<pre><code> 继承Thread类，并重写Thread中的run方法
+</code></pre>
+<pre><code>class MyThread extends Thread{
+　　@Override
+　　public void run(){
+ 　　　　System.out.println(&quot;创建多线程方法一&quot;);
+　　}
+}
+</code></pre>
+<h2 id="第二种-实现-runable接口">第二种 实现 Runable接口</h2>
+<pre><code>      实现Runnable接口，重写run()方法
+</code></pre>
+<pre><code>class MyThread implements Runnable{
+     @Override
+     public void run(){
+         System.out.println(&quot;创建多线程方法二&quot;);
+     }
+}
+</code></pre>
+<h2 id="第三种-实现callable接口">第三种 实现Callable接口</h2>
+<pre><code>      实现Callable接口，重写call()方法
+      可以提供返回值 可以抛出异常
+      创建Callable实现类
+      创建线程池 submi Callable实现类t
+</code></pre>
+<pre><code>
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[常见关系数据库和非关系数据库]]></title>
+        <id>https://oneseek.github.io/post/chang-jian-guan-xi-shu-ju-ku-he-fei-guan-xi-shu-ju-ku/</id>
+        <link href="https://oneseek.github.io/post/chang-jian-guan-xi-shu-ju-ku-he-fei-guan-xi-shu-ju-ku/">
+        </link>
+        <updated>2020-04-06T02:52:33.000Z</updated>
+        <content type="html"><![CDATA[<p>​关系数据库 ：Oracle、DB2、Microsoft SQL Server、Microsoft Access、MySQL</p>
+<p>​非关系数据库：NoSql、Cloudant、MongoDb、redis、HBase</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[岛屿数量]]></title>
         <id>https://oneseek.github.io/post/dao-yu-shu-liang/</id>
@@ -103,28 +149,6 @@
         <updated>2020-04-04T13:32:07.000Z</updated>
         <content type="html"><![CDATA[<p>世事变迁，历史沿革</p>
 <p>等有时间了，一定要重新整个舒服的博客 (╯▔皿▔)╯</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[synchronized]]></title>
-        <id>https://oneseek.github.io/post/synchronized/</id>
-        <link href="https://oneseek.github.io/post/synchronized/">
-        </link>
-        <updated>2020-04-04T07:27:56.000Z</updated>
-        <content type="html"><![CDATA[<p>synchronized<br>
-保证在同一时刻，只有一个线程可以执行某个方法或某个代码块，同时synchronized可以保证一个线程的变化可见（可见性），即可以代替volatile。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[spring implement HandlerInterceptor 接口 实现权限管理]]></title>
-        <id>https://oneseek.github.io/post/spring-implement-handlerinterceptor-jie-kou-shi-xian-quan-xian-guan-li/</id>
-        <link href="https://oneseek.github.io/post/spring-implement-handlerinterceptor-jie-kou-shi-xian-quan-xian-guan-li/">
-        </link>
-        <updated>2020-03-31T08:59:17.000Z</updated>
-        <content type="html"><![CDATA[<p>先写一个类实现 HandlerInterceptor<br>
-重写 preHandle函数 保存 request 的 user session对象 然后 sendRedirect重定向到登陆界面</p>
-<h3 id="role判断">role判断</h3>
-<p>定义一个type 从前台传送到后台 判断type后 验证用户密码</p>
 ]]></content>
     </entry>
 </feed>
