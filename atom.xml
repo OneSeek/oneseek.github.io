@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-06T03:15:06.617Z</updated>
+    <updated>2020-04-08T14:42:39.198Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[leetcode 945. 使数组唯一的最小增量]]></title>
+        <id>https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/</id>
+        <link href="https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/">
+        </link>
+        <updated>2020-04-08T14:41:22.000Z</updated>
+        <content type="html"><![CDATA[<p>给定整数数组 A，每次 move 操作将会选择任意 A[i]，并将其递增 1。</p>
+<p>返回使 A 中的每个值都是唯一的最少操作次数。</p>
+<p>示例 1:</p>
+<p>输入：[1,2,2]<br>
+输出：1<br>
+解释：经过一次 move 操作，数组将变为 [1, 2, 3]。<br>
+示例 2:</p>
+<p>输入：[3,2,1,2,1,7]<br>
+输出：6<br>
+解释：经过 6 次 move 操作，数组将变为 [3, 4, 1, 2, 5, 7]。<br>
+可以看出 5 次或 5 次以下的 move 操作是不能让数组的每个值唯一的。<br>
+提示：</p>
+<p>0 &lt;= A.length &lt;= 40000<br>
+0 &lt;= A[i] &lt; 40000</p>
+<p>思路：先排序，再去重复</p>
+<pre><code>class Solution {
+    public int minIncrementForUnique(int[] A) {
+        int ans = 0;
+        Arrays.sort(A);  
+        for(int i=1;i&lt;A.length;i++){
+            if(A[i]&lt;=A[i-1]){
+                ans += A[i-1]+1-A[i];
+                A[i]=A[i-1]+1;
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java 创建对象的几种方法]]></title>
         <id>https://oneseek.github.io/post/java-chuang-jian-dui-xiang-de-ji-chong-fang-fa/</id>
@@ -143,20 +180,6 @@
     }
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[leetcode：42. 接雨水]]></title>
-        <id>https://oneseek.github.io/post/leetcode42-jie-yu-shui/</id>
-        <link href="https://oneseek.github.io/post/leetcode42-jie-yu-shui/">
-        </link>
-        <updated>2020-04-04T14:33:07.000Z</updated>
-        <content type="html"><![CDATA[<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。<br>
-<img src="https://oneseek.github.io/post-images/1586010946546.png" alt="" loading="lazy"><br>
-上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。<br>
-示例:<br>
-输入: [0,1,0,2,1,0,1,3,2,1,2,1]<br>
-输出: 6</p>
 ]]></content>
     </entry>
 </feed>
