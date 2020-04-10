@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-08T14:42:39.198Z</updated>
+    <updated>2020-04-10T12:59:25.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -177,6 +177,37 @@
             }  
         }
         
+    }
+}
+</code></pre>
+<!-- more -->第二遍
+<pre><code>class Solution {
+    public int numIslands(char[][] grid) {
+        int num=0;
+        for(int i=0;i&lt;grid.length;i++){
+            for(int j=0;j&lt;grid[0].length;j++){
+                if(grid[i][j]=='1'){
+                    dfs(i,j,grid);
+                    num++;
+                }
+            }   
+        }
+        return num;
+    }
+    public void dfs(int i,int j,char[][] grid){
+        grid[i][j]='0';
+        if(i&lt;grid.length-1&amp;&amp;grid[i+1][j]=='1'){
+            dfs(i+1,j,grid);
+        }
+        if(j&lt;grid[0].length-1&amp;&amp;grid[i][j+1]=='1'){
+            dfs(i,j+1,grid);
+        }
+        if(i&gt;0&amp;&amp;grid[i-1][j]=='1'){
+            dfs(i-1,j,grid);
+        }
+        if(j&gt;0&amp;&amp;grid[i][j-1]=='1'){
+            dfs(i,j-1,grid);
+        }
     }
 }
 </code></pre>
