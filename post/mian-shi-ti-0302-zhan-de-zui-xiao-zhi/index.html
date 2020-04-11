@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练 素因子去重 | OneSeek</title>
+<title>面试题 03.02. 栈的最小值 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,65 +81,88 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练 素因子去重</h1>
+            <h1>面试题 03.02. 栈的最小值</h1>
             <p class="article-meta">
-              2020-03-27
+              2020-04-11
+              
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+                  leetcode
+                </a>
               
             </p>
             
             <div class="post-content">
-              <p>试题 算法训练 素因子去重</p>
-<p>资源限制<br>
-时间限制：1.0s   内存限制：256.0MB<br>
-问题描述<br>
-　　给定一个正整数n，求一个正整数p，满足p仅包含n的所有素因子，且每个素因子的次数不大于1<br>
-输入格式<br>
-　　一个整数，表示n<br>
-输出格式<br>
-　　输出一行，包含一个整数p。<br>
-样例输入<br>
-1000<br>
-样例输出<br>
-10<br>
-数据规模和约定<br>
-　　n&lt;=10^12<br>
-　　样例解释：n=1000=2^3<em>5</em>3，p=2*5=10</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;map&gt;
-#include &lt;cmath&gt;
-typedef long long ll;
-
-using namespace std;
-int main() {
-    ll n;
-    cin &gt;&gt; n;
-    
-    map&lt;ll, int&gt; num;
-    while (n % 2 == 0) {
-        num[2]=1;
-        n /= 2;
+              <p>请设计一个栈，除了常规栈支持的pop与push函数以外，还支持min函数，该函数返回栈元素中的最小值。执行push、pop和min操作的时间复杂度必须为O(1)。</p>
+<p>示例：</p>
+<p>MinStack minStack = new MinStack();<br>
+minStack.push(-2);<br>
+minStack.push(0);<br>
+minStack.push(-3);<br>
+minStack.getMin();   --&gt; 返回 -3.<br>
+minStack.pop();<br>
+minStack.top();      --&gt; 返回 0.<br>
+minStack.getMin();   --&gt; 返回 -2.</p>
+<p>开始用min操作不符合要求，看了题解改了下</p>
+<pre><code>class MinStack {
+    Node top;
+    /** initialize your data structure here. */
+    public MinStack() {
+        top = new Node();
     }
-    for (ll i = 3; i &lt;= sqrt(n * 1.0); i += 2) {
-        while (n % i == 0) {
-            num[i]=1;
-            n /= i;
+    
+    public void push(int x) {
+        int min=x;
+        if(x&gt;top.min){
+            min=top.min;
         }
+        Node n = new Node(x,min);
+        n.next = top;
+        top = n;
     }
-    if (n &gt; 2) {
-        num[n]=1;
-    }
-
-    ll ans=1;
-    for (map&lt;ll, int&gt;::iterator it = num.begin(); it != num.end(); ++it){
-        
-		ans *= it-&gt;first;
-         
-    }
-
-    cout&lt;&lt;ans;
     
-    return 0;
+    public void pop() {
+        top = top.next;
+    }
+    
+    public int top() {
+        return top.value;
+    }
+    
+    public int getMin() {
+        // int min = top.value;
+        // Node n = top;
+        // while(n.next!=null){
+        //     n = n.next;
+        //     if(n.value&lt;min){
+        //         min = n.value;
+        //     }
+        // }
+        return top.min;
+    }
 }
+class Node{
+    int value;
+    Node next;
+    int min;
+    Node(){
+        this.value=Integer.MAX_VALUE;
+        this.min=Integer.MAX_VALUE;
+    }
+    Node(int x,int min){
+        this.value = x;
+        this.min = min;
+    }
+    
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
 </code></pre>
 
             </div>
@@ -151,9 +174,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/java-guan-jian-zi/">
+              <a href="https://oneseek.github.io/post/vscode-yuan-cheng-lian-jie-linux-yu-dao-de-wen-ti/">
                 <h3 class="post-title">
-                  Java关键字
+                  vscode远程连接linux遇到的问题
                 </h3>
               </a>
             </div>
@@ -196,32 +219,32 @@ int main() {
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge warning">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge ">
+        class="badge secondary">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge success">
+        class="badge secondary">
         java
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge warning">
+        class="badge success">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge success">
+        class="badge secondary">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge secondary">
         SpringBoot
       </a>
       

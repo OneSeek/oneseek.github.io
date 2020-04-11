@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-11T14:13:47.814Z</updated>
+    <updated>2020-04-11T15:21:34.465Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,86 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[面试题 03.02. 栈的最小值]]></title>
+        <id>https://oneseek.github.io/post/mian-shi-ti-0302-zhan-de-zui-xiao-zhi/</id>
+        <link href="https://oneseek.github.io/post/mian-shi-ti-0302-zhan-de-zui-xiao-zhi/">
+        </link>
+        <updated>2020-04-11T15:20:11.000Z</updated>
+        <content type="html"><![CDATA[<p>请设计一个栈，除了常规栈支持的pop与push函数以外，还支持min函数，该函数返回栈元素中的最小值。执行push、pop和min操作的时间复杂度必须为O(1)。</p>
+<p>示例：</p>
+<p>MinStack minStack = new MinStack();<br>
+minStack.push(-2);<br>
+minStack.push(0);<br>
+minStack.push(-3);<br>
+minStack.getMin();   --&gt; 返回 -3.<br>
+minStack.pop();<br>
+minStack.top();      --&gt; 返回 0.<br>
+minStack.getMin();   --&gt; 返回 -2.</p>
+<p>开始用min操作不符合要求，看了题解改了下</p>
+<pre><code>class MinStack {
+    Node top;
+    /** initialize your data structure here. */
+    public MinStack() {
+        top = new Node();
+    }
+    
+    public void push(int x) {
+        int min=x;
+        if(x&gt;top.min){
+            min=top.min;
+        }
+        Node n = new Node(x,min);
+        n.next = top;
+        top = n;
+    }
+    
+    public void pop() {
+        top = top.next;
+    }
+    
+    public int top() {
+        return top.value;
+    }
+    
+    public int getMin() {
+        // int min = top.value;
+        // Node n = top;
+        // while(n.next!=null){
+        //     n = n.next;
+        //     if(n.value&lt;min){
+        //         min = n.value;
+        //     }
+        // }
+        return top.min;
+    }
+}
+class Node{
+    int value;
+    Node next;
+    int min;
+    Node(){
+        this.value=Integer.MAX_VALUE;
+        this.min=Integer.MAX_VALUE;
+    }
+    Node(int x,int min){
+        this.value = x;
+        this.min = min;
+    }
+    
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vscode远程连接linux遇到的问题]]></title>
         <id>https://oneseek.github.io/post/vscode-yuan-cheng-lian-jie-linux-yu-dao-de-wen-ti/</id>
@@ -141,42 +221,6 @@ small = [4]<br>
 <pre><code> implements Cloneable
 </code></pre>
 <h1 id="序列化">序列化</h1>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java实现多线程的三种方法]]></title>
-        <id>https://oneseek.github.io/post/java-shi-xian-duo-xian-cheng-de-san-chong-fang-fa/</id>
-        <link href="https://oneseek.github.io/post/java-shi-xian-duo-xian-cheng-de-san-chong-fang-fa/">
-        </link>
-        <updated>2020-04-06T02:53:38.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="第一种-继承-thread类">第一种 继承 Thread类</h2>
-<pre><code> 继承Thread类，并重写Thread中的run方法
-</code></pre>
-<pre><code>class MyThread extends Thread{
-　　@Override
-　　public void run(){
- 　　　　System.out.println(&quot;创建多线程方法一&quot;);
-　　}
-}
-</code></pre>
-<h2 id="第二种-实现-runable接口">第二种 实现 Runable接口</h2>
-<pre><code>      实现Runnable接口，重写run()方法
-</code></pre>
-<pre><code>class MyThread implements Runnable{
-     @Override
-     public void run(){
-         System.out.println(&quot;创建多线程方法二&quot;);
-     }
-}
-</code></pre>
-<h2 id="第三种-实现callable接口">第三种 实现Callable接口</h2>
-<pre><code>      实现Callable接口，重写call()方法
-      可以提供返回值 可以抛出异常
-      创建Callable实现类
-      创建线程池 submi Callable实现类t
-</code></pre>
-<pre><code>
-</code></pre>
 ]]></content>
     </entry>
 </feed>
