@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-10T14:25:56.745Z</updated>
+    <updated>2020-04-11T14:13:47.814Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[vscode远程连接linux遇到的问题]]></title>
+        <id>https://oneseek.github.io/post/vscode-yuan-cheng-lian-jie-linux-yu-dao-de-wen-ti/</id>
+        <link href="https://oneseek.github.io/post/vscode-yuan-cheng-lian-jie-linux-yu-dao-de-wen-ti/">
+        </link>
+        <updated>2020-04-11T14:10:55.000Z</updated>
+        <content type="html"><![CDATA[<p>输密码能连上密钥连不上，验证密钥的时候发现有个提示，点开提示里的detile，说是权限太大，删除其他用户的权限就能用密钥了</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[17.18. 最短超串]]></title>
         <id>https://oneseek.github.io/post/1718-zui-duan-chao-chuan/</id>
@@ -168,16 +177,6 @@ small = [4]<br>
 </code></pre>
 <pre><code>
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[常见关系数据库和非关系数据库]]></title>
-        <id>https://oneseek.github.io/post/chang-jian-guan-xi-shu-ju-ku-he-fei-guan-xi-shu-ju-ku/</id>
-        <link href="https://oneseek.github.io/post/chang-jian-guan-xi-shu-ju-ku-he-fei-guan-xi-shu-ju-ku/">
-        </link>
-        <updated>2020-04-06T02:52:33.000Z</updated>
-        <content type="html"><![CDATA[<p>​关系数据库 ：Oracle、DB2、Microsoft SQL Server、Microsoft Access、MySQL</p>
-<p>​非关系数据库：NoSql、Cloudant、MongoDb、redis、HBase</p>
 ]]></content>
     </entry>
 </feed>
