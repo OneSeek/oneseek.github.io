@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>shell编写显示ps相关脚本 | OneSeek</title>
+<title>1124. 表现良好的最长时间段 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,53 +81,86 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>shell编写显示ps相关脚本</h1>
+            <h1>1124. 表现良好的最长时间段</h1>
             <p class="article-meta">
-              2020-03-25
+              2020-04-12
               
-                <a href="https://oneseek.github.io/tag/W5YyrZHzs/" class="badge warning">
-                  Linux
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+                  leetcode
                 </a>
               
             </p>
             
             <div class="post-content">
-              <p>编写脚本checkCpu.sh，在脚本中三个函数：getPid、getCpu、checkCpu<br>
-getPid：参数1为当前用户名，参数2为进程名称（返回值为进程Pid）<br>
-getCpu:参数1为进程的pid（返回值为进程pid的cpu利用率）<br>
-checkCpu：参数1为当前用户名，参数2为进程名称    参数3. . . .(进程名称)，无返回值（在函数中打印各个进程cpu占用率）<br>
-执行脚本checkCpu.sh时 ，参数1为进程1名称     参数2. . . .(进程名称列表)</p>
-<pre><code>#!/bin/bash
-getPid(){
-username=$1
-processname=$2
-ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
+              <p>给你一份工作时间表 hours，上面记录着某一位员工每天的工作小时数。</p>
+<p>我们认为当员工一天中的工作小时数大于 8 小时的时候，那么这一天就是「劳累的一天」。</p>
+<p>所谓「表现良好的时间段」，意味在这段时间内，「劳累的天数」是严格 大于「不劳累的天数」。</p>
+<p>请你返回「表现良好时间段」的最大长度。</p>
+<p>示例 1：</p>
+<p>输入：hours = [9,9,6,0,6,6,9]<br>
+输出：3<br>
+解释：最长的表现良好时间段是 [9,9,6]。</p>
+<p>提示：</p>
+<p>1 &lt;= hours.length &lt;= 10000<br>
+0 &lt;= hours[i] &lt;= 16</p>
+<p>超时</p>
+<pre><code>class Solution {
+    public int longestWPI(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        if(judge(hours)){
+            return hours.length;
+        }
+        int r = rightJudge(hours);
+        int l = leftJudge(hours);
+
+        return r &gt; l ? r : l;
+    }
+
+    public boolean judge(int[] hours) {
+        int a = 0, b = 0;
+        for (int i : hours) {
+            if (i &gt; 8) {
+                a++;
+            } else {
+                b++;
+            }
+        }
+        return a &gt; b ? true : false;
+    }
+
+    public int leftJudge(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        if(judge(hours)){
+            return hours.length;
+        }
+        int[] arr1 = new int[hours.length-1];
+        System.arraycopy(hours, 1, arr1, 0, hours.length-1);
+        int r = rightJudge(arr1);
+        int l = leftJudge(arr1);
+        
+        return r&gt;l?r:l;
+    }
+
+    public int rightJudge(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        
+        if(judge(hours)){
+            return hours.length;
+        }
+        int[] arr1 = new int[hours.length-1];
+        System.arraycopy(hours, 0, arr1, 0, hours.length-1);
+        int r = rightJudge(arr1);
+        int l = leftJudge(arr1);
+    
+        return r&gt;l?r:l;
+    }
 }
-getCpu(){
-pid=$1
-ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-}
-checkCpu(){
-for processname in $*
-do
-   echo &quot;var = $processname&quot;
-   pid=`getPid $USER $processname`
-   echo &quot;pid = $pid&quot;
-   ret=`getCpu $USER $pid`
-   echo &quot;cat = $ret&quot;
-done
-}
-checkCpu $*
-</code></pre>
-<p>相关命令</p>
-<pre><code>ps -u $username | grep $processname|grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; | awk '{print $1}';
-</code></pre>
-<p>查询对应进程cpu利用率<br>
-第一种</p>
-<pre><code>ps aux |grep -v &quot;checkCpu&quot;|grep -v &quot;grep&quot; |grep $pid|awk '{print $3}';
-</code></pre>
-<p>第二种</p>
-<pre><code>ps -p 6672 -o pcpu
 </code></pre>
 
             </div>
@@ -139,9 +172,9 @@ checkCpu $*
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/javalang-lei-classloader/">
+              <a href="https://oneseek.github.io/post/217-cun-zai-chong-fu-yuan-su/">
                 <h3 class="post-title">
-                  java.lang 类 ClassLoader
+                  217. 存在重复元素
                 </h3>
               </a>
             </div>
@@ -194,12 +227,12 @@ checkCpu $*
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge secondary">
+        class="badge success">
         java
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge warning">
+        class="badge secondary">
         蓝桥杯
       </a>
       
@@ -209,12 +242,12 @@ checkCpu $*
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge warning">
+        class="badge success">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge warning">
+        class="badge secondary">
         Gridea
       </a>
       

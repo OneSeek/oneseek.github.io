@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-12T13:34:52.585Z</updated>
+    <updated>2020-04-12T14:58:18.807Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,84 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[1124. 表现良好的最长时间段]]></title>
+        <id>https://oneseek.github.io/post/1124-biao-xian-liang-hao-de-zui-chang-shi-jian-duan/</id>
+        <link href="https://oneseek.github.io/post/1124-biao-xian-liang-hao-de-zui-chang-shi-jian-duan/">
+        </link>
+        <updated>2020-04-12T14:53:40.000Z</updated>
+        <content type="html"><![CDATA[<p>给你一份工作时间表 hours，上面记录着某一位员工每天的工作小时数。</p>
+<p>我们认为当员工一天中的工作小时数大于 8 小时的时候，那么这一天就是「劳累的一天」。</p>
+<p>所谓「表现良好的时间段」，意味在这段时间内，「劳累的天数」是严格 大于「不劳累的天数」。</p>
+<p>请你返回「表现良好时间段」的最大长度。</p>
+<p>示例 1：</p>
+<p>输入：hours = [9,9,6,0,6,6,9]<br>
+输出：3<br>
+解释：最长的表现良好时间段是 [9,9,6]。</p>
+<p>提示：</p>
+<p>1 &lt;= hours.length &lt;= 10000<br>
+0 &lt;= hours[i] &lt;= 16</p>
+<p>超时</p>
+<pre><code>class Solution {
+    public int longestWPI(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        if(judge(hours)){
+            return hours.length;
+        }
+        int r = rightJudge(hours);
+        int l = leftJudge(hours);
+
+        return r &gt; l ? r : l;
+    }
+
+    public boolean judge(int[] hours) {
+        int a = 0, b = 0;
+        for (int i : hours) {
+            if (i &gt; 8) {
+                a++;
+            } else {
+                b++;
+            }
+        }
+        return a &gt; b ? true : false;
+    }
+
+    public int leftJudge(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        if(judge(hours)){
+            return hours.length;
+        }
+        int[] arr1 = new int[hours.length-1];
+        System.arraycopy(hours, 1, arr1, 0, hours.length-1);
+        int r = rightJudge(arr1);
+        int l = leftJudge(arr1);
+        
+        return r&gt;l?r:l;
+    }
+
+    public int rightJudge(int[] hours) {
+        if(hours.length==0){
+            return 0;
+        }
+        
+        if(judge(hours)){
+            return hours.length;
+        }
+        int[] arr1 = new int[hours.length-1];
+        System.arraycopy(hours, 0, arr1, 0, hours.length-1);
+        int r = rightJudge(arr1);
+        int l = leftJudge(arr1);
+    
+        return r&gt;l?r:l;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[217. 存在重复元素]]></title>
         <id>https://oneseek.github.io/post/217-cun-zai-chong-fu-yuan-su/</id>
@@ -200,43 +278,6 @@ small = [4]<br>
 }
 </code></pre>
 <p><a href="https://leetcode-cn.com/problems/shortest-supersequence-lcci/solution/chao-xiang-xi-jie-fa-yi-ding-neng-kan-dong-by-yuan/">题目链接</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[leetcode 945. 使数组唯一的最小增量]]></title>
-        <id>https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/</id>
-        <link href="https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/">
-        </link>
-        <updated>2020-04-08T14:41:22.000Z</updated>
-        <content type="html"><![CDATA[<p>给定整数数组 A，每次 move 操作将会选择任意 A[i]，并将其递增 1。</p>
-<p>返回使 A 中的每个值都是唯一的最少操作次数。</p>
-<p>示例 1:</p>
-<p>输入：[1,2,2]<br>
-输出：1<br>
-解释：经过一次 move 操作，数组将变为 [1, 2, 3]。<br>
-示例 2:</p>
-<p>输入：[3,2,1,2,1,7]<br>
-输出：6<br>
-解释：经过 6 次 move 操作，数组将变为 [3, 4, 1, 2, 5, 7]。<br>
-可以看出 5 次或 5 次以下的 move 操作是不能让数组的每个值唯一的。<br>
-提示：</p>
-<p>0 &lt;= A.length &lt;= 40000<br>
-0 &lt;= A[i] &lt; 40000</p>
-<p>思路：先排序，再去重复</p>
-<pre><code>class Solution {
-    public int minIncrementForUnique(int[] A) {
-        int ans = 0;
-        Arrays.sort(A);  
-        for(int i=1;i&lt;A.length;i++){
-            if(A[i]&lt;=A[i-1]){
-                ans += A[i-1]+1-A[i];
-                A[i]=A[i-1]+1;
-            }
-        }
-        return ans;
-    }
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
