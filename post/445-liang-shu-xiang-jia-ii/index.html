@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练-1的个数 | OneSeek</title>
+<title>445. 两数相加 II | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,60 +81,80 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练-1的个数</h1>
+            <h1>445. 两数相加 II</h1>
             <p class="article-meta">
-              2020-03-11
+              2020-04-14
               
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge success">
-                  蓝桥杯
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
+                  leetcode
                 </a>
               
             </p>
             
             <div class="post-content">
-              <pre><code>/*
-试题 算法训练 1的个数
-  
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-问题描述
-　　输入正整数n，判断从1到n之中，数字1一共要出现几次。例如1123这个数，则出现了两次1。例如15，那么从1到15之中，一共出现了8个1。
-输入格式
-　　一个正整数n
-输出格式
-　　一个整数，表示1出现的资料
-样例输入
-15
-样例输出
-8
-数据规模和约定
-　　n不超过30000
-*/
-#include &lt;algorithm&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-int cal(int n){
-	int sum=0;
-	while(n){
-		if(n%10==1){
-			sum++;
-		}
-		n/=10;
-	}
-	return sum;
-} 
-int main() {
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-	int sum=0;
-	for(int i=1;i&lt;=n;i++){
-		sum+=cal(i);
-	}
-	printf(&quot;%d&quot;,sum);
-    return 0;
+              <p>给你两个 非空 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
+<p>进阶：</p>
+<p>如果输入链表不能修改该如何处理？换句话说，你不能对列表中的节点进行翻转。</p>
+<p>示例：</p>
+<p>输入：(7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
+输出：7 -&gt; 8 -&gt; 0 -&gt; 7</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode t = new ListNode(0);
+        Stack&lt;Integer&gt; s1 = new Stack&lt;&gt;();
+        Stack&lt;Integer&gt; s2 = new Stack&lt;&gt;();
+        while(l1!=null){
+            s1.push(l1.val);
+            l1 = l1.next;
+        }
+        while(l2!=null){
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+        Stack&lt;Integer&gt; ans = new Stack&lt;&gt;();
+        int j=0;
+        while(!s1.empty()&amp;&amp;!s2.empty()){
+            int a = s1.pop()+s2.pop()+j;
+            
+            j = a/10;
+            a = a%10;
+        
+            ans.push(a);
+        }
+        if(s1.empty()){
+            s1 = s2;
+        }
+        while(!s1.empty()){
+            int a = s1.pop() + j;
+            
+            j = a/10;
+            a = a%10;
+            
+            ans.push(a);
+        }
+        if(j&gt;0){
+            ans.push(j);
+        }
+        ListNode tmp = t;
+        while(!ans.empty()){
+            tmp.next = new ListNode(ans.pop());
+            tmp = tmp.next;
+        }
+        return t.next;
+    }
 }
 </code></pre>
-<h3 id="水题刷着好开心啊o-̄-̄ブ">水题刷着好开心啊o(<em>￣▽￣</em>)ブ</h3>
+<p>主要用到栈和链表，栈判断是非为空用empty（） 这是之前没有记清楚的地方<br>
+栈相关函数 pop() peek() push()</p>
 
             </div>
           </article>
@@ -145,9 +165,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-er-jin-zhi-shu-shu/">
+              <a href="https://oneseek.github.io/post/1124-biao-xian-liang-hao-de-zui-chang-shi-jian-duan/">
                 <h3 class="post-title">
-                  算法训练-二进制数数
+                  1124. 表现良好的最长时间段
                 </h3>
               </a>
             </div>
@@ -190,17 +210,17 @@ int main() {
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge success">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge success">
+        class="badge secondary">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge warning">
+        class="badge secondary">
         java
       </a>
       
@@ -210,17 +230,17 @@ int main() {
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge warning">
+        class="badge ">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge ">
+        class="badge secondary">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge ">
+        class="badge warning">
         Gridea
       </a>
       
