@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>spring implement HandlerInterceptor 接口 实现权限管理 | OneSeek</title>
+<title>542. 01 矩阵 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,17 +81,95 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>spring implement HandlerInterceptor 接口 实现权限管理</h1>
+            <h1>542. 01 矩阵</h1>
             <p class="article-meta">
-              2020-03-31
+              2020-04-16
+              
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge warning">
+                  leetcode
+                </a>
               
             </p>
             
             <div class="post-content">
-              <p>先写一个类实现 HandlerInterceptor<br>
-重写 preHandle函数 保存 request 的 user session对象 然后 sendRedirect重定向到登陆界面</p>
-<h3 id="role判断">role判断</h3>
-<p>定义一个type 从前台传送到后台 判断type后 验证用户密码</p>
+              <p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
+<p>两个相邻元素间的距离为 1 。</p>
+<p>示例 1:<br>
+输入:</p>
+<p>0 0 0<br>
+0 1 0<br>
+0 0 0<br>
+输出:</p>
+<p>0 0 0<br>
+0 1 0<br>
+0 0 0<br>
+示例 2:<br>
+输入:</p>
+<p>0 0 0<br>
+0 1 0<br>
+1 1 1<br>
+输出:</p>
+<p>0 0 0<br>
+0 1 0<br>
+1 2 1<br>
+注意:</p>
+<p>给定矩阵的元素个数不超过 10000。<br>
+给定矩阵中至少有一个元素是 0。<br>
+矩阵中的元素只在四个方向上相邻: 上、下、左、右。</p>
+<p>超时了，明天再看看正确答案吧</p>
+<pre><code>class Solution {
+    public int[][] updateMatrix(int[][] matrix) {
+        int [][] matrix01 = new int[matrix.length][matrix[0].length];
+
+        for(int i=0;i&lt;matrix.length;i++){
+            for(int j=0;j&lt;matrix[0].length;j++){
+                matrix01[i][j]=Integer.MAX_VALUE;
+            }
+        }
+        for(int i=0;i&lt;matrix.length;i++){
+            for(int j=0;j&lt;matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    matrix01[i][j]=0;
+                    min(i, j, matrix01);
+                }
+            }
+        }
+
+        return matrix01;
+    }
+
+    public void min(int i,int j,int[][] matri01){
+        if(i&gt;0){
+            if(matri01[i-1][j]&gt;matri01[i][j]+1){
+                matri01[i-1][j] = matri01[i][j]+1;
+                min(i-1, j, matri01);
+            }
+        }
+        if(j&gt;0){
+            if(matri01[i][j-1]&gt;matri01[i][j]+1){
+                matri01[i][j-1] = matri01[i][j]+1;
+                min(i, j-1, matri01);
+            }
+        }
+        if(i+1&lt;matri01.length){
+            if(matri01[i+1][j]&gt;matri01[i][j]+1){
+                matri01[i+1][j] = matri01[i][j]+1;
+                min(i+1, j, matri01);
+            }
+        }
+        if(j+1&lt;matri01[0].length){
+            if(matri01[i][j+1]&gt;matri01[i][j]+1){
+                matri01[i][j+1] = matri01[i][j]+1;
+                min(i, j+1, matri01);
+            }
+        }
+    }
+}
+
+/* 0 0 0 
+   0 1 0
+   1 1 1*/
+</code></pre>
 
             </div>
           </article>
@@ -102,9 +180,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/nio-shi-xian-jian-dan-fu-wu-qi/">
+              <a href="https://oneseek.github.io/post/yi-qing-di-tu-zai-xian-xun-lian-ying/">
                 <h3 class="post-title">
-                  NIO实现简单服务器
+                  疫情地图在线训练营
                 </h3>
               </a>
             </div>
@@ -147,32 +225,32 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge success">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/J4vkU3JNI/"
-        class="badge warning">
+        class="badge secondary">
         小项目
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge secondary">
+        class="badge ">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge secondary">
+        class="badge ">
         java
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge warning">
+        class="badge secondary">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge ">
+        class="badge warning">
         nginx
       </a>
       
@@ -182,7 +260,7 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge ">
+        class="badge secondary">
         Gridea
       </a>
       
