@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-16T08:07:35.860Z</updated>
+    <updated>2020-04-16T10:31:40.264Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[Spring AOP]]></title>
+        <id>https://oneseek.github.io/post/spring-aop/</id>
+        <link href="https://oneseek.github.io/post/spring-aop/">
+        </link>
+        <updated>2020-04-16T08:08:11.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="官方文档摘抄">官方文档摘抄</h1>
+<p>使用 Java Configuration 启用 @AspectJ 支持<br>
+要使用 Java @Configuration启用 @AspectJ 支持，请添加@EnableAspectJAutoProxy annotation，如下面的 example 所示：</p>
+<pre><code>@Configuration
+@EnableAspectJAutoProxy
+public class AppConfig {
+
+}
+</code></pre>
+<p>使用 XML Configuration 启用 @AspectJ 支持<br>
+要使用 XML-based configuration 启用 @AspectJ 支持，请使用aop:aspectj-autoproxy元素，如下面的 example 所示：</p>
+<pre><code>&lt;aop:aspectj-autoproxy/&gt;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[542. 01 矩阵]]></title>
         <id>https://oneseek.github.io/post/542-01-ju-zhen/</id>
@@ -97,47 +118,43 @@
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[疫情地图在线训练营]]></title>
-        <id>https://oneseek.github.io/post/yi-qing-di-tu-zai-xian-xun-lian-ying/</id>
-        <link href="https://oneseek.github.io/post/yi-qing-di-tu-zai-xian-xun-lian-ying/">
+        <title type="html"><![CDATA[公众号疫情地图在线训练营]]></title>
+        <id>https://oneseek.github.io/post/gong-zhong-hao-yi-qing-di-tu-zai-xian-xun-lian-ying/</id>
+        <link href="https://oneseek.github.io/post/gong-zhong-hao-yi-qing-di-tu-zai-xian-xun-lian-ying/">
         </link>
-        <updated>2020-04-15T13:01:41.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="day01">Day01</h1>
-<p>关机小程序<br>
+        <updated>2020-04-15T08:09:56.000Z</updated>
+        <content type="html"><![CDATA[<p>Day01<br>
+关机小程序<br>
 自动关机</p>
 <p>取消自动关机</p>
-<pre><code>import java.io.IOException;
-import java.util.Scanner;
-
-public class Demo1 {
-
-   public static void main(String[] args) throws IOException{
-   	// TODO Auto-generated method stub
-   	while(true) {
-   		Scanner scanner = new Scanner(System.in);
-   		System.out.println(&quot;关机请输入:1, \t取消关机请输入:2, \t退出请输入3!&quot;);
-   		System.out.println(&quot;****************************************************&quot;);
-   		String select = scanner.next();
-   		if(select.equals(&quot;1&quot;)) {
-   			System.out.println(&quot;请输入关机秒数，例如3600:&quot;);
-   			String time = scanner.next();
-   			Runtime.getRuntime().exec(&quot;shutdown -s -t &quot;+time);
-   			//System.out.println(&quot;shutdown -s -t &quot;+time);
-   			System.out.println(time+&quot;秒后关机&quot;);
-   		}else if(select.equals(&quot;2&quot;)) {
-   			Runtime.getRuntime().exec(&quot;shutdown -a&quot;);
-   			System.out.println(&quot;已取消关机\n&quot;);
-   		}else if(select.equals(&quot;3&quot;)){
-   			break;
-   		}else {
-   			System.out.println(&quot;输入错误，请重新输入！&quot;);
-   		}
-   	}
-   }
-
-}
-</code></pre>
-<p>Day02<br>
+<p>import java.io.IOException;<br>
+import java.util.Scanner;</p>
+<p>public class Demo1 {</p>
+<p>public static void main(String[] args) throws IOException{<br>
+// TODO Auto-generated method stub<br>
+while(true) {<br>
+Scanner scanner = new Scanner(System.in);<br>
+System.out.println(&quot;关机请输入:1, \t取消关机请输入:2, \t退出请输入3!&quot;);<br>
+System.out.println(&quot;****************************************************&quot;);<br>
+String select = scanner.next();<br>
+if(select.equals(&quot;1&quot;)) {<br>
+System.out.println(&quot;请输入关机秒数，例如3600:&quot;);<br>
+String time = scanner.next();<br>
+Runtime.getRuntime().exec(&quot;shutdown -s -t &quot;+time);<br>
+//System.out.println(&quot;shutdown -s -t &quot;+time);<br>
+System.out.println(time+&quot;秒后关机&quot;);<br>
+}else if(select.equals(&quot;2&quot;)) {<br>
+Runtime.getRuntime().exec(&quot;shutdown -a&quot;);<br>
+System.out.println(&quot;已取消关机\n&quot;);<br>
+}else if(select.equals(&quot;3&quot;)){<br>
+break;<br>
+}else {<br>
+System.out.println(&quot;输入错误，请重新输入！&quot;);<br>
+}<br>
+}<br>
+}</p>
+<p>}<br>
+Day02<br>
 今日任务：验证码短信发送<br>
 任务线索：<br>
 1、URL类（URL、URLConnection、参数传递、编码处理 ）<br>
@@ -145,36 +162,33 @@ public class Demo1 {
 3、短信API（发送短信并获取短信发送结果）<br>
 4、疫情数据分析与读取（百度、网易、腾讯、丁香园等疫情数据分析与读取）</p>
 <p>主要代码</p>
-<pre><code>import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-public class Demo {
-
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		String code = URLEncoder.encode(&quot;恭喜你，作业已完成！验证码是：你好。如非本人操作，请忽略本短信【开课吧新职课】&quot;, &quot;UTF-8&quot;);
-		
-		//1.	创建一个网址对象
-		URL url = new URL(&quot;http://api.jisuapi.com/sms/send?appkey=5701500bf5e5e1df&amp;mobile=手机号&amp;content=&quot;+code);
-		//2.	通过网址对象打开网络连接, 并得到连接对象
-		URLConnection conn = url.openConnection();
-		//3.	通过连接对象 获取用于读取页面内容的 输入流 ( 字节流 ) 
-		InputStream is = conn.getInputStream();
-		//4.	将上述的字节流 装饰为 字符流 , 并为字符流添加缓冲,使其可以一次读取一行文本内容
-		BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
-		//5.	通过上述的br , 读取一行文字内容.并将内容赋值给变量text
-		String text = br.readLine();
-		System.out.println(text);
-	}
-
+<p>import java.io.BufferedReader;<br>
+import java.io.IOException;<br>
+import java.io.InputStream;<br>
+import java.io.InputStreamReader;<br>
+import java.net.URL;<br>
+import java.net.URLConnection;<br>
+import java.net.URLEncoder;</p>
+<p>public class Demo {</p>
+<pre><code>public static void main(String[] args) throws IOException {
+	// TODO Auto-generated method stub
+	String code = URLEncoder.encode(&quot;恭喜你，作业已完成！验证码是：你好。如非本人操作，请忽略本短信【开课吧新职课】&quot;, &quot;UTF-8&quot;);
+	
+	//1.	创建一个网址对象
+	URL url = new URL(&quot;http://api.jisuapi.com/sms/send?appkey=5701500bf5e5e1df&amp;mobile=手机号&amp;content=&quot;+code);
+	//2.	通过网址对象打开网络连接, 并得到连接对象
+	URLConnection conn = url.openConnection();
+	//3.	通过连接对象 获取用于读取页面内容的 输入流 ( 字节流 ) 
+	InputStream is = conn.getInputStream();
+	//4.	将上述的字节流 装饰为 字符流 , 并为字符流添加缓冲,使其可以一次读取一行文本内容
+	BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
+	//5.	通过上述的br , 读取一行文字内容.并将内容赋值给变量text
+	String text = br.readLine();
+	System.out.println(text);
 }
 </code></pre>
-<p>Day03<br>
+<p>}<br>
+Day03<br>
 今日任务：疫情地图绘制</p>
 <p>任务线索：<br>
 1、B\S程序（Tomcat搭建、JSP使用等 ）部署<br>
@@ -182,116 +196,19 @@ public class Demo {
 3、架构优化（为适应高并发场景进行优化）<br>
 4、部署上线（部署至阿里云并添加公众号入口）<br>
 主要代码</p>
-<pre><code>&lt;%!
-String text;
-long time = 0; %&gt;
-&lt;%
-    if(System.currentTimeMillis()-time&gt;60000){
-        time = System.currentTimeMillis();
-        URL url = new URL(&quot;http://zaixianke.com/yq/info?today&quot;);
-        URLConnection conn = url.openConnection();
-        InputStream is = conn.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
-        text = br.readLine(); 
-    }
-%&gt;
-</code></pre>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="day01">Day01</h1>
-<p>关机小程序<br>
-自动关机</p>
-<p>取消自动关机</p>
-<pre><code>import java.io.IOException;
-import java.util.Scanner;
-
-public class Demo1 {
-
-   public static void main(String[] args) throws IOException{
-   	// TODO Auto-generated method stub
-   	while(true) {
-   		Scanner scanner = new Scanner(System.in);
-   		System.out.println(&quot;关机请输入:1, \t取消关机请输入:2, \t退出请输入3!&quot;);
-   		System.out.println(&quot;****************************************************&quot;);
-   		String select = scanner.next();
-   		if(select.equals(&quot;1&quot;)) {
-   			System.out.println(&quot;请输入关机秒数，例如3600:&quot;);
-   			String time = scanner.next();
-   			Runtime.getRuntime().exec(&quot;shutdown -s -t &quot;+time);
-   			//System.out.println(&quot;shutdown -s -t &quot;+time);
-   			System.out.println(time+&quot;秒后关机&quot;);
-   		}else if(select.equals(&quot;2&quot;)) {
-   			Runtime.getRuntime().exec(&quot;shutdown -a&quot;);
-   			System.out.println(&quot;已取消关机\n&quot;);
-   		}else if(select.equals(&quot;3&quot;)){
-   			break;
-   		}else {
-   			System.out.println(&quot;输入错误，请重新输入！&quot;);
-   		}
-   	}
-   }
-
-}
-</code></pre>
-<p>Day02<br>
-今日任务：验证码短信发送<br>
-任务线索：<br>
-1、URL类（URL、URLConnection、参数传递、编码处理 ）<br>
-2、字符读取（编码处理、读取并显示结果 ）<br>
-3、短信API（发送短信并获取短信发送结果）<br>
-4、疫情数据分析与读取（百度、网易、腾讯、丁香园等疫情数据分析与读取）</p>
-<p>主要代码</p>
-<pre><code>import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-public class Demo {
-
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		String code = URLEncoder.encode(&quot;恭喜你，作业已完成！验证码是：你好。如非本人操作，请忽略本短信【开课吧新职课】&quot;, &quot;UTF-8&quot;);
-		
-		//1.	创建一个网址对象
-		URL url = new URL(&quot;http://api.jisuapi.com/sms/send?appkey=5701500bf5e5e1df&amp;mobile=手机号&amp;content=&quot;+code);
-		//2.	通过网址对象打开网络连接, 并得到连接对象
-		URLConnection conn = url.openConnection();
-		//3.	通过连接对象 获取用于读取页面内容的 输入流 ( 字节流 ) 
-		InputStream is = conn.getInputStream();
-		//4.	将上述的字节流 装饰为 字符流 , 并为字符流添加缓冲,使其可以一次读取一行文本内容
-		BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
-		//5.	通过上述的br , 读取一行文字内容.并将内容赋值给变量text
-		String text = br.readLine();
-		System.out.println(text);
-	}
-
-}
-</code></pre>
-<p>Day03<br>
-今日任务：疫情地图绘制</p>
-<p>任务线索：<br>
-1、B\S程序（Tomcat搭建、JSP使用等 ）部署<br>
-2、ECharts（引入ECharts和地图绘制等）<br>
-3、架构优化（为适应高并发场景进行优化）<br>
-4、部署上线（部署至阿里云并添加公众号入口）<br>
-主要代码</p>
-<pre><code>&lt;%!
-String text;
-long time = 0; %&gt;
-&lt;%
-    if(System.currentTimeMillis()-time&gt;60000){
-        time = System.currentTimeMillis();
-        URL url = new URL(&quot;http://zaixianke.com/yq/info?today&quot;);
-        URLConnection conn = url.openConnection();
-        InputStream is = conn.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
-        text = br.readLine(); 
-    }
-%&gt;
-</code></pre>
-<!-- more -->
+<p>&lt;%!<br>
+String text;<br>
+long time = 0; %&gt;<br>
+&lt;%<br>
+if(System.currentTimeMillis()-time&gt;60000){<br>
+time = System.currentTimeMillis();<br>
+URL url = new URL(&quot;http://zaixianke.com/yq/info?today&quot;);<br>
+URLConnection conn = url.openConnection();<br>
+InputStream is = conn.getInputStream();<br>
+BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));<br>
+text = br.readLine();<br>
+}<br>
+%&gt;</p>
 ]]></content>
     </entry>
     <entry>
@@ -438,40 +355,6 @@ class Solution {
         int l = leftJudge(arr1);
     
         return r&gt;l?r:l;
-    }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[217. 存在重复元素]]></title>
-        <id>https://oneseek.github.io/post/217-cun-zai-chong-fu-yuan-su/</id>
-        <link href="https://oneseek.github.io/post/217-cun-zai-chong-fu-yuan-su/">
-        </link>
-        <updated>2020-04-12T13:34:17.000Z</updated>
-        <content type="html"><![CDATA[<p>给定一个整数数组，判断是否存在重复元素。</p>
-<p>如果任意一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p>
-<p>示例 1:</p>
-<p>输入: [1,2,3,1]<br>
-输出: true<br>
-示例 2:</p>
-<p>输入: [1,2,3,4]<br>
-输出: false<br>
-示例 3:</p>
-<p>输入: [1,1,1,3,3,4,3,2,4,2]<br>
-输出: true</p>
-<pre><code>class Solution {
-    public boolean containsDuplicate(int[] nums) {
-        Map&lt;Integer,Integer&gt; map = new HashMap&lt;Integer,Integer&gt;();
-        
-        for(int i=0;i&lt;nums.length;i++){
-            if(map.get(nums[i])!=null){
-                return true;
-            }else{
-                map.put(nums[i],1);
-            }
-        }
-        return false;
     }
 }
 </code></pre>
