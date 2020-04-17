@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-16T10:31:40.264Z</updated>
+    <updated>2020-04-17T12:36:48.158Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[idea maven 资源文件加载不到classes]]></title>
+        <id>https://oneseek.github.io/post/idea-maven-zi-yuan-wen-jian-jia-zai-bu-dao-classes/</id>
+        <link href="https://oneseek.github.io/post/idea-maven-zi-yuan-wen-jian-jia-zai-bu-dao-classes/">
+        </link>
+        <updated>2020-04-17T08:48:13.000Z</updated>
+        <content type="html"><![CDATA[<p>没找到原因 有人说试idea的bug<br>
+解决方法：1、手动复制<br>
+2、删除iml文件中的 <code>org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule=&quot;true&quot;</code></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Spring AOP]]></title>
         <id>https://oneseek.github.io/post/spring-aop/</id>
@@ -280,84 +291,6 @@ class Solution {
 </code></pre>
 <p>主要用到栈和链表，栈判断是非为空用empty（） 这是之前没有记清楚的地方<br>
 栈相关函数 pop() peek() push()</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1124. 表现良好的最长时间段]]></title>
-        <id>https://oneseek.github.io/post/1124-biao-xian-liang-hao-de-zui-chang-shi-jian-duan/</id>
-        <link href="https://oneseek.github.io/post/1124-biao-xian-liang-hao-de-zui-chang-shi-jian-duan/">
-        </link>
-        <updated>2020-04-12T14:53:40.000Z</updated>
-        <content type="html"><![CDATA[<p>给你一份工作时间表 hours，上面记录着某一位员工每天的工作小时数。</p>
-<p>我们认为当员工一天中的工作小时数大于 8 小时的时候，那么这一天就是「劳累的一天」。</p>
-<p>所谓「表现良好的时间段」，意味在这段时间内，「劳累的天数」是严格 大于「不劳累的天数」。</p>
-<p>请你返回「表现良好时间段」的最大长度。</p>
-<p>示例 1：</p>
-<p>输入：hours = [9,9,6,0,6,6,9]<br>
-输出：3<br>
-解释：最长的表现良好时间段是 [9,9,6]。</p>
-<p>提示：</p>
-<p>1 &lt;= hours.length &lt;= 10000<br>
-0 &lt;= hours[i] &lt;= 16</p>
-<p>超时</p>
-<pre><code>class Solution {
-    public int longestWPI(int[] hours) {
-        if(hours.length==0){
-            return 0;
-        }
-        if(judge(hours)){
-            return hours.length;
-        }
-        int r = rightJudge(hours);
-        int l = leftJudge(hours);
-
-        return r &gt; l ? r : l;
-    }
-
-    public boolean judge(int[] hours) {
-        int a = 0, b = 0;
-        for (int i : hours) {
-            if (i &gt; 8) {
-                a++;
-            } else {
-                b++;
-            }
-        }
-        return a &gt; b ? true : false;
-    }
-
-    public int leftJudge(int[] hours) {
-        if(hours.length==0){
-            return 0;
-        }
-        if(judge(hours)){
-            return hours.length;
-        }
-        int[] arr1 = new int[hours.length-1];
-        System.arraycopy(hours, 1, arr1, 0, hours.length-1);
-        int r = rightJudge(arr1);
-        int l = leftJudge(arr1);
-        
-        return r&gt;l?r:l;
-    }
-
-    public int rightJudge(int[] hours) {
-        if(hours.length==0){
-            return 0;
-        }
-        
-        if(judge(hours)){
-            return hours.length;
-        }
-        int[] arr1 = new int[hours.length-1];
-        System.arraycopy(hours, 0, arr1, 0, hours.length-1);
-        int r = rightJudge(arr1);
-        int l = leftJudge(arr1);
-    
-        return r&gt;l?r:l;
-    }
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
