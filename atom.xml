@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-18T09:44:09.205Z</updated>
+    <updated>2020-04-18T14:23:57.518Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,117 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[25. K 个一组翻转链表]]></title>
+        <id>https://oneseek.github.io/post/25-k-ge-yi-zu-fan-zhuan-lian-biao/</id>
+        <link href="https://oneseek.github.io/post/25-k-ge-yi-zu-fan-zhuan-lian-biao/">
+        </link>
+        <updated>2020-04-18T13:46:23.000Z</updated>
+        <content type="html"><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。<br>
+k 是一个正整数，它的值小于或等于链表的长度。<br>
+如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
+<p>示例：<br>
+给你这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5<br>
+当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5<br>
+当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</p>
+<p>说明：<br>
+你的算法只能使用常数的额外空间。<br>
+你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。<br>
+来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/reverse-nodes-in-k-group<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。<br>
+/**</p>
+<ul>
+<li>Definition for singly-linked list.</li>
+<li>public class ListNode {</li>
+<li>
+<pre><code>int val;
+</code></pre>
+</li>
+<li>
+<pre><code>ListNode next;
+</code></pre>
+</li>
+<li>
+<pre><code>ListNode(int x) { val = x; }
+</code></pre>
+</li>
+<li>}<br>
+*/</li>
+</ul>
+<pre><code>class Solution {
+   public ListNode reverseKGroup(ListNode head, int k) {
+       ListNode tail = head;
+       for (int i = 0; i &lt; k; i++) {
+           //剩余数量小于k的话，则不需要反转。
+           if (tail == null) {
+               return head;
+           }
+           tail = tail.next;
+       }
+       ListNode newHead = reverseK(head, k);
+       head.next = reverseKGroup(tail, k);
+       
+       return newHead;
+   }
+   public ListNode reverseK(ListNode head, int k) {
+       ListNode prev = null;
+       ListNode curr = head;
+       ListNode next = null;
+       while(curr!=null&amp;&amp;k--&gt;0){
+           next = curr.next;
+           curr.next = prev;
+           prev = curr;
+           curr = next;
+       }
+       return prev;
+   }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[242. 有效的字母异位词]]></title>
+        <id>https://oneseek.github.io/post/242-you-xiao-de-zi-mu-yi-wei-ci/</id>
+        <link href="https://oneseek.github.io/post/242-you-xiao-de-zi-mu-yi-wei-ci/">
+        </link>
+        <updated>2020-04-18T13:45:40.000Z</updated>
+        <content type="html"><![CDATA[<p>简单题<br>
+给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。<br>
+示例 1:<br>
+输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;<br>
+输出: true<br>
+示例 2:<br>
+输入: s = &quot;rat&quot;, t = &quot;car&quot;<br>
+输出: false<br>
+说明:<br>
+你可以假设字符串只包含小写字母。<br>
+进阶:<br>
+如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>
+来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/valid-anagram<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<pre><code>class Solution {
+    public boolean isAnagram(String s, String t) {
+        int[] arr1 = new int[26];
+        int[] arr2 = new int[26];
+        for (char i : s.toCharArray()) {
+            arr1[(int)i-97]++;
+        }
+        for (char i : t.toCharArray()) {
+            arr2[(int)i-97]++;
+        }
+        for(int i=0;i&lt;26;i++){
+            if(arr1[i]!=arr2[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[idea maven 资源文件加载不到classes]]></title>
         <id>https://oneseek.github.io/post/idea-maven-zi-yuan-wen-jian-jia-zai-bu-dao-classes/</id>
@@ -126,171 +237,6 @@ public class AppConfig {
    0 1 0
    1 1 1*/
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[公众号疫情地图在线训练营]]></title>
-        <id>https://oneseek.github.io/post/gong-zhong-hao-yi-qing-di-tu-zai-xian-xun-lian-ying/</id>
-        <link href="https://oneseek.github.io/post/gong-zhong-hao-yi-qing-di-tu-zai-xian-xun-lian-ying/">
-        </link>
-        <updated>2020-04-15T08:09:56.000Z</updated>
-        <content type="html"><![CDATA[<p>Day01<br>
-关机小程序<br>
-自动关机</p>
-<p>取消自动关机</p>
-<p>import java.io.IOException;<br>
-import java.util.Scanner;</p>
-<p>public class Demo1 {</p>
-<p>public static void main(String[] args) throws IOException{<br>
-// TODO Auto-generated method stub<br>
-while(true) {<br>
-Scanner scanner = new Scanner(System.in);<br>
-System.out.println(&quot;关机请输入:1, \t取消关机请输入:2, \t退出请输入3!&quot;);<br>
-System.out.println(&quot;****************************************************&quot;);<br>
-String select = scanner.next();<br>
-if(select.equals(&quot;1&quot;)) {<br>
-System.out.println(&quot;请输入关机秒数，例如3600:&quot;);<br>
-String time = scanner.next();<br>
-Runtime.getRuntime().exec(&quot;shutdown -s -t &quot;+time);<br>
-//System.out.println(&quot;shutdown -s -t &quot;+time);<br>
-System.out.println(time+&quot;秒后关机&quot;);<br>
-}else if(select.equals(&quot;2&quot;)) {<br>
-Runtime.getRuntime().exec(&quot;shutdown -a&quot;);<br>
-System.out.println(&quot;已取消关机\n&quot;);<br>
-}else if(select.equals(&quot;3&quot;)){<br>
-break;<br>
-}else {<br>
-System.out.println(&quot;输入错误，请重新输入！&quot;);<br>
-}<br>
-}<br>
-}</p>
-<p>}<br>
-Day02<br>
-今日任务：验证码短信发送<br>
-任务线索：<br>
-1、URL类（URL、URLConnection、参数传递、编码处理 ）<br>
-2、字符读取（编码处理、读取并显示结果 ）<br>
-3、短信API（发送短信并获取短信发送结果）<br>
-4、疫情数据分析与读取（百度、网易、腾讯、丁香园等疫情数据分析与读取）</p>
-<p>主要代码</p>
-<p>import java.io.BufferedReader;<br>
-import java.io.IOException;<br>
-import java.io.InputStream;<br>
-import java.io.InputStreamReader;<br>
-import java.net.URL;<br>
-import java.net.URLConnection;<br>
-import java.net.URLEncoder;</p>
-<p>public class Demo {</p>
-<pre><code>public static void main(String[] args) throws IOException {
-	// TODO Auto-generated method stub
-	String code = URLEncoder.encode(&quot;恭喜你，作业已完成！验证码是：你好。如非本人操作，请忽略本短信【开课吧新职课】&quot;, &quot;UTF-8&quot;);
-	
-	//1.	创建一个网址对象
-	URL url = new URL(&quot;http://api.jisuapi.com/sms/send?appkey=5701500bf5e5e1df&amp;mobile=手机号&amp;content=&quot;+code);
-	//2.	通过网址对象打开网络连接, 并得到连接对象
-	URLConnection conn = url.openConnection();
-	//3.	通过连接对象 获取用于读取页面内容的 输入流 ( 字节流 ) 
-	InputStream is = conn.getInputStream();
-	//4.	将上述的字节流 装饰为 字符流 , 并为字符流添加缓冲,使其可以一次读取一行文本内容
-	BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));
-	//5.	通过上述的br , 读取一行文字内容.并将内容赋值给变量text
-	String text = br.readLine();
-	System.out.println(text);
-}
-</code></pre>
-<p>}<br>
-Day03<br>
-今日任务：疫情地图绘制</p>
-<p>任务线索：<br>
-1、B\S程序（Tomcat搭建、JSP使用等 ）部署<br>
-2、ECharts（引入ECharts和地图绘制等）<br>
-3、架构优化（为适应高并发场景进行优化）<br>
-4、部署上线（部署至阿里云并添加公众号入口）<br>
-主要代码</p>
-<p>&lt;%!<br>
-String text;<br>
-long time = 0; %&gt;<br>
-&lt;%<br>
-if(System.currentTimeMillis()-time&gt;60000){<br>
-time = System.currentTimeMillis();<br>
-URL url = new URL(&quot;http://zaixianke.com/yq/info?today&quot;);<br>
-URLConnection conn = url.openConnection();<br>
-InputStream is = conn.getInputStream();<br>
-BufferedReader br = new BufferedReader(new InputStreamReader(is,&quot;UTF-8&quot;));<br>
-text = br.readLine();<br>
-}<br>
-%&gt;</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[445. 两数相加 II]]></title>
-        <id>https://oneseek.github.io/post/445-liang-shu-xiang-jia-ii/</id>
-        <link href="https://oneseek.github.io/post/445-liang-shu-xiang-jia-ii/">
-        </link>
-        <updated>2020-04-14T14:54:13.000Z</updated>
-        <content type="html"><![CDATA[<p>给你两个 非空 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。</p>
-<p>你可以假设除了数字 0 之外，这两个数字都不会以零开头。</p>
-<p>进阶：</p>
-<p>如果输入链表不能修改该如何处理？换句话说，你不能对列表中的节点进行翻转。</p>
-<p>示例：</p>
-<p>输入：(7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
-输出：7 -&gt; 8 -&gt; 0 -&gt; 7</p>
-<pre><code>/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode t = new ListNode(0);
-        Stack&lt;Integer&gt; s1 = new Stack&lt;&gt;();
-        Stack&lt;Integer&gt; s2 = new Stack&lt;&gt;();
-        while(l1!=null){
-            s1.push(l1.val);
-            l1 = l1.next;
-        }
-        while(l2!=null){
-            s2.push(l2.val);
-            l2 = l2.next;
-        }
-        Stack&lt;Integer&gt; ans = new Stack&lt;&gt;();
-        int j=0;
-        while(!s1.empty()&amp;&amp;!s2.empty()){
-            int a = s1.pop()+s2.pop()+j;
-            
-            j = a/10;
-            a = a%10;
-        
-            ans.push(a);
-        }
-        if(s1.empty()){
-            s1 = s2;
-        }
-        while(!s1.empty()){
-            int a = s1.pop() + j;
-            
-            j = a/10;
-            a = a%10;
-            
-            ans.push(a);
-        }
-        if(j&gt;0){
-            ans.push(j);
-        }
-        ListNode tmp = t;
-        while(!ans.empty()){
-            tmp.next = new ListNode(ans.pop());
-            tmp = tmp.next;
-        }
-        return t.next;
-    }
-}
-</code></pre>
-<p>主要用到栈和链表，栈判断是非为空用empty（） 这是之前没有记清楚的地方<br>
-栈相关函数 pop() peek() push()</p>
 ]]></content>
     </entry>
 </feed>
