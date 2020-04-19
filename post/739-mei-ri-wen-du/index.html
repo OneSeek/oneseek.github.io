@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>文章归档 | OneSeek</title>
+<title>739. 每日温度 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -76,129 +77,82 @@
   </div>
 </nav>
 
-    
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          
+          <article class="article">
+            <h1>739. 每日温度</h1>
+            <p class="article-meta">
+              2020-04-19
+              
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge ">
+                  leetcode
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>难度中等<br>
+根据每日 气温 列表，请重新生成一个列表，对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替。<br>
+例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。<br>
+提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。</p>
+<h1 id="暴力循环">暴力循环</h1>
+<pre><code>class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        int l = T.length;
+        int[] ans = new int[l];
+        for(int i=0;i&lt;l;i++){
+            int day=0;
+            for(int j=i+1;j&lt;l;j++){
+                day++;
+                if(T[j]&gt;T[i]){
+                    ans[i]=day;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h1 id="栈">栈</h1>
+<pre><code>class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        int l = T.length;
+        int[] ans = new int[l]; 
+        Stack&lt;Integer&gt; stack = new Stack(); // 存放下标
+        for(int i=0;i&lt;l;i++){
+            while(!stack.empty()&amp;&amp;T[i]&gt;T[stack.peek()]){ // 和栈顶比较比栈顶大就计算栈顶元素的结果 否则 将元素下标入栈
+                ans[stack.peek()]=i-stack.peek();
+                stack.pop();
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+}
+</code></pre>
 
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
-            
-              <h3 class="year" data-aos-delay="500">2020</h3>
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/suan-fa-xun-lian-jiao-huan-shui-~/">
-                      <h4 class="post-title">
-                        算法训练-交换(水~)
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/suan-fa-xun-lian-k-hao-shu/">
-                      <h4 class="post-title">
-                        算法训练-K好数
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/suan-fa-xun-lian-zui-duan-lu/">
-                      <h4 class="post-title">
-                        算法训练-最短路(BF)
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/shui-ti-da-xiao-xie-zhuan-huan/">
-                      <h4 class="post-title">
-                        水题-大小写转换
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/pei-zhi-gitalk/">
-                      <h4 class="post-title">
-                        配置gitalk
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/shi-liu-jin-zhi-zhuan-ba-jin-zhi/">
-                      <h4 class="post-title">
-                        十六进制转八进制
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/jie-cheng-ji-suan-gao-jing-du/">
-                      <h4 class="post-title">
-                        阶乘计算（高精度）
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-              
-            
-              <h3 class="year" data-aos-delay="500">2018</h3>
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-                  <article class="post">
-                    <a href="https://oneseek.github.io/post/hello-gridea/">
-                      <h4 class="post-title">
-                        Hello Gridea
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-            
-          </div>
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-    <a href="https://oneseek.github.io/archives/" class="paper-btn">
-      上一页
-    </a>
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/20-you-xiao-de-gua-hao/">
+                <h3 class="post-title">
+                  20. 有效的括号
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1587280905822" class="no-responsive avatar">
@@ -233,42 +187,42 @@
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge warning">
+        class="badge success">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/J4vkU3JNI/"
-        class="badge ">
+        class="badge secondary">
         小项目
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge warning">
+        class="badge secondary">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge secondary">
+        class="badge ">
         java
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge success">
+        class="badge secondary">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge secondary">
+        class="badge warning">
         nginx
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge secondary">
+        class="badge warning">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge secondary">
+        class="badge warning">
         Gridea
       </a>
       
@@ -446,6 +400,8 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
+    </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 

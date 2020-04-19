@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-18T14:23:57.518Z</updated>
+    <updated>2020-04-19T07:21:50.731Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,110 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[739. 每日温度]]></title>
+        <id>https://oneseek.github.io/post/739-mei-ri-wen-du/</id>
+        <link href="https://oneseek.github.io/post/739-mei-ri-wen-du/">
+        </link>
+        <updated>2020-04-19T07:21:09.000Z</updated>
+        <content type="html"><![CDATA[<p>难度中等<br>
+根据每日 气温 列表，请重新生成一个列表，对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替。<br>
+例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。<br>
+提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。</p>
+<h1 id="暴力循环">暴力循环</h1>
+<pre><code>class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        int l = T.length;
+        int[] ans = new int[l];
+        for(int i=0;i&lt;l;i++){
+            int day=0;
+            for(int j=i+1;j&lt;l;j++){
+                day++;
+                if(T[j]&gt;T[i]){
+                    ans[i]=day;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h1 id="栈">栈</h1>
+<pre><code>class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        int l = T.length;
+        int[] ans = new int[l]; 
+        Stack&lt;Integer&gt; stack = new Stack(); // 存放下标
+        for(int i=0;i&lt;l;i++){
+            while(!stack.empty()&amp;&amp;T[i]&gt;T[stack.peek()]){ // 和栈顶比较比栈顶大就计算栈顶元素的结果 否则 将元素下标入栈
+                ans[stack.peek()]=i-stack.peek();
+                stack.pop();
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[20. 有效的括号]]></title>
+        <id>https://oneseek.github.io/post/20-you-xiao-de-gua-hao/</id>
+        <link href="https://oneseek.github.io/post/20-you-xiao-de-gua-hao/">
+        </link>
+        <updated>2020-04-19T06:00:35.000Z</updated>
+        <content type="html"><![CDATA[<p>难度 简单<br>
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。<br>
+左括号必须以正确的顺序闭合。<br>
+注意空字符串可被认为是有效字符串。</p>
+<p>示例 1:</p>
+<p>输入: &quot;()&quot;<br>
+输出: true<br>
+示例 2:</p>
+<p>输入: &quot;()[]{}&quot;<br>
+输出: true<br>
+示例 3:</p>
+<p>输入: &quot;(]&quot;<br>
+输出: false<br>
+示例 4:</p>
+<p>输入: &quot;([)]&quot;<br>
+输出: false<br>
+示例 5:</p>
+<p>输入: &quot;{[]}&quot;<br>
+输出: true</p>
+<p>来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/valid-parentheses<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<pre><code>class Solution {
+    public boolean isValid(String s) {
+        Stack&lt;Character&gt; str = new Stack();
+        for(char c:s.toCharArray()){
+            if(!str.empty()&amp;&amp;inverse(str.peek(),c)){
+                str.pop();
+            }else{
+                str.push(c);
+            }
+        }
+        return str.empty();
+    }
+    public boolean inverse(char c1,char c2){
+        if(c2==')'){
+            return c1=='(';
+        }else if(c2==']'){
+            return c1=='[';
+        }else if(c2=='}'){
+            return c1=='{';
+        }
+        return false;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[25. K 个一组翻转链表]]></title>
         <id>https://oneseek.github.io/post/25-k-ge-yi-zu-fan-zhuan-lian-biao/</id>
@@ -130,113 +234,6 @@ k 是一个正整数，它的值小于或等于链表的长度。<br>
         <content type="html"><![CDATA[<p>没找到原因 有人说试idea的bug<br>
 解决方法：1、手动复制<br>
 2、删除iml文件中的 <code>org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule=&quot;true&quot;</code></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Spring AOP]]></title>
-        <id>https://oneseek.github.io/post/spring-aop/</id>
-        <link href="https://oneseek.github.io/post/spring-aop/">
-        </link>
-        <updated>2020-04-16T08:08:11.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="官方文档摘抄">官方文档摘抄</h1>
-<p>使用 Java Configuration 启用 @AspectJ 支持<br>
-要使用 Java @Configuration启用 @AspectJ 支持，请添加@EnableAspectJAutoProxy annotation，如下面的 example 所示：</p>
-<pre><code>@Configuration
-@EnableAspectJAutoProxy
-public class AppConfig {
-
-}
-</code></pre>
-<p>使用 XML Configuration 启用 @AspectJ 支持<br>
-要使用 XML-based configuration 启用 @AspectJ 支持，请使用aop:aspectj-autoproxy元素，如下面的 example 所示：</p>
-<pre><code>&lt;aop:aspectj-autoproxy/&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[542. 01 矩阵]]></title>
-        <id>https://oneseek.github.io/post/542-01-ju-zhen/</id>
-        <link href="https://oneseek.github.io/post/542-01-ju-zhen/">
-        </link>
-        <updated>2020-04-15T16:11:52.000Z</updated>
-        <content type="html"><![CDATA[<p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
-<p>两个相邻元素间的距离为 1 。</p>
-<p>示例 1:<br>
-输入:</p>
-<p>0 0 0<br>
-0 1 0<br>
-0 0 0<br>
-输出:</p>
-<p>0 0 0<br>
-0 1 0<br>
-0 0 0<br>
-示例 2:<br>
-输入:</p>
-<p>0 0 0<br>
-0 1 0<br>
-1 1 1<br>
-输出:</p>
-<p>0 0 0<br>
-0 1 0<br>
-1 2 1<br>
-注意:</p>
-<p>给定矩阵的元素个数不超过 10000。<br>
-给定矩阵中至少有一个元素是 0。<br>
-矩阵中的元素只在四个方向上相邻: 上、下、左、右。</p>
-<p>超时了，明天再看看正确答案吧</p>
-<pre><code>class Solution {
-    public int[][] updateMatrix(int[][] matrix) {
-        int [][] matrix01 = new int[matrix.length][matrix[0].length];
-
-        for(int i=0;i&lt;matrix.length;i++){
-            for(int j=0;j&lt;matrix[0].length;j++){
-                matrix01[i][j]=Integer.MAX_VALUE;
-            }
-        }
-        for(int i=0;i&lt;matrix.length;i++){
-            for(int j=0;j&lt;matrix[0].length;j++){
-                if(matrix[i][j]==0){
-                    matrix01[i][j]=0;
-                    min(i, j, matrix01);
-                }
-            }
-        }
-
-        return matrix01;
-    }
-
-    public void min(int i,int j,int[][] matri01){
-        if(i&gt;0){
-            if(matri01[i-1][j]&gt;matri01[i][j]+1){
-                matri01[i-1][j] = matri01[i][j]+1;
-                min(i-1, j, matri01);
-            }
-        }
-        if(j&gt;0){
-            if(matri01[i][j-1]&gt;matri01[i][j]+1){
-                matri01[i][j-1] = matri01[i][j]+1;
-                min(i, j-1, matri01);
-            }
-        }
-        if(i+1&lt;matri01.length){
-            if(matri01[i+1][j]&gt;matri01[i][j]+1){
-                matri01[i+1][j] = matri01[i][j]+1;
-                min(i+1, j, matri01);
-            }
-        }
-        if(j+1&lt;matri01[0].length){
-            if(matri01[i][j+1]&gt;matri01[i][j]+1){
-                matri01[i][j+1] = matri01[i][j]+1;
-                min(i, j+1, matri01);
-            }
-        }
-    }
-}
-
-/* 0 0 0 
-   0 1 0
-   1 1 1*/
-</code></pre>
 ]]></content>
     </entry>
 </feed>
