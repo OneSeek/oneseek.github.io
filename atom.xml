@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-19T11:59:02.574Z</updated>
+    <updated>2020-04-20T08:57:18.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,64 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[91. 解码方法 难度中等]]></title>
+        <id>https://oneseek.github.io/post/91-jie-ma-fang-fa-nan-du-zhong-deng/</id>
+        <link href="https://oneseek.github.io/post/91-jie-ma-fang-fa-nan-du-zhong-deng/">
+        </link>
+        <updated>2020-04-20T08:56:40.000Z</updated>
+        <content type="html"><![CDATA[<p>一条包含字母 A-Z 的消息通过以下方式进行了编码：<br>
+'A' -&gt; 1<br>
+'B' -&gt; 2<br>
+...<br>
+'Z' -&gt; 26<br>
+给定一个只包含数字的非空字符串，请计算解码方法的总数。<br>
+示例 1:<br>
+输入: &quot;12&quot;<br>
+输出: 2<br>
+解释: 它可以解码为 &quot;AB&quot;（1 2）或者 &quot;L&quot;（12）。<br>
+示例 2:<br>
+输入: &quot;226&quot;<br>
+输出: 3<br>
+解释: 它可以解码为 &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), 或者 &quot;BBF&quot; (2 2 6) 。<br>
+来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/decode-ways<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<pre><code>class Solution {
+    public int numDecodings(String s) {
+        char[] c = s.toCharArray();
+    
+        int ans = decodings(c,c.length-1);
+        
+        return ans;
+    }
+    // 递归decodings(i) = decodings(i-1) + decoding(i-2)
+    public int decodings(char[] c,int i){
+        //特殊情况
+        if(c[0]=='0'){ //第一个不能是0
+            return 0;
+        }
+        if(i&gt;=2&amp;&amp;c[i]=='0'&amp;&amp;c[i-1]=='0'){//不能有连续两个0
+            return 0;
+        }
+        //边界 
+        if(i&lt;=0){
+            return 1;
+        }
+        // decodings(i) = decodings(i-1) + decoding(i-2)
+        int ans = 0;
+        if(c[i]!='0'){ // c[i]为0时,不计算decodings(i-1),直接算decodings(i-2)
+            ans = decodings(c, i-1);
+        }
+        if((c[i-1]=='2'&amp;&amp;c[i]&lt;'7')||c[i-1]=='1'){ // 计算decodings(i-2)
+            ans += decodings(c, i-2);
+        }
+        return ans;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[739. 每日温度]]></title>
         <id>https://oneseek.github.io/post/739-mei-ri-wen-du/</id>
@@ -223,17 +281,6 @@ k 是一个正整数，它的值小于或等于链表的长度。<br>
     }
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[idea maven 资源文件加载不到classes]]></title>
-        <id>https://oneseek.github.io/post/idea-maven-zi-yuan-wen-jian-jia-zai-bu-dao-classes/</id>
-        <link href="https://oneseek.github.io/post/idea-maven-zi-yuan-wen-jian-jia-zai-bu-dao-classes/">
-        </link>
-        <updated>2020-04-17T08:48:13.000Z</updated>
-        <content type="html"><![CDATA[<p>没找到原因 有人说试idea的bug<br>
-解决方法：1、手动复制<br>
-2、删除iml文件中的 <code>org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule=&quot;true&quot;</code></p>
 ]]></content>
     </entry>
 </feed>
