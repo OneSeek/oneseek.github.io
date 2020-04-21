@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>leetcode | OneSeek</title>
+<title>39. 组合总和 难度中等 | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://oneseek.github.io">OneSeek</a></h3>
@@ -79,140 +80,88 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: leetcode</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/1718-zui-duan-chao-chuan/">17.18. 最短超串</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-10
-      
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge secondary">
-          leetcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/1718-zui-duan-chao-chuan/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>39. 组合总和 难度中等</h1>
+            <p class="article-meta">
+              2020-04-21
+              
+                <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge warning">
+                  leetcode
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：</p>
+<p>所有数字（包括 target）都是正整数。<br>
+解集不能包含重复的组合。 <br>
+示例 1:</p>
+<p>输入: candidates = [2,3,6,7], target = 7,<br>
+所求解集为:<br>
+[<br>
+[7],<br>
+[2,2,3]<br>
+]<br>
+示例 2:</p>
+<p>输入: candidates = [2,3,5], target = 8,<br>
+所求解集为:<br>
+[<br>
+  [2,2,2,2],<br>
+  [2,3,3],<br>
+  [3,5]<br>
+]</p>
+<p>来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/combination-sum<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<pre><code>class Solution {
+    List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+    List&lt;Integer&gt; solution = new ArrayList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
+        backtrack(candidates,target,0);
+        return res;
+    }
+    void backtrack(int[] candidates, int target, int start) {
+        if (target &lt; 0) {
+            return;
+        }
+        if (target == 0) {
+            res.add(new ArrayList&lt;&gt;(solution)); // 要用一个new ArrayList&lt;&gt;() 否则之后的clear会清除 因为存的是数组引用
+        }
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/">leetcode 945. 使数组唯一的最小增量</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-08
-      
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge secondary">
-          leetcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/leetcode-945-shi-shu-zu-wei-yi-de-zui-xiao-zeng-liang/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+        for (int i = start; i &lt; candidates.length; i++) {
+            solution.add(candidates[i]);
+            backtrack(candidates, target - candidates[i], i);
+            if (solution.size() &gt; 0) {
+                solution.remove(solution.size() - 1); //回溯之后数组内 值也要匹配删除
+            }
+        }
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/dao-yu-shu-liang/">岛屿数量</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-05
-      
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge success">
-          leetcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/dao-yu-shu-liang/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+    }
+}
+</code></pre>
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-zhua-bu-kong-lian-shun/">leetcode-万万没想到之抓捕孔连顺</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-15
-      
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge warning">
-          leetcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-zhua-bu-kong-lian-shun/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-cong-ming-de-bian-ji/">leetcode-万万没想到之聪明的编辑</a>
-    </h2>
-    <p class="article-meta">
-      2020-03-15
-      
-        <a href="https://oneseek.github.io/tag/m6wZo8JrA/" class="badge ">
-          leetcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://oneseek.github.io/post/leetcode-wan-wan-mei-xiang-dao-zhi-cong-ming-de-bian-ji/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-    <a href="https://oneseek.github.io/tag/m6wZo8JrA/page/2/" class="paper-btn">
-      上一页
-    </a>
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://oneseek.github.io/post/91-jie-ma-fang-fa-nan-du-zhong-deng/">
+                <h3 class="post-title">
+                  91. 解码方法 难度中等
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://oneseek.github.io/images/avatar.png?v=1587459897612" class="no-responsive avatar">
@@ -252,17 +201,17 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/J4vkU3JNI/"
-        class="badge ">
+        class="badge secondary">
         小项目
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge ">
+        class="badge warning">
         Linux
       </a>
       
       <a href="https://oneseek.github.io/tag/xAZHCSswP/"
-        class="badge warning">
+        class="badge success">
         java
       </a>
       
@@ -277,12 +226,12 @@
       </a>
       
       <a href="https://oneseek.github.io/tag/8PavsPD1i/"
-        class="badge secondary">
+        class="badge ">
         SpringBoot
       </a>
       
       <a href="https://oneseek.github.io/tag/O0F7cPAMr/"
-        class="badge success">
+        class="badge secondary">
         Gridea
       </a>
       
@@ -464,6 +413,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oneseek.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

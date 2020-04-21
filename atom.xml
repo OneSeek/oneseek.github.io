@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-20T08:57:18.874Z</updated>
+    <updated>2020-04-21T09:05:03.856Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,63 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[39. 组合总和 难度中等]]></title>
+        <id>https://oneseek.github.io/post/39-zu-he-zong-he-nan-du-zhong-deng/</id>
+        <link href="https://oneseek.github.io/post/39-zu-he-zong-he-nan-du-zhong-deng/">
+        </link>
+        <updated>2020-04-21T09:03:02.000Z</updated>
+        <content type="html"><![CDATA[<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：</p>
+<p>所有数字（包括 target）都是正整数。<br>
+解集不能包含重复的组合。 <br>
+示例 1:</p>
+<p>输入: candidates = [2,3,6,7], target = 7,<br>
+所求解集为:<br>
+[<br>
+[7],<br>
+[2,2,3]<br>
+]<br>
+示例 2:</p>
+<p>输入: candidates = [2,3,5], target = 8,<br>
+所求解集为:<br>
+[<br>
+  [2,2,2,2],<br>
+  [2,3,3],<br>
+  [3,5]<br>
+]</p>
+<p>来源：力扣（LeetCode）<br>
+链接：https://leetcode-cn.com/problems/combination-sum<br>
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<pre><code>class Solution {
+    List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;();
+    List&lt;Integer&gt; solution = new ArrayList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; combinationSum(int[] candidates, int target) {
+        backtrack(candidates,target,0);
+        return res;
+    }
+    void backtrack(int[] candidates, int target, int start) {
+        if (target &lt; 0) {
+            return;
+        }
+        if (target == 0) {
+            res.add(new ArrayList&lt;&gt;(solution)); // 要用一个new ArrayList&lt;&gt;() 否则之后的clear会清除 因为存的是数组引用
+        }
+
+        for (int i = start; i &lt; candidates.length; i++) {
+            solution.add(candidates[i]);
+            backtrack(candidates, target - candidates[i], i);
+            if (solution.size() &gt; 0) {
+                solution.remove(solution.size() - 1); //回溯之后数组内 值也要匹配删除
+            }
+        }
+
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[91. 解码方法 难度中等]]></title>
         <id>https://oneseek.github.io/post/91-jie-ma-fang-fa-nan-du-zhong-deng/</id>
@@ -237,48 +294,6 @@ k 是一个正整数，它的值小于或等于链表的长度。<br>
        }
        return prev;
    }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[242. 有效的字母异位词]]></title>
-        <id>https://oneseek.github.io/post/242-you-xiao-de-zi-mu-yi-wei-ci/</id>
-        <link href="https://oneseek.github.io/post/242-you-xiao-de-zi-mu-yi-wei-ci/">
-        </link>
-        <updated>2020-04-18T13:45:40.000Z</updated>
-        <content type="html"><![CDATA[<p>简单题<br>
-给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。<br>
-示例 1:<br>
-输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;<br>
-输出: true<br>
-示例 2:<br>
-输入: s = &quot;rat&quot;, t = &quot;car&quot;<br>
-输出: false<br>
-说明:<br>
-你可以假设字符串只包含小写字母。<br>
-进阶:<br>
-如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？<br>
-来源：力扣（LeetCode）<br>
-链接：https://leetcode-cn.com/problems/valid-anagram<br>
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<pre><code>class Solution {
-    public boolean isAnagram(String s, String t) {
-        int[] arr1 = new int[26];
-        int[] arr2 = new int[26];
-        for (char i : s.toCharArray()) {
-            arr1[(int)i-97]++;
-        }
-        for (char i : t.toCharArray()) {
-            arr2[(int)i-97]++;
-        }
-        for(int i=0;i&lt;26;i++){
-            if(arr1[i]!=arr2[i]){
-                return false;
-            }
-        }
-        return true;
-    }
 }
 </code></pre>
 ]]></content>
