@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>算法训练-1的个数 | OneSeek</title>
+<title>逆波兰表达式求值(后序表达式) | OneSeek</title>
 <meta name="description" content="Be a coder who can change the world">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,60 +81,84 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>算法训练-1的个数</h1>
+            <h1>逆波兰表达式求值(后序表达式)</h1>
             <p class="article-meta">
-              2020-03-11
-              
-                <a href="https://oneseek.github.io/tag/OZH1_H07L/" class="badge ">
-                  蓝桥杯
-                </a>
+              2020-04-22
               
             </p>
             
             <div class="post-content">
-              <pre><code>/*
-试题 算法训练 1的个数
-  
-资源限制
-时间限制：1.0s   内存限制：256.0MB
-问题描述
-　　输入正整数n，判断从1到n之中，数字1一共要出现几次。例如1123这个数，则出现了两次1。例如15，那么从1到15之中，一共出现了8个1。
-输入格式
-　　一个正整数n
-输出格式
-　　一个整数，表示1出现的资料
-样例输入
-15
-样例输出
-8
-数据规模和约定
-　　n不超过30000
-*/
-#include &lt;algorithm&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstring&gt;
-int cal(int n){
-	int sum=0;
-	while(n){
-		if(n%10==1){
-			sum++;
-		}
-		n/=10;
-	}
-	return sum;
-} 
-int main() {
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-	int sum=0;
-	for(int i=1;i&lt;=n;i++){
-		sum+=cal(i);
-	}
-	printf(&quot;%d&quot;,sum);
-    return 0;
+              <p>逆波兰表达式求值(后序表达式)<br>
+根据逆波兰表示法，求表达式的值。</p>
+<p>有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
+<p>说明：</p>
+<p>整数除法只保留整数部分。<br>
+给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。<br>
+示例 1：</p>
+<p>输入: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]<br>
+输出: 9<br>
+解释: ((2 + 1) * 3) = 9<br>
+示例 2：</p>
+<p>输入: [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;]<br>
+输出: 6<br>
+解释: (4 + (13 / 5)) = 6<br>
+示例 3：</p>
+<p>输入: [&quot;10&quot;, &quot;6&quot;, &quot;9&quot;, &quot;3&quot;, &quot;+&quot;, &quot;-11&quot;, &quot;&quot;, &quot;/&quot;, &quot;&quot;, &quot;17&quot;, &quot;+&quot;, &quot;5&quot;, &quot;+&quot;]<br>
+输出: 22<br>
+解释:<br>
+((10 * (6 / ((9 + 3) * -11))) + 17) + 5<br>
+= ((10 * (6 / (12 * -11))) + 17) + 5<br>
+= ((10 * (6 / -132)) + 17) + 5<br>
+= ((10 * 0) + 17) + 5<br>
+= (0 + 17) + 5<br>
+= 17 + 5<br>
+= 22</p>
+<p>Copy</p>
+<pre><code>import java.util.Stack;
+
+class Solution {
+    // 后序
+    public int evalRPN(String[] tokens) {
+        Integer res = 0;
+        Stack&lt;String&gt; stack = new Stack&lt;&gt;();
+        for(String s: tokens){
+            if(&quot;+&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;+&quot;);
+                stack.push(res.toString());
+            }else if(&quot;-&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;-&quot;);
+                stack.push(res.toString());
+            }else if(&quot;*&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;*&quot;);
+                stack.push(res.toString());
+            }else if(&quot;/&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;/&quot;);
+                stack.push(res.toString());
+            }else{
+                res = Integer.parseInt(s);
+                stack.push(s);
+            }
+        }
+        return res;
+    }
+
+    public int cal(String sb, String sa, String c) {
+        int ans = 0;
+        int a = Integer.parseInt(sa);
+        int b = Integer.parseInt(sb);
+        if (c == &quot;+&quot;) {
+            ans = a + b;
+        } else if (c == &quot;-&quot;) {
+            ans = a - b;
+        } else if (c == &quot;*&quot;) {
+            ans = a * b;
+        } else if (c == &quot;/&quot;) {
+            ans = a / b;
+        }
+        return ans;
+    }
 }
 </code></pre>
-<h3 id="水题刷着好开心啊o-̄-̄ブ">水题刷着好开心啊o(<em>￣▽￣</em>)ブ</h3>
 
             </div>
           </article>
@@ -145,9 +169,9 @@ int main() {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://oneseek.github.io/post/suan-fa-xun-lian-er-jin-zhi-shu-shu/">
+              <a href="https://oneseek.github.io/post/39-zu-he-zong-he-nan-du-zhong-deng/">
                 <h3 class="post-title">
-                  算法训练-二进制数数
+                  39. 组合总和 难度中等
                 </h3>
               </a>
             </div>
@@ -190,17 +214,17 @@ int main() {
     <div class="row">
       
       <a href="https://oneseek.github.io/tag/m6wZo8JrA/"
-        class="badge warning">
+        class="badge secondary">
         leetcode
       </a>
       
       <a href="https://oneseek.github.io/tag/J4vkU3JNI/"
-        class="badge ">
+        class="badge success">
         小项目
       </a>
       
       <a href="https://oneseek.github.io/tag/W5YyrZHzs/"
-        class="badge ">
+        class="badge secondary">
         Linux
       </a>
       
@@ -210,12 +234,12 @@ int main() {
       </a>
       
       <a href="https://oneseek.github.io/tag/OZH1_H07L/"
-        class="badge warning">
+        class="badge ">
         蓝桥杯
       </a>
       
       <a href="https://oneseek.github.io/tag/7p4YZGo8w/"
-        class="badge secondary">
+        class="badge warning">
         nginx
       </a>
       

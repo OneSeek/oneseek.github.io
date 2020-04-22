@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://oneseek.github.io</id>
     <title>OneSeek</title>
-    <updated>2020-04-21T09:05:03.856Z</updated>
+    <updated>2020-04-22T15:17:37.659Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://oneseek.github.io"/>
     <link rel="self" href="https://oneseek.github.io/atom.xml"/>
@@ -10,6 +10,85 @@
     <logo>https://oneseek.github.io/images/avatar.png</logo>
     <icon>https://oneseek.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, OneSeek</rights>
+    <entry>
+        <title type="html"><![CDATA[逆波兰表达式求值(后序表达式)]]></title>
+        <id>https://oneseek.github.io/post/ni-bo-lan-biao-da-shi-qiu-zhi-hou-xu-biao-da-shi/</id>
+        <link href="https://oneseek.github.io/post/ni-bo-lan-biao-da-shi-qiu-zhi-hou-xu-biao-da-shi/">
+        </link>
+        <updated>2020-04-22T15:16:52.000Z</updated>
+        <content type="html"><![CDATA[<p>逆波兰表达式求值(后序表达式)<br>
+根据逆波兰表示法，求表达式的值。</p>
+<p>有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
+<p>说明：</p>
+<p>整数除法只保留整数部分。<br>
+给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。<br>
+示例 1：</p>
+<p>输入: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]<br>
+输出: 9<br>
+解释: ((2 + 1) * 3) = 9<br>
+示例 2：</p>
+<p>输入: [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;]<br>
+输出: 6<br>
+解释: (4 + (13 / 5)) = 6<br>
+示例 3：</p>
+<p>输入: [&quot;10&quot;, &quot;6&quot;, &quot;9&quot;, &quot;3&quot;, &quot;+&quot;, &quot;-11&quot;, &quot;&quot;, &quot;/&quot;, &quot;&quot;, &quot;17&quot;, &quot;+&quot;, &quot;5&quot;, &quot;+&quot;]<br>
+输出: 22<br>
+解释:<br>
+((10 * (6 / ((9 + 3) * -11))) + 17) + 5<br>
+= ((10 * (6 / (12 * -11))) + 17) + 5<br>
+= ((10 * (6 / -132)) + 17) + 5<br>
+= ((10 * 0) + 17) + 5<br>
+= (0 + 17) + 5<br>
+= 17 + 5<br>
+= 22</p>
+<p>Copy</p>
+<pre><code>import java.util.Stack;
+
+class Solution {
+    // 后序
+    public int evalRPN(String[] tokens) {
+        Integer res = 0;
+        Stack&lt;String&gt; stack = new Stack&lt;&gt;();
+        for(String s: tokens){
+            if(&quot;+&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;+&quot;);
+                stack.push(res.toString());
+            }else if(&quot;-&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;-&quot;);
+                stack.push(res.toString());
+            }else if(&quot;*&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;*&quot;);
+                stack.push(res.toString());
+            }else if(&quot;/&quot;.equals(s)){
+                res = cal(stack.pop(), stack.pop(), &quot;/&quot;);
+                stack.push(res.toString());
+            }else{
+                res = Integer.parseInt(s);
+                stack.push(s);
+            }
+        }
+        return res;
+    }
+
+    public int cal(String sb, String sa, String c) {
+        int ans = 0;
+        int a = Integer.parseInt(sa);
+        int b = Integer.parseInt(sb);
+        if (c == &quot;+&quot;) {
+            ans = a + b;
+        } else if (c == &quot;-&quot;) {
+            ans = a - b;
+        } else if (c == &quot;*&quot;) {
+            ans = a * b;
+        } else if (c == &quot;/&quot;) {
+            ans = a / b;
+        }
+        return ans;
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[39. 组合总和 难度中等]]></title>
         <id>https://oneseek.github.io/post/39-zu-he-zong-he-nan-du-zhong-deng/</id>
@@ -225,75 +304,6 @@
         }
         return false;
     }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[25. K 个一组翻转链表]]></title>
-        <id>https://oneseek.github.io/post/25-k-ge-yi-zu-fan-zhuan-lian-biao/</id>
-        <link href="https://oneseek.github.io/post/25-k-ge-yi-zu-fan-zhuan-lian-biao/">
-        </link>
-        <updated>2020-04-18T13:46:23.000Z</updated>
-        <content type="html"><![CDATA[<p>给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。<br>
-k 是一个正整数，它的值小于或等于链表的长度。<br>
-如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。</p>
-<p>示例：<br>
-给你这个链表：1-&gt;2-&gt;3-&gt;4-&gt;5<br>
-当 k = 2 时，应当返回: 2-&gt;1-&gt;4-&gt;3-&gt;5<br>
-当 k = 3 时，应当返回: 3-&gt;2-&gt;1-&gt;4-&gt;5</p>
-<p>说明：<br>
-你的算法只能使用常数的额外空间。<br>
-你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。<br>
-来源：力扣（LeetCode）<br>
-链接：https://leetcode-cn.com/problems/reverse-nodes-in-k-group<br>
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。<br>
-/**</p>
-<ul>
-<li>Definition for singly-linked list.</li>
-<li>public class ListNode {</li>
-<li>
-<pre><code>int val;
-</code></pre>
-</li>
-<li>
-<pre><code>ListNode next;
-</code></pre>
-</li>
-<li>
-<pre><code>ListNode(int x) { val = x; }
-</code></pre>
-</li>
-<li>}<br>
-*/</li>
-</ul>
-<pre><code>class Solution {
-   public ListNode reverseKGroup(ListNode head, int k) {
-       ListNode tail = head;
-       for (int i = 0; i &lt; k; i++) {
-           //剩余数量小于k的话，则不需要反转。
-           if (tail == null) {
-               return head;
-           }
-           tail = tail.next;
-       }
-       ListNode newHead = reverseK(head, k);
-       head.next = reverseKGroup(tail, k);
-       
-       return newHead;
-   }
-   public ListNode reverseK(ListNode head, int k) {
-       ListNode prev = null;
-       ListNode curr = head;
-       ListNode next = null;
-       while(curr!=null&amp;&amp;k--&gt;0){
-           next = curr.next;
-           curr.next = prev;
-           prev = curr;
-           curr = next;
-       }
-       return prev;
-   }
 }
 </code></pre>
 ]]></content>
